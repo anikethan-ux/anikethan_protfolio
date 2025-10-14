@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
-    /* === GENERAL === */
+    /* === GENERAL STYLES === */
     body {
       margin: 0;
       font-family: "Poppins", sans-serif;
@@ -28,85 +28,25 @@
       overflow-x: hidden;
       text-align: center;
     }
+    header, main, footer { position: relative; z-index: 2; }
+    h1, h2, h3 { color: #00ffe1; margin-bottom: 15px; }
+    p { color: #cfd8dc; line-height: 1.6; }
+    a { color: #00ffe1; text-decoration: none; transition: 0.3s; }
+    a:hover { color: #fff; text-shadow: 0 0 10px #00ffe1; }
 
-    header, main, footer {
-      position: relative;
-      z-index: 2;
-    }
+    /* === HEADER === */
+    header { padding: 60px 20px 40px; }
+    .welcome-msg h2 { font-size: 2.2em; color: #00ffe1; margin-bottom: 10px; letter-spacing: 1px; }
+    .profile-pic { width: 180px; height: 180px; border-radius: 50%; border: 3px solid #00ffe1; object-fit: cover; box-shadow: 0 0 35px rgba(0,255,225,0.4); margin-top: 20px; animation: float 4s ease-in-out infinite; }
+    @keyframes float { 0% {transform: translateY(0);} 50% {transform: translateY(-15px);} 100% {transform: translateY(0);} }
+    h1 { font-size: 2.4em; margin-top: 20px; font-weight: 600; }
+    h1 span { color: #00ffe1; font-weight: 700; }
+    .social-icons { margin-top: 15px; }
+    .social-icons a { color: #00ffe1; font-size: 1.5em; margin: 0 10px; transition: 0.3s; }
+    .social-icons a:hover { color: white; transform: scale(1.2); text-shadow: 0 0 10px #00ffe1; }
 
-    h1, h2, h3 {
-      color: #00ffe1;
-      margin-bottom: 15px;
-    }
-
-    p {
-      color: #cfd8dc;
-      line-height: 1.6;
-    }
-
-    /* === HEADER SECTION === */
-    header {
-      padding-top: 60px;
-      padding-bottom: 40px;
-    }
-
-    .welcome-msg h2 {
-      font-size: 2.2em;
-      color: #00ffe1;
-      margin-bottom: 10px;
-      letter-spacing: 1px;
-    }
-
-    .profile-pic {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      border: 3px solid #00ffe1;
-      object-fit: cover;
-      box-shadow: 0 0 35px rgba(0, 255, 225, 0.4);
-      margin-top: 20px;
-      animation: float 4s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-15px); }
-      100% { transform: translateY(0px); }
-    }
-
-    h1 {
-      font-size: 2.4em;
-      margin-top: 20px;
-      font-weight: 600;
-    }
-
-    h1 span {
-      color: #00ffe1;
-      font-weight: 700;
-    }
-
-    .social-icons {
-      margin-top: 15px;
-    }
-
-    .social-icons a {
-      color: #00ffe1;
-      font-size: 1.5em;
-      margin: 0 10px;
-      transition: 0.3s;
-    }
-
-    .social-icons a:hover {
-      color: white;
-      transform: scale(1.2);
-      text-shadow: 0 0 10px #00ffe1;
-    }
-
-    /* === MAIN SECTIONS === */
-    main {
-      margin-top: 30px;
-    }
-
+    /* === MAIN === */
+    main { margin-top: 30px; }
     main section {
       background: rgba(255, 255, 255, 0.07);
       margin: 40px auto;
@@ -118,134 +58,58 @@
       backdrop-filter: blur(15px);
       transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
-
-    main section:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 0 45px rgba(0, 255, 255, 0.4);
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    li {
-      margin: 10px 0;
-    }
-
-    a {
-      color: #00ffe1;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-
-    a:hover {
-      color: #fff;
-      text-shadow: 0 0 10px #00ffe1;
-    }
+    main section:hover { transform: translateY(-8px); box-shadow: 0 0 45px rgba(0,255,255,0.4); }
+    ul { list-style: none; padding: 0; }
+    li { margin: 10px 0; }
 
     /* === PROJECT CARDS === */
     #projects div {
       background: rgba(0, 0, 0, 0.3);
-      border: 1px solid rgba(0, 255, 225, 0.3);
+      border: 1px solid rgba(0,255,225,0.3);
       border-radius: 15px;
       padding: 20px;
       margin: 15px 0;
       transition: 0.3s ease;
     }
-
-    #projects div:hover {
-      background: rgba(0, 255, 225, 0.1);
-      transform: scale(1.02);
-    }
+    #projects div:hover { background: rgba(0,255,225,0.1); transform: scale(1.02); }
 
     /* === CONTACT FORM === */
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      align-items: center;
-    }
-
+    form { display: flex; flex-direction: column; gap: 15px; align-items: center; }
     input, textarea {
-      width: 80%;
-      max-width: 500px;
-      padding: 12px;
-      border: none;
-      border-radius: 10px;
-      outline: none;
-      font-size: 1em;
-      background: rgba(255, 255, 255, 0.15);
-      color: white;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
+      width: 80%; max-width: 500px; padding: 12px; border: none; border-radius: 10px;
+      outline: none; font-size: 1em; background: rgba(255,255,255,0.15); color: white;
+      box-shadow: 0 0 10px rgba(255,255,255,0.15);
     }
-
-    textarea {
-      height: 120px;
-      resize: none;
-    }
-
+    textarea { height: 120px; resize: none; }
     button {
       background: linear-gradient(135deg, #00ffe1, #007bff);
-      color: white;
-      border: none;
-      padding: 12px 30px;
-      font-size: 1em;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s ease;
+      color: white; border: none; padding: 12px 30px; font-size: 1em;
+      border-radius: 8px; cursor: pointer; transition: 0.3s ease;
       box-shadow: 0 0 15px rgba(0,255,255,0.4);
     }
-
-    button:hover {
-      background: linear-gradient(135deg, #007bff, #00ffe1);
-      transform: scale(1.08);
-      box-shadow: 0 0 25px rgba(0,255,255,0.7);
-    }
+    button:hover { background: linear-gradient(135deg, #007bff, #00ffe1); transform: scale(1.08); box-shadow: 0 0 25px rgba(0,255,255,0.7); }
 
     /* === FOOTER === */
-    footer {
-      padding: 30px 0;
-      background: rgba(0, 0, 0, 0.3);
-      border-top: 1px solid rgba(255,255,255,0.1);
-      margin-top: 50px;
-    }
-
-    footer p:first-child {
-      font-size: 1.5em;
-      color: #00ffe1;
-      margin-bottom: 8px;
-    }
+    footer { padding: 30px 0; background: rgba(0,0,0,0.3); border-top: 1px solid rgba(255,255,255,0.1); margin-top: 50px; }
+    footer p:first-child { font-size: 1.5em; color: #00ffe1; margin-bottom: 8px; }
 
     /* === RESPONSIVE === */
     @media (max-width: 600px) {
-      .profile-pic {
-        width: 130px;
-        height: 130px;
-      }
-      h1 {
-        font-size: 1.8em;
-      }
-      .welcome-msg h2 {
-        font-size: 1.6em;
-      }
+      .profile-pic { width: 130px; height: 130px; }
+      h1 { font-size: 1.8em; }
+      .welcome-msg h2 { font-size: 1.6em; }
     }
   </style>
 </head>
-
 <body id="vanta-bg">
 
   <!-- HEADER -->
   <header data-aos="fade-down" data-aos-duration="1200">
-    <div class="welcome-msg">
-      <h2>✨ Welcome to My Portfolio ✨</h2>
-    </div>
-
+    <div class="welcome-msg"><h2>✨ Welcome to My Portfolio ✨</h2></div>
     <img src="Screenshot (31).png" alt="Nalla Anikethan Reddy" class="profile-pic" />
-
     <h1>👋 Hi, I'm <span>Nalla Anikethan Reddy</span></h1>
+    <p>GRADUATE FRESHER</p>
     <p>Web Developer | Java & Python Programmer | Tech Enthusiast</p>
-
     <div class="social-icons">
       <a href="mailto:anikethanreddynalla@gmail.com"><i class="fa-solid fa-envelope"></i></a>
       <a href="https://www.linkedin.com/in/anikethan-reddy-nalla-bb9779317" target="_blank"><i class="fab fa-linkedin"></i></a>
@@ -314,12 +178,13 @@
 
     <section id="message" data-aos="fade-up">
       <h2>Message Me</h2>
-      <form action="https://formspree.io/f/xvgpkrky" method="POST">
-        <input type="text" name="name" placeholder="Your Name / Company" required />
-        <input type="email" name="_replyto" placeholder="Your Email / Role" required />
+      <form id="contactForm">
+        <input type="text" name="name" placeholder="company Name / Company" required />
+        <input type="email" name="email" placeholder="Your Email / email" required />
         <textarea name="message" placeholder="Please send your contact details..." required></textarea>
         <button type="submit">Send Message 🚀</button>
       </form>
+      <p id="formResponse" style="margin-top: 10px; color:#00ffe1;"></p>
     </section>
   </main>
 
@@ -348,17 +213,29 @@
   <!-- AOS INIT -->
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>
-    AOS.init({
-      once: true,
-      duration: 1200,
+    AOS.init({ once: true, duration: 1200 });
+
+    // === AJAX FORM SUBMISSION ===
+    const form = document.getElementById('contactForm');
+    const response = document.getElementById('formResponse');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      fetch('send_mail.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(res => res.text())
+      .then(data => {
+        response.textContent = data;
+        form.reset();
+      })
+      .catch(err => {
+        response.textContent = 'Oops! Something went wrong.';
+      });
     });
   </script>
 </body>
-</script>
-<!-- === External Scripts === -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.globe.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-<script src="script.js"></script>
-
 </html>
