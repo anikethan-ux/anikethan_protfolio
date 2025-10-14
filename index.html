@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nalla Anikethan Reddy | Portfolio</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- VANTA.js + THREE.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.globe.min.js"></script>
+
+  <!-- AOS (Scroll Animations) -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* === GENERAL === */
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      color: #e2e3e4;
+      background-color: #000814;
+      overflow-x: hidden;
+      text-align: center;
+    }
+
+    header, main, footer {
+      position: relative;
+      z-index: 2;
+    }
+
+    h1, h2, h3 {
+      color: #00ffe1;
+      margin-bottom: 15px;
+    }
+
+    p {
+      color: #cfd8dc;
+      line-height: 1.6;
+    }
+
+    /* === HEADER SECTION === */
+    header {
+      padding-top: 60px;
+      padding-bottom: 40px;
+    }
+
+    .welcome-msg h2 {
+      font-size: 2.2em;
+      color: #00ffe1;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+
+    .profile-pic {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 3px solid #00ffe1;
+      object-fit: cover;
+      box-shadow: 0 0 35px rgba(0, 255, 225, 0.4);
+      margin-top: 20px;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+
+    h1 {
+      font-size: 2.4em;
+      margin-top: 20px;
+      font-weight: 600;
+    }
+
+    h1 span {
+      color: #00ffe1;
+      font-weight: 700;
+    }
+
+    .social-icons {
+      margin-top: 15px;
+    }
+
+    .social-icons a {
+      color: #00ffe1;
+      font-size: 1.5em;
+      margin: 0 10px;
+      transition: 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: white;
+      transform: scale(1.2);
+      text-shadow: 0 0 10px #00ffe1;
+    }
+
+    /* === MAIN SECTIONS === */
+    main {
+      margin-top: 30px;
+    }
+
+    main section {
+      background: rgba(255, 255, 255, 0.07);
+      margin: 40px auto;
+      padding: 40px 25px;
+      width: 85%;
+      max-width: 900px;
+      border-radius: 20px;
+      box-shadow: 0 0 35px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(15px);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    main section:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 45px rgba(0, 255, 255, 0.4);
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      margin: 10px 0;
+    }
+
+    a {
+      color: #00ffe1;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    a:hover {
+      color: #fff;
+      text-shadow: 0 0 10px #00ffe1;
+    }
+
+    /* === PROJECT CARDS === */
+    #projects div {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(0, 255, 225, 0.3);
+      border-radius: 15px;
+      padding: 20px;
+      margin: 15px 0;
+      transition: 0.3s ease;
+    }
+
+    #projects div:hover {
+      background: rgba(0, 255, 225, 0.1);
+      transform: scale(1.02);
+    }
+
+    /* === CONTACT FORM === */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+    }
+
+    input, textarea {
+      width: 80%;
+      max-width: 500px;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      outline: none;
+      font-size: 1em;
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
+    }
+
+    textarea {
+      height: 120px;
+      resize: none;
+    }
+
+    button {
+      background: linear-gradient(135deg, #00ffe1, #007bff);
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 1em;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 0 15px rgba(0,255,255,0.4);
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #007bff, #00ffe1);
+      transform: scale(1.08);
+      box-shadow: 0 0 25px rgba(0,255,255,0.7);
+    }
+
+    /* === FOOTER === */
+    footer {
+      padding: 30px 0;
+      background: rgba(0, 0, 0, 0.3);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: 50px;
+    }
+
+    footer p:first-child {
+      font-size: 1.5em;
+      color: #00ffe1;
+      margin-bottom: 8px;
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 600px) {
+      .profile-pic {
+        width: 130px;
+        height: 130px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+      .welcome-msg h2 {
+        font-size: 1.6em;
+      }
+    }
+  </style>
+</head>
+
+<body id="vanta-bg">
+
+  <!-- HEADER -->
+  <header data-aos="fade-down" data-aos-duration="1200">
+    <div class="welcome-msg">
+      <h2>✨ Welcome to My Portfolio ✨</h2>
+    </div>
+
+    <img src="Screenshot (31).png" alt="Nalla Anikethan Reddy" class="profile-pic" />
+
+    <h1>👋 Hi, I'm <span>Nalla Anikethan Reddy</span></h1>
+    <p>Web Developer | Java & Python Programmer | Tech Enthusiast</p>
+
+    <div class="social-icons">
+      <a href="mailto:anikethanreddynalla@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+      <a href="https://www.linkedin.com/in/anikethan-reddy-nalla-bb9779317" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="tel:+917989461409"><i class="fa-solid fa-phone"></i></a>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+    <section id="about" data-aos="fade-up">
+      <h2>About Me</h2>
+      <p>I’m a passionate software developer who loves crafting dynamic web applications and learning cutting-edge technologies. My dream is to become a full-stack developer and contribute to impactful projects that make a difference.</p>
+    </section>
+
+    <section id="education" data-aos="fade-up">
+      <h2>Education</h2>
+      <ul>
+        <li><strong>B.Tech:</strong> ECE-AIML, GITAM University (2021–2025)</li>
+        <li><strong>Intermediate:</strong> MPC, Sri Chaitanya Junior College (2019–2021)</li>
+        <li><strong>High School:</strong> Tejaswi High School (2019)</li>
+      </ul>
+    </section>
+
+    <section id="internship" data-aos="fade-up">
+      <h2>Internship</h2>
+      <ul>
+        <li><strong>Company:</strong> E-Code Learning Software Services (May–July 2024)</li>
+        <li><strong>Project:</strong> Stock Price Prediction using Machine Learning</li>
+      </ul>
+    </section>
+
+    <section id="projects" data-aos="fade-up">
+      <h2>Projects</h2>
+      <div>
+        <h3>Portfolio Website</h3>
+        <p>Personal portfolio built using HTML, CSS, and Vanta.js for showcasing my skills and projects.</p>
+      </div>
+      <div>
+        <h3>AI-Powered Biometric Authentication System</h3>
+        <p>Secure bank locker authentication using AI, ML, and biometric technologies.</p>
+      </div>
+      <div>
+        <h3>MATLAB Image Processing Techniques</h3>
+        <p>Developed algorithms for image enhancement and recognition using MATLAB.</p>
+      </div>
+      <div>
+        <h3>College Sports Management System</h3>
+        <p>ASP.NET & SQL-based system for managing sports events and participants.</p>
+      </div>
+    </section>
+
+    <section id="skills" data-aos="fade-up">
+      <h2>Skills</h2>
+      <ul>
+        <li>Java, Python, HTML, CSS, JavaScript</li>
+        <li>SQL, OOPs, Problem Solving</li>
+      </ul>
+    </section>
+
+    <section id="contact" data-aos="fade-up">
+      <h2>Contact Me</h2>
+      <p>Email: <a href="mailto:anikethanreddynalla@gmail.com">anikethanreddynalla@gmail.com</a></p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/anikethan-reddy-nalla-bb9779317" target="_blank">linkedin.com/in/anikethan-reddy-nalla</a></p>
+      <p>Phone: <a href="tel:+917989461409">+91 7989461409</a></p>
+    </section>
+
+    <section id="message" data-aos="fade-up">
+      <h2>Message Me</h2>
+      <form action="https://formspree.io/f/xvgpkrky" method="POST">
+        <input type="text" name="name" placeholder="Your Name / Company" required />
+        <input type="email" name="_replyto" placeholder="Your Email / Role" required />
+        <textarea name="message" placeholder="Please send your contact details..." required></textarea>
+        <button type="submit">Send Message 🚀</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>THANK YOU FOR VISITING MY PORTFOLIO</p>
+    <p>© 2025 Nalla Anikethan Reddy — All Rights Reserved</p>
+  </footer>
+
+  <!-- VANTA BACKGROUND -->
+  <script>
+    VANTA.GLOBE({
+      el: "#vanta-bg",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      scaleMobile: 1.00,
+      color: 0x00ffe1,
+      backgroundColor: 0x000814,
+    });
+  </script>
+
+  <!-- AOS INIT -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      once: true,
+      duration: 1200,
+    });
+  </script>
+</body>
+</script>
+<!-- === External Scripts === -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.globe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script src="script.js"></script>
+
+</html>
