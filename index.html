@@ -19,7 +19,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
-    /* === GENERAL STYLES === */
     body {
       margin: 0;
       font-family: "Poppins", sans-serif;
@@ -48,8 +47,6 @@
       color: #fff;
       text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffe1;
     }
-
-    /* === HEADER === */
     header { padding: 60px 20px 40px; }
     .welcome-msg h2 {
       font-size: 2.2em;
@@ -97,7 +94,6 @@
       text-shadow: 0 0 10px #00ffe1, 0 0 20px #ff00ff;
     }
 
-    /* === MAIN SECTIONS === */
     main { margin-top: 30px; }
     main section {
       background: rgba(255, 255, 255, 0.07);
@@ -116,7 +112,33 @@
     }
     ul { list-style: none; padding: 0; }
 
-    /* === PROJECT CARDS === */
+    /* Buttons for toggle */
+    .toggle-btn {
+      background: linear-gradient(90deg, #00ffe1, #ff00ff);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      color: #000;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+    .toggle-btn:hover {
+      background: linear-gradient(90deg, #ff00ff, #00ffe1);
+      transform: scale(1.05);
+    }
+    .details {
+      display: none;
+      text-align: left;
+      margin-top: 15px;
+      line-height: 1.8;
+    }
+    .details ul {
+      list-style: disc;
+      margin-left: 40px;
+    }
+
     #projects div {
       background: rgba(0, 0, 0, 0.4);
       border: 1px solid rgba(0,255,225,0.4);
@@ -131,7 +153,33 @@
       box-shadow: 0 0 25px rgba(0,255,255,0.5);
     }
 
-    /* === FOOTER === */
+    /* 🌟 Achievements Section */
+    #achievements {
+      display: grid;
+      gap: 20px;
+    }
+    .achievement-card {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(0, 255, 225, 0.2);
+    }
+    .achievement-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 30px rgba(255, 0, 255, 0.4);
+    }
+    .achievement-card i {
+      font-size: 2.2em;
+      color: #00ffe1;
+      margin-bottom: 10px;
+    }
+    .achievement-card h3 {
+      color: #00ffe1;
+      margin-bottom: 10px;
+    }
+
     footer {
       padding: 30px 0;
       background: rgba(0,0,0,0.5);
@@ -145,7 +193,6 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* === RESPONSIVE === */
     @media (max-width: 600px) {
       .profile-pic { width: 130px; height: 130px; }
       h1 { font-size: 1.8em; }
@@ -156,7 +203,7 @@
 <body id="vanta-bg">
 
   <!-- HEADER -->
-  <header data-aos="fade-down" data-aos-duration="1200">
+  <header data-aos="fade-down">
     <div class="welcome-msg"><h2>✨ Welcome to My Portfolio ✨</h2></div>
     <img src="Screenshot (31).png" alt="Nalla Anikethan Reddy" class="profile-pic" />
     <h1>👋 Hi, I'm <span>Nalla Anikethan Reddy</span></h1>
@@ -187,38 +234,126 @@
 
     <section id="internship" data-aos="fade-up">
       <h2>Internship</h2>
-      <ul>
-        <li><strong>Company:</strong> E-Code Learning Software Services (May–July 2024)</li>
-        <li><strong>Project:</strong> Stock Price Prediction using Machine Learning</li>
-      </ul>
+      <p><strong>Company:</strong> E-Code Learning Software Services</p>
+      <p><strong>Project:</strong> Stock Price Prediction using Machine Learning</p>
+      <button class="toggle-btn" onclick="toggleDetails('internshipDetails')">View Details</button>
+      <div class="details" id="internshipDetails">
+        <p><strong>Duration:</strong> 20 May 2024 – 21 July 2024</p>
+        <p>During my internship, I worked on a Stock Price Prediction project using machine learning...</p>
+        <ul>
+          <li>Developed and deployed ML models (Linear Regression, LSTM, Random Forest).</li>
+          <li>Performed preprocessing, feature engineering, and time-series analysis.</li>
+          <li>Integrated APIs (Yahoo Finance, Alpha Vantage) for live data.</li>
+          <li>Visualized data using Matplotlib, Seaborn, and Plotly.</li>
+        </ul>
+      </div>
     </section>
 
     <section id="projects" data-aos="fade-up">
       <h2>Projects</h2>
       <div>
-        <h3>Portfolio Website</h3>
-        <p>Personal portfolio built using HTML, CSS, and Vanta.js for showcasing my skills and projects.</p>
+        <h3>Portfolio Application (React JS)</h3>
+        <p>Developed a responsive portfolio using HTML, CSS, and React JS to showcase my skills and experience.</p>
+        <button class="toggle-btn" onclick="toggleDetails('portfolioProject')">View Details</button>
+        <div class="details" id="portfolioProject">
+          <h4>Role and Responsibilities:</h4>
+          <ul>
+            <li>Designed a responsive UI using React JS and CSS.</li>
+            <li>Created reusable components and implemented routing.</li>
+            <li>Used GitHub for version control and Visual Studio Code for development.</li>
+            <li>Ensured cross-browser compatibility and mobile responsiveness.</li>
+          </ul>
+          <h4>Project Details:</h4>
+          <p><strong>Technologies:</strong> HTML, CSS, React JS</p>
+          <p><strong>Tools:</strong> GitHub, Visual Studio Code</p>
+          <p><strong>Features:</strong> Home, About, Projects, Contact, and Responsive Design</p>
+        </div>
       </div>
+
       <div>
         <h3>AI-Powered Biometric Authentication System</h3>
-        <p>Secure bank locker authentication using AI, ML, and biometric technologies.</p>
+        <p>Developed a biometric authentication system using AI and IoT for secure bank lockers.</p>
+        <button class="toggle-btn" onclick="toggleDetails('biometricProject')">View Details</button>
+        <div class="details" id="biometricProject">
+          <p>Integrated fingerprint and facial recognition with Raspberry Pi for enhanced security.</p>
+          <h4>Roles and Responsibilities:</h4>
+          <ul>
+            <li>Integrated Raspberry Pi, camera module, and fingerprint sensor.</li>
+            <li>Implemented secure encryption and data storage.</li>
+            <li>Established communication between hardware and cloud servers.</li>
+          </ul>
+        </div>
       </div>
+
       <div>
-        <h3>MATLAB Image Processing Techniques</h3>
-        <p>Developed algorithms for image enhancement and recognition using MATLAB.</p>
+        <h3>Advanced Visual Computing: MATLAB-Based Image Processing</h3>
+        <p>Developed MATLAB-based image processing algorithms for enhancement and analysis.</p>
+        <button class="toggle-btn" onclick="toggleDetails('matlabProject')">View Details</button>
+        <div class="details" id="matlabProject">
+          <h4>Roles and Responsibilities:</h4>
+          <ul>
+            <li>Designed modules for filtering, edge detection, and segmentation.</li>
+            <li>Developed transformation algorithms for better image analysis.</li>
+            <li>Optimized algorithms for real-world performance and accuracy.</li>
+          </ul>
+        </div>
       </div>
+
       <div>
-        <h3>College Sports Management System</h3>
-        <p>ASP.NET & SQL-based system for managing sports events and participants.</p>
+        <h3>College Sports Management System (.NET, SQL)</h3>
+        <p>Created a .NET-based system for managing college sports events and participants.</p>
+        <button class="toggle-btn" onclick="toggleDetails('sportsProject')">View Details</button>
+        <div class="details" id="sportsProject">
+          <h4>Roles and Responsibilities:</h4>
+          <ul>
+            <li>Developed a multi-layered ASP.NET and SQL-based system.</li>
+            <li>Ensured scalability and secure architecture.</li>
+            <li>Collaborated on UI/UX design for better user experience.</li>
+          </ul>
+        </div>
       </div>
     </section>
 
     <section id="skills" data-aos="fade-up">
       <h2>Skills</h2>
       <ul>
-        <li>Java, Python, HTML, CSS, JavaScript</li>
-        <li>SQL, OOPs, Problem Solving</li>
+        <li>Java, Python, HTML, CSS, JavaScript, React JS</li>
+        <li>SQL, OOPs, Problem Solving, Git & GitHub</li>
       </ul>
+    </section>
+
+    <!-- 🌟 New Achievements Section -->
+    <section id="achievements" data-aos="fade-up">
+      <h2>Achievements & Certifications</h2>
+      <div class="achievement-card">
+        <i class="fa-solid fa-chart-line"></i>
+        <h3>Stock Price Prediction Using Machine Learning</h3>
+        <p>Certified for developing predictive models using ML algorithms and financial datasets.</p>
+      </div>
+
+      <div class="achievement-card">
+        <i class="fa-solid fa-code"></i>
+        <h3>C for Everyone – Programming</h3>
+        <p>Completed foundational C programming certification emphasizing structured problem-solving.</p>
+      </div>
+
+      <div class="achievement-card">
+        <i class="fa-solid fa-car"></i>
+        <h3>Electronic Vehicle Technology</h3>
+        <p>Certified in advanced EV concepts, battery management, and green mobility systems.</p>
+      </div>
+
+      <div class="achievement-card">
+        <i class="fa-brands fa-python"></i>
+        <h3>Python in Machine Learning</h3>
+        <p>Gained certification in Python ML applications, covering model training and data analysis.</p>
+      </div>
+
+      <div class="achievement-card">
+        <i class="fa-solid fa-cloud"></i>
+        <h3>Microsoft Azure Fundamentals</h3>
+        <p>Certified in Azure cloud concepts, networking, and basic deployment management.</p>
+      </div>
     </section>
 
     <section id="contact" data-aos="fade-up">
@@ -229,13 +364,20 @@
     </section>
   </main>
 
-  <!-- FOOTER -->
   <footer>
     <p>THANK YOU FOR VISITING MY PORTFOLIO</p>
     <p>© 2025 Nalla Anikethan Reddy — All Rights Reserved</p>
   </footer>
 
-  <!-- VANTA BACKGROUND -->
+  <!-- JS for toggles -->
+  <script>
+    function toggleDetails(id) {
+      const el = document.getElementById(id);
+      el.style.display = (el.style.display === "block") ? "none" : "block";
+    }
+  </script>
+
+  <!-- VANTA Background -->
   <script>
     VANTA.GLOBE({
       el: "#vanta-bg",
@@ -251,7 +393,7 @@
     });
   </script>
 
-  <!-- AOS INIT -->
+  <!-- AOS Init -->
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>
     AOS.init({ once: true, duration: 1200 });
