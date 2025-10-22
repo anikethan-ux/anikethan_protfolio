@@ -193,6 +193,25 @@
       -webkit-text-fill-color: transparent;
     }
 
+    /* Resume Download Button */
+    .resume-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 25px;
+      font-weight: 600;
+      color: #000;
+      background: linear-gradient(90deg, #00ffe1, #ff00ff);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    .resume-btn:hover {
+      background: linear-gradient(90deg, #ff00ff, #00ffe1);
+      transform: scale(1.05);
+    }
+
     @media (max-width: 600px) {
       .profile-pic { width: 130px; height: 130px; }
       h1 { font-size: 1.8em; }
@@ -214,6 +233,8 @@
       <a href="https://www.linkedin.com/in/anikethan-reddy-nalla-bb9779317" target="_blank"><i class="fab fa-linkedin"></i></a>
       <a href="tel:+917989461409"><i class="fa-solid fa-phone"></i></a>
     </div>
+    <!-- Resume Download Button -->
+    <a href="N.Anikethan reddy fresher graduate update resume.pdf" download class="resume-btn">📄 Download Resume</a>
   </header>
 
   <!-- MAIN -->
@@ -300,24 +321,24 @@
       </div>
 
       <div>
-  <h3>College Sports Management System (.NET, SQL)</h3>
-  <p>Created a .NET-based system for managing college sports events and participants.</p>
-  <a href="https://anikethan-ux.github.io/sports-management-system-designed-by-nalla-anikethanreddy/" 
-     target="_blank" 
-     class="toggle-btn"
-     style="display:inline-block;margin-bottom:10px;text-decoration:none;">
-     🔗 Visit Project
-  </a>
-  <button class="toggle-btn" onclick="toggleDetails('sportsProject')">View Details</button>
-  <div class="details" id="sportsProject">
-    <h4>Roles and Responsibilities:</h4>
-    <ul>
-      <li>Developed a multi-layered ASP.NET and SQL-based system.</li>
-      <li>Ensured scalability and secure architecture.</li>
-      <li>Collaborated on UI/UX design for better user experience.</li>
-    </ul>
-  </div>
-</div>
+        <h3>College Sports Management System (.NET, SQL)</h3>
+        <p>Created a .NET-based system for managing college sports events and participants.</p>
+        <a href="https://anikethan-ux.github.io/sports-management-system-designed-by-nalla-anikethanreddy/" 
+           target="_blank" 
+           class="toggle-btn"
+           style="display:inline-block;margin-bottom:10px;text-decoration:none;">
+           🔗 Visit Project
+        </a>
+        <button class="toggle-btn" onclick="toggleDetails('sportsProject')">View Details</button>
+        <div class="details" id="sportsProject">
+          <h4>Roles and Responsibilities:</h4>
+          <ul>
+            <li>Developed a multi-layered ASP.NET and SQL-based system.</li>
+            <li>Ensured scalability and secure architecture.</li>
+            <li>Collaborated on UI/UX design for better user experience.</li>
+          </ul>
+        </div>
+      </div>
 
     </section>
 
@@ -329,7 +350,7 @@
       </ul>
     </section>
 
-    <!-- 🌟 New Achievements Section -->
+    <!-- 🌟 Achievements Section -->
     <section id="achievements" data-aos="fade-up">
       <h2>Achievements & Certifications</h2>
       <div class="achievement-card">
