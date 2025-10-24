@@ -135,11 +135,32 @@
       line-height: 1.8;
     }
     .details ul {
-      list-style: disc;
-      margin-left: 40px;
+      list-style: none;
+      margin-left: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 0;
+    }
+    .details li {
+      background: rgba(0,255,225,0.2);
+      color: #000;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: 0.3s;
+      cursor: default;
+    }
+    .details li:hover {
+      background: rgba(255,0,255,0.4);
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(0,255,255,0.5);
     }
 
-    #projects div {
+    #projects div, #skills div {
       background: rgba(0, 0, 0, 0.4);
       border: 1px solid rgba(0,255,225,0.4);
       border-radius: 15px;
@@ -147,7 +168,7 @@
       margin: 15px 0;
       transition: 0.3s ease;
     }
-    #projects div:hover {
+    #projects div:hover, #skills div:hover {
       background: rgba(0,255,225,0.15);
       transform: scale(1.05);
       box-shadow: 0 0 25px rgba(0,255,255,0.5);
@@ -216,6 +237,7 @@
       .profile-pic { width: 130px; height: 130px; }
       h1 { font-size: 1.8em; }
       .welcome-msg h2 { font-size: 1.6em; }
+      .details ul { flex-direction: column; gap: 12px; }
     }
   </style>
 </head>
@@ -233,7 +255,6 @@
       <a href="https://www.linkedin.com/in/anikethan-reddy-nalla-bb9779317" target="_blank"><i class="fab fa-linkedin"></i></a>
       <a href="tel:+917989461409"><i class="fa-solid fa-phone"></i></a>
     </div>
-    <!-- Resume Download Button -->
     <a href="N.Anikethan reddy fresher graduate update resume.pdf" download class="resume-btn">📄 Download Resume</a>
   </header>
 
@@ -339,15 +360,45 @@
           </ul>
         </div>
       </div>
-
     </section>
 
+    <!-- 🌟 Skills Section with toggles -->
     <section id="skills" data-aos="fade-up">
       <h2>Skills</h2>
-      <ul>
-        <li>Java, Python, HTML, CSS, JavaScript, React JS</li>
-        <li>SQL, OOPs, Problem Solving, Git & GitHub</li>
-      </ul>
+      <div>
+        <button class="toggle-btn" onclick="toggleDetails('frontendSkills')">💻 Frontend Skills</button>
+        <div class="details" id="frontendSkills">
+          <ul>
+            <li><i class="fab fa-html5"></i> HTML</li>
+            <li><i class="fab fa-css3-alt"></i> CSS</li>
+            <li><i class="fab fa-js-square"></i> JavaScript</li>
+            <li><i class="fab fa-react"></i> React JS</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <button class="toggle-btn" onclick="toggleDetails('backendSkills')">🖥️ Backend Skills</button>
+        <div class="details" id="backendSkills">
+          <ul>
+            <li><i class="fa-brands fa-java"></i> Java</li>
+            <li><i class="fa-brands fa-python"></i> Python</li>
+            <li><i class="fas fa-database"></i> SQL</li>
+            <li><i class="fas fa-cogs"></i> C++</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <button class="toggle-btn" onclick="toggleDetails('toolsSkills')">🛠️ Tools & Other Skills</button>
+        <div class="details" id="toolsSkills">
+          <ul>
+            <li><i class="fab fa-git-alt"></i> Git & GitHub</li>
+            <li><i class="fas fa-lightbulb"></i> Problem Solving</li>
+            <li><i class="fas fa-project-diagram"></i> OOPs Concepts</li>
+          </ul>
+        </div>
+      </div>
     </section>
 
     <!-- 🌟 Achievements Section -->
