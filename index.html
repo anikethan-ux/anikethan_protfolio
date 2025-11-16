@@ -5,17 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nalla Anikethan Reddy | Advanced Portfolio</title>
 
-    <!-- Google Font - Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
 
-    <!-- VANTA.js + THREE.js for Globe Background -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.globe.min.js"></script>
 
-    <!-- AOS (Scroll Animations) -->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
 
-    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
@@ -28,6 +24,7 @@
             --color-card-bg: rgba(255, 255, 255, 0.05);
             --glow-primary: 0 0 15px rgba(0, 255, 225, 0.7), 0 0 30px rgba(0, 255, 225, 0.5);
             --glow-secondary: 0 0 15px rgba(255, 0, 255, 0.7), 0 0 30px rgba(255, 0, 255, 0.5);
+            --color-divider: rgba(0, 255, 225, 0.5);
         }
 
         /* Base Styles */
@@ -40,6 +37,15 @@
             text-align: center;
         }
         header, main, footer { position: relative; z-index: 2; }
+
+        /* Subtle Technical Image Background (Layer 1) */
+        main {
+            /* Image (abstract code/tech pattern), very faint, fixed to give depth */
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%2300ffe110" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)" /></svg>');
+            background-repeat: repeat;
+            background-attachment: fixed;
+            margin-top: 50px;
+        }
 
         /* Neon Gradient Titles */
         h1, h2, h3 {
@@ -104,7 +110,6 @@
         }
 
         /* Section Styling (Advanced Card Look) */
-        main { margin-top: 50px; }
         main section {
             background: var(--color-card-bg);
             margin: 60px auto;
@@ -126,7 +131,18 @@
         }
         ul { list-style: none; padding: 0; }
 
-        /* Neon Buttons */
+        /* Section Divider for Better Flow */
+        .section-divider {
+            width: 50%;
+            height: 2px;
+            background: var(--color-divider);
+            margin: 40px auto;
+            border-radius: 1px;
+            box-shadow: var(--glow-primary);
+            opacity: 0.5;
+        }
+
+        /* Neon Buttons & Refined Pulse Effect */
         .toggle-btn, .resume-btn {
             background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
             border: none;
@@ -140,14 +156,22 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             box-shadow: 0 0 10px rgba(0, 255, 225, 0.5);
-            display: inline-block;
+            display: inline-flex; /* Use flex for button content alignment */
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
         }
         .toggle-btn:hover, .resume-btn:hover {
             background: linear-gradient(90deg, var(--color-secondary), var(--color-primary));
             transform: scale(1.05) perspective(100px) rotateX(2deg);
-            box-shadow: 0 0 20px rgba(255, 0, 255, 0.8);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.8), 0 0 30px rgba(255, 0, 255, 0.6); /* Enhanced Glow */
         }
-
+        /* Toggle Button Icon Styling */
+        .toggle-btn i.toggle-icon {
+            font-size: 1em;
+            transition: transform 0.3s ease;
+        }
         /* Detail/Toggle Content */
         .details {
             display: none;
@@ -275,10 +299,8 @@
 </head>
 <body id="vanta-bg">
 
-    <!-- HEADER -->
     <header data-aos="fade-down">
         <div class="welcome-msg"><h2>✨ Welcome to My Protfolio✨</h2></div>
-        <!--  - Placeholder for the image -->
         <img src="Screenshot (31).png" alt="Nalla Anikethan Reddy" class="profile-pic" />
         <h1>👋 Hi, I'm Nalla Anikethan Reddy</h1>
         <p>GRADUATE FRESHER | Seeking Innovation & Impact</p>
@@ -291,13 +313,14 @@
         <a href="Nalla_Anikethan_Reddy_Resume_graduated_resume.pdf" download class="resume-btn">📄 **Download Resume**</a>
     </header>
 
-    <!-- MAIN -->
     <main>
         <section id="about" data-aos="fade-up">
             <h2>About Me</h2>
             <p>I’m Nalla Anikethan Reddy, a motivated and enthusiastic fresher skilled in **Web Development**, **Java**, **Python**, **Dbms**, **SQL**, **problem-solving** and **OOP** concepts. I possess a strong analytical mindset and problem-solving ability, proven through hands-on projects and internships. I am quick to learn, adaptable, and eager to contribute as a Software Developer / Web Developer in a dynamic and innovative environment, focusing on delivering high-quality, scalable solutions.</p>
         </section>
         
+        <div class="section-divider"></div>
+
         <section id="education" data-aos="fade-up">
             <h2>Education</h2>
             <div>
@@ -322,11 +345,16 @@
             </div>
         </section>
 
+        <div class="section-divider"></div>
+
         <section id="internship" data-aos="fade-up">
             <h2>Internship Experience</h2>
             <p><strong>Company:</strong> E-Code Learning Software Services</p>
             <p><strong>Project:</strong> Stock Price Prediction using Machine Learning</p>
-            <button class="toggle-btn" onclick="toggleDetails('internshipDetails')">View Details</button>
+            <button class="toggle-btn" onclick="toggleDetails('internshipDetails')">
+                <span class="btn-text">View Details</span>
+                <i class="fas fa-plus toggle-icon" id="icon-internshipDetails"></i>
+            </button>
             <div class="details" id="internshipDetails">
                 <p><strong>Duration:</strong> 20 May 2024 – 21 July 2024</p>
                 <p>During my internship, I worked on a Stock Price Prediction project using machine learning to develop robust predictive models for financial analysis.</p>
@@ -339,12 +367,17 @@
             </div>
         </section>
 
+        <div class="section-divider"></div>
+
         <section id="projects" data-aos="fade-up">
             <h2>Featured Projects</h2>
             <div>
                 <h3><i class="fab fa-react"></i> Portfolio Application (React JS)</h3>
                 <p>Developed a responsive and aesthetically pleasing portfolio using modern web technologies to professionally showcase my development skills and projects.</p>
-                <button class="toggle-btn" onclick="toggleDetails('portfolioProject')">View Details</button>
+                <button class="toggle-btn" onclick="toggleDetails('portfolioProject')">
+                    <span class="btn-text">View Details</span>
+                    <i class="fas fa-plus toggle-icon" id="icon-portfolioProject"></i>
+                </button>
                 <div class="details" id="portfolioProject">
                     <h4>Key Contributions:</h4>
                     <ul>
@@ -360,7 +393,10 @@
             <div>
                 <h3><i class="fas fa-lock"></i> AI-Powered Biometric Authentication System (IoT)</h3>
                 <p>Designed a high-security, multimodal biometric authentication system integrating AI for secure bank locker access.</p>
-                <button class="toggle-btn" onclick="toggleDetails('biometricProject')">View Details</button>
+                <button class="toggle-btn" onclick="toggleDetails('biometricProject')">
+                    <span class="btn-text">View Details</span>
+                    <i class="fas fa-plus toggle-icon" id="icon-biometricProject"></i>
+                </button>
                 <div class="details" id="biometricProject">
                     <p>This system utilizes a **Raspberry Pi** to integrate fingerprint and facial recognition, providing an enhanced layer of physical and digital security.</p>
                     <h4>Key Contributions:</h4>
@@ -375,7 +411,10 @@
             <div>
                 <h3><i class="fas fa-image"></i> Advanced Visual Computing: MATLAB-Based Image Processing</h3>
                 <p>Developed and optimized complex image processing algorithms in MATLAB for advanced image enhancement and detailed analysis.</p>
-                <button class="toggle-btn" onclick="toggleDetails('matlabProject')">View Details</button>
+                <button class="toggle-btn" onclick="toggleDetails('matlabProject')">
+                    <span class="btn-text">View Details</span>
+                    <i class="fas fa-plus toggle-icon" id="icon-matlabProject"></i>
+                </button>
                 <div class="details" id="matlabProject">
                     <h4>Key Contributions:</h4>
                     <ul>
@@ -395,7 +434,10 @@
                     style="display:inline-block;margin-bottom:10px;text-decoration:none;">
                     🔗 **Visit Project**
                 </a>
-                <button class="toggle-btn" onclick="toggleDetails('sportsProject')">View Details</button>
+                <button class="toggle-btn" onclick="toggleDetails('sportsProject')">
+                    <span class="btn-text">View Details</span>
+                    <i class="fas fa-plus toggle-icon" id="icon-sportsProject"></i>
+                </button>
                 <div class="details" id="sportsProject">
                     <h4>Key Contributions:</h4>
                     <ul>
@@ -415,7 +457,10 @@
                     style="display:inline-block;margin-bottom:10px;text-decoration:none;">
                     🔗 **Visit Project**
                 </a>
-                <button class="toggle-btn" onclick="toggleDetails('open book library')">View Details</button>
+                <button class="toggle-btn" onclick="toggleDetails('open book library')">
+                    <span class="btn-text">View Details</span>
+                    <i class="fas fa-plus toggle-icon" id="icon-open book library"></i>
+                </button>
                 <div class="details" id="open book library">
                     <h4>Key Contributions:</h4>
                     <ul>
@@ -427,14 +472,18 @@
             </div>
         </section>
 
-        <!-- ACHIEVEMENTS SECTION (Refactored to stacked toggles) -->
+        <div class="section-divider"></div>
+
         <section id="achievements" data-aos="fade-up">
             <h2>Achievements & Certifications</h2>
             
             <div>
                 <h3><i class="fa-solid fa-chart-line"></i> Stock Price Prediction Using Machine Learning</h3>
                 <p>Certified for developing predictive models using ML algorithms and financial datasets during the E-Code internship.</p>
-                <button class="toggle-btn" onclick="toggleDetails('achieve1')">View Details</button>
+                <button class="toggle-btn" onclick="toggleDetails('achieve1')">
+                    <span class="btn-text">View Details</span>
+                    <i class="fas fa-plus toggle-icon" id="icon-achieve1"></i>
+                </button>
                 <div class="details" id="achieve1">
                     <p><strong>Issuing Body:</strong> E-Code Learning Software Services</p>
                     <p><strong>Skills Demonstrated:</strong> Time-Series Analysis, Python, Scikit-learn, Predictive Modeling.</p>
@@ -444,7 +493,10 @@
             <div>
                 <h3><i class="fa-brands fa-python"></i> Python in Machine Learning</h3>
                 <p>Gained certification in Python ML applications, covering model training and data analysis.</p>
-                <button class="toggle-btn" onclick="toggleDetails('achieve2')">View Details</button>
+                <button class="toggle-btn" onclick="toggleDetails('achieve2')">
+                    <span class="btn-text">View Details</span>
+                    <i class="fas fa-plus toggle-icon" id="icon-achieve2"></i>
+                </button>
                 <div class="details" id="achieve2">
                     <p><strong>Focus:</strong> Data preprocessing, algorithm selection, model evaluation, and implementation using popular Python libraries (Pandas, NumPy, TensorFlow/PyTorch concepts).</p>
                 </div>
@@ -453,7 +505,10 @@
             <div>
                 <h3><i class="fa-brands fa-pied-piper-alt"></i> GenAI Powered Data Analytics (TATA)</h3>
                 <p>Completed job simulation on GenAI-powered data analysis, risk profiling, and implementing AI-driven collections strategy.</p>
-                <button class="toggle-btn" onclick="toggleDetails('achieve3')">View Details</button>
+                <button class="toggle-btn" onclick="toggleDetails('achieve3')">
+                    <span class="btn-text">View Details</span>
+                    <i class="fas fa-plus toggle-icon" id="icon-achieve3"></i>
+                </button>
                 <div class="details" id="achieve3">
                     <p><strong>Modules Covered:</strong> Exploratory Data Analysis, Predicting Delinquency with AI, Business Reporting, and AI-Driven Strategy Implementation.</p>
                 </div>
@@ -462,7 +517,10 @@
             <div>
                 <h3><i class="fa-solid fa-laptop-code"></i> Software Engineering Job Simulation (JPMorgan Chase & Co)</h3>
                 <p>Certified in project setup, Kafka integration, H2 integration, and developing REST API controllers.</p>
-                <button class="toggle-btn" onclick="toggleDetails('achieve4')">View Details</button>
+                <button class="toggle-btn" onclick="toggleDetails('achieve4')">
+                    <span class="btn-text">View Details</span>
+                    <i class="fas fa-plus toggle-icon" id="icon-achieve4"></i>
+                </button>
                 <div class="details" id="achieve4">
                     <p><strong>Skills Gained:</strong> Project Setup, Kafka Integration, H2 Integration, REST API Controller Development, and Version Control.</p>
                 </div>
@@ -471,7 +529,10 @@
             <div>
                 <h3><i class="fa-solid fa-code"></i> C for Everyone – Programming</h3>
                 <p>Completed foundational C programming certification emphasizing structured problem-solving.</p>
-                <button class="toggle-btn" onclick="toggleDetails('achieve5')">View Details</button>
+                <button class="toggle-btn" onclick="toggleDetails('achieve5')">
+                    <span class="btn-text">View Details</span>
+                    <i class="fas fa-plus toggle-icon" id="icon-achieve5"></i>
+                </button>
                 <div class="details" id="achieve5">
                     <p><strong>Focus:</strong> Structured problem-solving, foundational data structures, and efficient memory management concepts in C.</p>
                 </div>
@@ -480,18 +541,25 @@
             <div>
                 <h3><i class="fa-solid fa-cloud"></i> Microsoft Azure Fundamentals</h3>
                 <p>Certified in Azure cloud concepts, networking, and basic deployment management.</p>
-                <button class="toggle-btn" onclick="toggleDetails('achieve6')">View Details</button>
+                <button class="toggle-btn" onclick="toggleDetails('achieve6')">
+                    <span class="btn-text">View Details</span>
+                    <i class="fas fa-plus toggle-icon" id="icon-achieve6"></i>
+                </button>
                 <div class="details" id="achieve6">
                     <p><strong>Topics:</strong> Cloud concepts, core Azure services, security, privacy, compliance, and Azure pricing and support.</p>
                 </div>
             </div>
         </section>
 
-        <!-- SKILLS SECTION -->
+        <div class="section-divider"></div>
+
         <section id="skills" data-aos="fade-up">
             <h2>Technical Skills</h2>
             <div>
-                <button class="toggle-btn" onclick="toggleDetails('frontendSkills')">💻 **Frontend Development**</button>
+                <button class="toggle-btn" onclick="toggleDetails('frontendSkills')">
+                    💻 **Frontend Development**
+                    <i class="fas fa-plus toggle-icon" id="icon-frontendSkills"></i>
+                </button>
                 <div class="details" id="frontendSkills">
                     <ul>
                         <li><i class="fab fa-html5"></i> HTML5</li>
@@ -503,7 +571,10 @@
             </div>
 
             <div>
-                <button class="toggle-btn" onclick="toggleDetails('backendSkills')">🖥️ **Backend & Databases**</button>
+                <button class="toggle-btn" onclick="toggleDetails('backendSkills')">
+                    🖥️ **Backend & Databases**
+                    <i class="fas fa-plus toggle-icon" id="icon-backendSkills"></i>
+                </button>
                 <div class="details" id="backendSkills">
                     <ul>
                         <li><i class="fa-brands fa-java"></i> Java</li>
@@ -515,7 +586,10 @@
             </div>
 
             <div>
-                <button class="toggle-btn" onclick="toggleDetails('toolsSkills')">🛠️ **Tools & Concepts**</button>
+                <button class="toggle-btn" onclick="toggleDetails('toolsSkills')">
+                    🛠️ **Tools & Concepts**
+                    <i class="fas fa-plus toggle-icon" id="icon-toolsSkills"></i>
+                </button>
                 <div class="details" id="toolsSkills">
                     <ul>
                         <li><i class="fab fa-git-alt"></i> Git & GitHub</li>
@@ -526,6 +600,8 @@
                 </div>
             </div>
         </section>
+
+        <div class="section-divider"></div>
 
         <section id="contact" data-aos="fade-up">
             <h2>Get In Touch</h2>
@@ -566,20 +642,22 @@
         <p>© 2025 Nalla Anikethan Reddy — All Rights Reserved</p>
     </footer>
 
-    <!-- JS for toggles -->
     <script>
         function toggleDetails(id) {
             const el = document.getElementById(id);
+            const icon = document.getElementById('icon-' + id);
+            
             // Use smooth toggle for better UX
             if (el.style.display === "block") {
                 el.style.display = "none";
+                if (icon) icon.classList.replace('fa-minus', 'fa-plus');
             } else {
                 el.style.display = "block";
+                if (icon) icon.classList.replace('fa-plus', 'fa-minus');
             }
         }
     </script>
 
-    <!-- VANTA Background -->
     <script>
         VANTA.GLOBE({
             el: "#vanta-bg",
@@ -597,7 +675,6 @@
         });
     </script>
 
-    <!-- AOS Init -->
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script>
         AOS.init({ once: true, duration: 1200, easing: 'ease-out-cubic' });
