@@ -1,603 +1,606 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nalla Anikethan Reddy | Portfolio</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nalla Anikethan Reddy | Advanced Portfolio</title>
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+    <!-- Google Font - Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
 
-  <!-- VANTA.js + THREE.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.globe.min.js"></script>
+    <!-- VANTA.js + THREE.js for Globe Background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.globe.min.js"></script>
 
-  <!-- AOS (Scroll Animations) -->
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+    <!-- AOS (Scroll Animations) -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
 
-  <!-- Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: "Poppins", sans-serif;
-      color: #f5f5f5;
-      background: radial-gradient(circle at top, #0a0a1a, #000010);
-      overflow-x: hidden;
-      text-align: center;
-    }
-    header, main, footer { position: relative; z-index: 2; }
-    h1, h2, h3 {
-      background: linear-gradient(90deg, #00ffe1, #ff00ff, #00b3ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 15px;
-    }
-    p, li {
-      color: #e0e0e0;
-      line-height: 1.6;
-    }
-    a {
-      color: #00ffe1;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-    a:hover {
-      color: #fff;
-      text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffe1;
-    }
-    header { padding: 60px 20px 40px; }
-    .welcome-msg h2 {
-      font-size: 2.2em;
-      font-weight: 600;
-      background: linear-gradient(90deg, #ff00ff, #00ffe1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .profile-pic {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      border: 3px solid #00ffe1;
-      object-fit: cover;
-      box-shadow: 0 0 40px rgba(0,255,225,0.7);
-      margin-top: 20px;
-      animation: float 4s ease-in-out infinite;
-    }
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
-      100% { transform: translateY(0); }
-    }
-    h1 {
-      font-size: 2.5em;
-      margin-top: 20px;
-      font-weight: 700;
-    }
-    h1 span {
-      background: linear-gradient(90deg, #00ffe1, #ff00ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .social-icons {
-      margin-top: 15px;
-    }
-    .social-icons a {
-      font-size: 1.7em;
-      margin: 0 12px;
-      transition: 0.3s;
-    }
-    .social-icons a:hover {
-      transform: scale(1.3);
-      color: #ff00ff;
-      text-shadow: 0 0 10px #00ffe1, 0 0 20px #ff00ff;
-    }
+    <style>
+        /* CSS Variables for Advanced Look */
+        :root {
+            --color-primary: #00ffe1; /* Neon Cyan */
+            --color-secondary: #ff00ff; /* Neon Magenta */
+            --color-text: #e0e0e0;
+            --color-background: #000010;
+            --color-card-bg: rgba(255, 255, 255, 0.05);
+            --glow-primary: 0 0 15px rgba(0, 255, 225, 0.7), 0 0 30px rgba(0, 255, 225, 0.5);
+            --glow-secondary: 0 0 15px rgba(255, 0, 255, 0.7), 0 0 30px rgba(255, 0, 255, 0.5);
+        }
 
-    main { margin-top: 30px; }
-    main section {
-      background: rgba(255, 255, 255, 0.07);
-      margin: 40px auto;
-      padding: 40px 25px;
-      width: 85%;
-      max-width: 900px;
-      border-radius: 20px;
-      box-shadow: 0 0 40px rgba(0,255,255,0.2);
-      backdrop-filter: blur(15px);
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-    }
-    main section:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 0 50px rgba(255,0,255,0.4);
-    }
-    ul { list-style: none; padding: 0; }
+        /* Base Styles */
+        body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            color: var(--color-text);
+            background-color: var(--color-background);
+            overflow-x: hidden;
+            text-align: center;
+        }
+        header, main, footer { position: relative; z-index: 2; }
 
-    /* Buttons for toggle */
-    .toggle-btn {
-      background: linear-gradient(90deg, #00ffe1, #ff00ff);
-      border: none;
-      padding: 10px 20px;
-      border-radius: 10px;
-      color: #000;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      margin-top: 10px;
-    }
-    .toggle-btn:hover {
-      background: linear-gradient(90deg, #ff00ff, #00ffe1);
-      transform: scale(1.05);
-    }
-    .details {
-      display: none;
-      text-align: left;
-      margin-top: 15px;
-      line-height: 1.8;
-    }
-    .details ul {
-      list-style: none;
-      margin-left: 0;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      padding: 0;
-    }
-    .details li {
-      background: rgba(0,255,225,0.2);
-      color: #000;
-      padding: 12px 18px;
-      border-radius: 12px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      transition: 0.3s;
-      cursor: default;
-    }
-    .details li:hover {
-      background: rgba(255,0,255,0.4);
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(0,255,255,0.5);
-    }
+        /* Neon Gradient Titles */
+        h1, h2, h3 {
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
 
-    #projects div, #skills div {
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(0,255,225,0.4);
-      border-radius: 15px;
-      padding: 20px;
-      margin: 15px 0;
-      transition: 0.3s ease;
-    }
-    #projects div:hover, #skills div:hover {
-      background: rgba(0,255,225,0.15);
-      transform: scale(1.05);
-      box-shadow: 0 0 25px rgba(0,255,255,0.5);
-    }
+        p, li {
+            color: var(--color-text);
+            line-height: 1.7;
+        }
 
-    /* 🌟 Achievements Section */
-    #achievements {
-      display: grid;
-      gap: 20px;
-    }
-    .achievement-card {
-      background: rgba(255, 255, 255, 0.08);
-      padding: 20px;
-      border-radius: 15px;
-      text-align: center;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 15px rgba(0, 255, 225, 0.2);
-    }
-    .achievement-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 0 30px rgba(255, 0, 255, 0.4);
-    }
-    .achievement-card i {
-      font-size: 2.2em;
-      color: #00ffe1;
-      margin-bottom: 10px;
-    }
-    .achievement-card h3 {
-      color: #00ffe1;
-      margin-bottom: 10px;
-    }
+        /* Neon Links */
+        a {
+            color: var(--color-primary);
+            text-decoration: none;
+            transition: 0.3s ease;
+        }
+        a:hover {
+            color: #fff;
+            text-shadow: 0 0 5px var(--color-secondary), 0 0 15px var(--color-primary);
+        }
 
-    footer {
-      padding: 30px 0;
-      background: rgba(0,0,0,0.5);
-      border-top: 1px solid rgba(255,255,255,0.2);
-      margin-top: 50px;
-    }
-    footer p:first-child {
-      font-size: 1.5em;
-      background: linear-gradient(90deg, #00ffe1, #ff00ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+        /* Header Section */
+        header { padding: 80px 20px 60px; }
+        .welcome-msg h2 {
+            font-size: 2.5em;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+        .profile-pic {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid var(--color-primary);
+            object-fit: cover;
+            box-shadow: var(--glow-primary);
+            margin-top: 20px;
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        h1 { font-size: 3em; margin-top: 25px; }
 
-    /* Resume Download Button */
-    .resume-btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 12px 25px;
-      font-weight: 600;
-      color: #000;
-      background: linear-gradient(90deg, #00ffe1, #ff00ff);
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-decoration: none;
-    }
-    .resume-btn:hover {
-      background: linear-gradient(90deg, #ff00ff, #00ffe1);
-      transform: scale(1.05);
-    }
+        /* Social Icons */
+        .social-icons { margin-top: 20px; }
+        .social-icons a {
+            font-size: 2em;
+            margin: 0 15px;
+            transition: 0.3s transform, 0.3s text-shadow;
+        }
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: var(--color-secondary);
+            text-shadow: 0 0 10px var(--color-primary), 0 0 20px var(--color-secondary);
+        }
 
-    @media (max-width: 600px) {
-      .profile-pic { width: 130px; height: 130px; }
-      h1 { font-size: 1.8em; }
-      .welcome-msg h2 { font-size: 1.6em; }
-      .details ul { flex-direction: column; gap: 12px; }
-    }
-  </style>
+        /* Section Styling (Advanced Card Look) */
+        main { margin-top: 50px; }
+        main section {
+            background: var(--color-card-bg);
+            margin: 60px auto;
+            padding: 50px 30px;
+            width: 90%;
+            max-width: 1100px;
+            border-radius: 25px;
+            border: 1px solid rgba(0, 255, 225, 0.2);
+            box-shadow: 0 0 50px rgba(0, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease;
+            transform-style: preserve-3d; 
+            perspective: 1000px;
+        }
+        /* Sophisticated Hover Effect (3D Tilt) */
+        main section:hover {
+            transform: translateZ(10px);
+            box-shadow: var(--glow-secondary);
+        }
+        ul { list-style: none; padding: 0; }
+
+        /* Neon Buttons */
+        .toggle-btn, .resume-btn {
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            border: none;
+            padding: 12px 25px;
+            border-radius: 15px;
+            color: #000;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            margin-top: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 10px rgba(0, 255, 225, 0.5);
+            display: inline-block;
+        }
+        .toggle-btn:hover, .resume-btn:hover {
+            background: linear-gradient(90deg, var(--color-secondary), var(--color-primary));
+            transform: scale(1.05) perspective(100px) rotateX(2deg);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.8);
+        }
+
+        /* Detail/Toggle Content */
+        .details {
+            display: none;
+            text-align: left;
+            margin-top: 20px;
+            padding: 20px;
+            border-left: 3px solid var(--color-primary);
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            animation: fadeIn 0.5s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .details ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 10px 0;
+            margin-top: 15px;
+        }
+        .details li {
+            background: rgba(0, 255, 225, 0.15);
+            color: var(--color-primary);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+            border: 1px solid var(--color-primary);
+            cursor: default;
+        }
+        .details li:hover {
+            background: rgba(255, 0, 255, 0.3);
+            color: #fff;
+            transform: scale(1.05);
+            box-shadow: 0 0 10px var(--color-secondary);
+        }
+
+        /* Projects, Skills, and ACHIEVEMENTS Card Styling (Stacked Look) */
+        #projects > div, #skills > div, #achievements > div {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(0, 255, 225, 0.4);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            transition: 0.4s ease;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+            text-align: left; 
+        }
+        #projects > div:hover, #skills > div:hover, #achievements > div:hover {
+            background: rgba(0, 255, 225, 0.1);
+            transform: scale(1.02);
+            box-shadow: var(--glow-primary);
+        }
+        /* Icon styling inside the stacked achievement/project/skill cards */
+        #achievements h3 i, #projects h3 i {
+            margin-right: 10px;
+            color: var(--color-secondary);
+        }
+        
+
+        /* Education Card Styling */
+        #education > div {
+            display: grid;
+            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            margin-top: 30px;
+        }
+        #education > div > div {
+            background: var(--color-card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: left;
+            border-left: 4px solid var(--color-secondary);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        #education > div > div:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: var(--glow-secondary);
+        }
+        #education h3 { color: var(--color-primary); margin-bottom: 10px; }
+
+
+        /* Contact Section Advanced */
+        #contact > div {
+            background: rgba(255, 255, 255, 0.07);
+            border-radius: 20px;
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            margin: 30px auto;
+            text-align: left;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+            border: 1px solid rgba(255, 0, 255, 0.3);
+        }
+        #contact a { color: #fff; }
+        #contact i { color: var(--color-primary); font-size: 1.5em; }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            background: rgba(0,0,0,0.6);
+            border-top: 2px solid rgba(255,255,255,0.1);
+            margin-top: 80px;
+        }
+        footer p:first-child {
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            .welcome-msg h2 { font-size: 2em; }
+            main section { padding: 30px 20px; }
+            .details ul { flex-direction: column; gap: 10px; }
+        }
+    </style>
 </head>
 <body id="vanta-bg">
 
-  <!-- HEADER -->
-  <header data-aos="fade-down">
-    <div class="welcome-msg"><h2>✨ Welcome to My Portfolio ✨</h2></div>
-    <img src="Screenshot (31).png" alt="Nalla Anikethan Reddy" class="profile-pic" />
-    <h1>👋 Hi, I'm <span>Nalla Anikethan Reddy</span></h1>
-    <p>GRADUATE FRESHER</p>
-    <p>Web Developer | Java & Python Programmer | Tech Enthusiast</p>
-    <div class="social-icons">
-      <a href="mailto:anikethanreddynalla@gmail.com"><i class="fa-solid fa-envelope"></i></a>
-      <a href="https://www.linkedin.com/in/anikethan-reddy-nalla-bb9779317" target="_blank"><i class="fab fa-linkedin"></i></a>
-      <a href="tel:+917989461409"><i class="fa-solid fa-phone"></i></a>
-    </div>
-    <a href="Nalla_Anikethan_Reddy_Resume_graduated_resume.pdf" download class="resume-btn">📄 Download Resume</a>
-  </header>
-
-  <!-- MAIN -->
-  <main>
-    <section id="about" data-aos="fade-up">
-      <h2>About Me</h2>
-      <p>I’m Nalla Anikethan Reddy, a motivated and enthusiastic fresher skilled in Web Development, Java, Python, SQL, and OOP concepts, with a strong analytical mindset and problem-solving ability.
-I am quick to learn, adaptable, and eager to contribute as a Software Developer / Web Developer in a dynamic and innovative environment.</p>
-    </section>
-
-    <section id="education" data-aos="fade-up">
-  <h2>Education</h2>
-  <div style="
-    display: grid;
-    gap: 25px;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  ">
-    <div style="
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 15px;
-      padding: 20px;
-      text-align: left;
-      box-shadow: 0 0 20px rgba(0,255,255,0.2);
-      transition: all 0.3s ease;
-    " onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 0 30px rgba(255,0,255,0.4)';" 
-       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 0 20px rgba(0,255,255,0.2)';">
-      <h3 style="color:#00ffe1; margin-bottom:8px;">🎓 B.Tech - ECE (AIML)</h3>
-      <p><strong>Institution:</strong> GITAM University</p>
-      <p><strong>Duration:</strong> 2021 – 2025</p>
-      <p><strong>Status:</strong>Graduated</p>
-    </div>
-
-    <div style="
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 15px;
-      padding: 20px;
-      text-align: left;
-      box-shadow: 0 0 20px rgba(0,255,255,0.2);
-      transition: all 0.3s ease;
-    " onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 0 30px rgba(255,0,255,0.4)';" 
-       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 0 20px rgba(0,255,255,0.2)';">
-      <h3 style="color:#00ffe1; margin-bottom:8px;">🏫 Intermediate - MPC</h3>
-      <p><strong>Institution:</strong> Sri Chaitanya Junior College</p>
-      <p><strong>Duration:</strong> 2019 – 2021</p>
-    </div>
-
-    <div style="
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 15px;
-      padding: 20px;
-      text-align: left;
-      box-shadow: 0 0 20px rgba(0,255,255,0.2);
-      transition: all 0.3s ease;
-    " onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 0 30px rgba(255,0,255,0.4)';" 
-       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 0 20px rgba(0,255,255,0.2)';">
-      <h3 style="color:#00ffe1; margin-bottom:8px;">📘 High School - TBSE</h3>
-      <p><strong>Institution:</strong> Tejaswi High School</p>
-      <p><strong>Completed:</strong> 2019</p>
-    </div>
-  </div>
-</section>
-
-
-    <section id="internship" data-aos="fade-up">
-      <h2>Internship</h2>
-      <p><strong>Company:</strong> E-Code Learning Software Services</p>
-      <p><strong>Project:</strong> Stock Price Prediction using Machine Learning</p>
-      <button class="toggle-btn" onclick="toggleDetails('internshipDetails')">View Details</button>
-      <div class="details" id="internshipDetails">
-        <p><strong>Duration:</strong> 20 May 2024 – 21 July 2024</p>
-        <p>During my internship, I worked on a Stock Price Prediction project using machine learning...</p>
-        <ul>
-          <li>Developed and deployed ML models (Linear Regression, LSTM, Random Forest).</li>
-          <li>Performed preprocessing, feature engineering, and time-series analysis.</li>
-          <li>Integrated APIs (Yahoo Finance, Alpha Vantage) for live data.</li>
-          <li>Visualized data using Matplotlib, Seaborn, and Plotly.</li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="projects" data-aos="fade-up">
-      <h2>Projects</h2>
-      <div>
-        <h3>Portfolio Application (React JS)</h3>
-        <p>Developed a responsive portfolio using HTML, CSS, and React JS to showcase my skills and experience.</p>
-        <button class="toggle-btn" onclick="toggleDetails('portfolioProject')">View Details</button>
-        <div class="details" id="portfolioProject">
-          <h4>Role and Responsibilities:</h4>
-          <ul>
-            <li>Designed a responsive UI using React JS and CSS.</li>
-            <li>Created reusable components and implemented routing.</li>
-            <li>Used GitHub for version control and Visual Studio Code for development.</li>
-            <li>Ensured cross-browser compatibility and mobile responsiveness.</li>
-          </ul>
-          <h4>Project Details:</h4>
-          <p><strong>Technologies:</strong> HTML, CSS, React JS</p>
-          <p><strong>Tools:</strong> GitHub, Visual Studio Code</p>
-          <p><strong>Features:</strong> Home, About, Projects, Contact, and Responsive Design</p>
+    <!-- HEADER -->
+    <header data-aos="fade-down">
+        <div class="welcome-msg"><h2>✨ Welcome to My Protfolio✨</h2></div>
+        <!--  - Placeholder for the image -->
+        <img src="Screenshot (31).png" alt="Nalla Anikethan Reddy" class="profile-pic" />
+        <h1>👋 Hi, I'm Nalla Anikethan Reddy</h1>
+        <p>GRADUATE FRESHER | Seeking Innovation & Impact</p>
+        <p>Software | Web Developer | Java & Python Programmer | Tech Enthusiast</p>
+        <div class="social-icons">
+            <a href="mailto:anikethanreddynalla@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            <a href="https://www.linkedin.com/in/anikethan-reddy-nalla-bb9779317" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="tel:+917989461409" aria-label="Phone"><i class="fa-solid fa-phone"></i></a>
         </div>
-      </div>
+        <a href="Nalla_Anikethan_Reddy_Resume_graduated_resume.pdf" download class="resume-btn">📄 **Download Resume**</a>
+    </header>
 
-      <div>
-        <h3>AI-Powered Biometric Authentication System</h3>
-        <p>Developed a biometric authentication system using AI and IoT for secure bank lockers.</p>
-        <button class="toggle-btn" onclick="toggleDetails('biometricProject')">View Details</button>
-        <div class="details" id="biometricProject">
-          <p>Integrated fingerprint and facial recognition with Raspberry Pi for enhanced security.</p>
-          <h4>Roles and Responsibilities:</h4>
-          <ul>
-            <li>Integrated Raspberry Pi, camera module, and fingerprint sensor.</li>
-            <li>Implemented secure encryption and data storage.</li>
-            <li>Established communication between hardware and cloud servers.</li>
-          </ul>
-        </div>
-      </div>
+    <!-- MAIN -->
+    <main>
+        <section id="about" data-aos="fade-up">
+            <h2>About Me</h2>
+            <p>I’m Nalla Anikethan Reddy, a motivated and enthusiastic fresher skilled in **Web Development**, **Java**, **Python**, **Dbms**, **SQL**, **problem-solving** and **OOP** concepts. I possess a strong analytical mindset and problem-solving ability, proven through hands-on projects and internships. I am quick to learn, adaptable, and eager to contribute as a Software Developer / Web Developer in a dynamic and innovative environment, focusing on delivering high-quality, scalable solutions.</p>
+        </section>
+        
+        <section id="education" data-aos="fade-up">
+            <h2>Education</h2>
+            <div>
+                <div>
+                    <h3>🎓 B.Tech - ECE (AIML)</h3>
+                    <p><strong>Institution:</strong> GITAM University</p>
+                    <p><strong>Duration:</strong> 2021 – 2025</p>
+                    <p><strong>Status:</strong> Graduated</p>
+                </div>
 
-      <div>
-        <h3>Advanced Visual Computing: MATLAB-Based Image Processing</h3>
-        <p>Developed MATLAB-based image processing algorithms for enhancement and analysis.</p>
-        <button class="toggle-btn" onclick="toggleDetails('matlabProject')">View Details</button>
-        <div class="details" id="matlabProject">
-          <h4>Roles and Responsibilities:</h4>
-          <ul>
-            <li>Designed modules for filtering, edge detection, and segmentation.</li>
-            <li>Developed transformation algorithms for better image analysis.</li>
-            <li>Optimized algorithms for real-world performance and accuracy.</li>
-          </ul>
-        </div>
-      </div>
+                <div>
+                    <h3>🏫 Intermediate - MPC</h3>
+                    <p><strong>Institution:</strong> Sri Chaitanya Junior College</p>
+                    <p><strong>Duration:</strong> 2019 – 2021</p>
+                </div>
 
-      <div>
-        <h3>College Sports Management System (.NET, SQL)</h3>
-        <p>Created a .NET-based system for managing college sports events and participants.</p>
-        <a href="https://anikethan-ux.github.io/sports-management-system-designed-by-nalla-anikethanreddy/" 
-           target="_blank" 
-           class="toggle-btn"
-           style="display:inline-block;margin-bottom:10px;text-decoration:none;">
-           🔗 Visit Project
-        </a>
-        <button class="toggle-btn" onclick="toggleDetails('sportsProject')">View Details</button>
-        <div class="details" id="sportsProject">
-          <h4>Roles and Responsibilities:</h4>
-          <ul>
-            <li>Developed a multi-layered ASP.NET and SQL-based system.</li>
-            <li>Ensured scalability and secure architecture.</li>
-            <li>Collaborated on UI/UX design for better user experience.</li>
-          </ul>
-        </div>
-      </div>
+                <div>
+                    <h3>📘 High School - TBSE</h3>
+                    <p><strong>Institution:</strong> Tejaswi High School</p>
+                    <p><strong>Completed:</strong> 2019</p>
+                </div>
+            </div>
+        </section>
 
-      <div>
-        <h3>open book library</h3>
-        <p>Built a tool to help users quickly find books by keyword/author/title.</p>
-        <a href="https://anikethan-ux.github.io/book-finder-anikethan/" 
-           target="_blank" 
-           class="toggle-btn"
-           style="display:inline-block;margin-bottom:10px;text-decoration:none;">
-           🔗 Visit Project
-        </a>
-        <button class="toggle-btn" onclick="toggleDetails('open book library')">View Details</button>
-        <div class="details" id="open book library">
-          <h4>Roles and Responsibilities:</h4>
-          <ul>
-            <li>Designed and developed a responsive Book Finder web app using HTML, CSS, and JavaScript integrated with a public book API.</li>
-            <li>Implemented dynamic search functionality, API data handling, and user-friendly UI for smooth interaction.</li>
-            <li>Deployed the project on GitHub Pages and managed code versioning using Git for continuous improvement.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+        <section id="internship" data-aos="fade-up">
+            <h2>Internship Experience</h2>
+            <p><strong>Company:</strong> E-Code Learning Software Services</p>
+            <p><strong>Project:</strong> Stock Price Prediction using Machine Learning</p>
+            <button class="toggle-btn" onclick="toggleDetails('internshipDetails')">View Details</button>
+            <div class="details" id="internshipDetails">
+                <p><strong>Duration:</strong> 20 May 2024 – 21 July 2024</p>
+                <p>During my internship, I worked on a Stock Price Prediction project using machine learning to develop robust predictive models for financial analysis.</p>
+                <ul>
+                    <li><i class="fas fa-microchip"></i> Developed and deployed ML models (Linear Regression, LSTM, Random Forest).</li>
+                    <li><i class="fas fa-flask"></i> Performed preprocessing, feature engineering, and time-series analysis on financial data.</li>
+                    <li><i class="fas fa-link"></i> Integrated APIs (Yahoo Finance, Alpha Vantage) for real-time data fetching.</li>
+                    <li><i class="fas fa-chart-bar"></i> Visualized data trends using Matplotlib, Seaborn, and Plotly for insights.</li>
+                </ul>
+            </div>
+        </section>
 
-    <!-- 🌟 Skills Section with toggles -->
-    <section id="skills" data-aos="fade-up">
-      <h2>Skills</h2>
-      <div>
-        <button class="toggle-btn" onclick="toggleDetails('frontendSkills')">💻 Frontend Skills</button>
-        <div class="details" id="frontendSkills">
-          <ul>
-            <li><i class="fab fa-html5"></i> HTML</li>
-            <li><i class="fab fa-css3-alt"></i> CSS</li>
-            <li><i class="fab fa-js-square"></i> JavaScript</li>
-            <li><i class="fab fa-react"></i> React JS</li>
-          </ul>
-        </div>
-      </div>
+        <section id="projects" data-aos="fade-up">
+            <h2>Featured Projects</h2>
+            <div>
+                <h3><i class="fab fa-react"></i> Portfolio Application (React JS)</h3>
+                <p>Developed a responsive and aesthetically pleasing portfolio using modern web technologies to professionally showcase my development skills and projects.</p>
+                <button class="toggle-btn" onclick="toggleDetails('portfolioProject')">View Details</button>
+                <div class="details" id="portfolioProject">
+                    <h4>Key Contributions:</h4>
+                    <ul>
+                        <li><i class="fab fa-react"></i> Designed a responsive, component-based UI using **React JS** and advanced CSS.</li>
+                        <li><i class="fas fa-route"></i> Implemented front-end routing and optimized component lifecycle for performance.</li>
+                        <li><i class="fab fa-github"></i> Utilized **GitHub** for version control and collaborative development practices.</li>
+                    </ul>
+                    <h4>Project Details:</h4>
+                    <p><strong>Technologies:</strong> HTML, CSS, React JS | **Tools:** GitHub, Visual Studio Code</p>
+                </div>
+            </div>
 
-      <div>
-        <button class="toggle-btn" onclick="toggleDetails('backendSkills')">🖥️ Backend Skills</button>
-        <div class="details" id="backendSkills">
-          <ul>
-            <li><i class="fa-brands fa-java"></i> Java</li>
-            <li><i class="fa-brands fa-python"></i> Python</li>
-            <li><i class="fas fa-database"></i> SQL</li>
-            <li><i class="fas fa-cogs"></i> C++</li>
-          </ul>
-        </div>
-      </div>
+            <div>
+                <h3><i class="fas fa-lock"></i> AI-Powered Biometric Authentication System (IoT)</h3>
+                <p>Designed a high-security, multimodal biometric authentication system integrating AI for secure bank locker access.</p>
+                <button class="toggle-btn" onclick="toggleDetails('biometricProject')">View Details</button>
+                <div class="details" id="biometricProject">
+                    <p>This system utilizes a **Raspberry Pi** to integrate fingerprint and facial recognition, providing an enhanced layer of physical and digital security.</p>
+                    <h4>Key Contributions:</h4>
+                    <ul>
+                        <li><i class="fas fa-fingerprint"></i> Integrated **Raspberry Pi**, camera module, and fingerprint sensor for data acquisition.</li>
+                        <li><i class="fas fa-shield-alt"></i> Implemented secure encryption and data storage mechanisms for biometric templates.</li>
+                        <li><i class="fas fa-cloud-upload-alt"></i> Established communication protocols between hardware and cloud servers for remote management.</li>
+                    </ul>
+                </div>
+            </div>
 
-      <div>
-        <button class="toggle-btn" onclick="toggleDetails('toolsSkills')">🛠️ Tools & Other Skills</button>
-        <div class="details" id="toolsSkills">
-          <ul>
-            <li><i class="fab fa-git-alt"></i> Git & GitHub</li>
-            <li><i class="fas fa-lightbulb"></i> Problem Solving</li>
-            <li><i class="fas fa-project-diagram"></i> OOPs Concepts</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+            <div>
+                <h3><i class="fas fa-image"></i> Advanced Visual Computing: MATLAB-Based Image Processing</h3>
+                <p>Developed and optimized complex image processing algorithms in MATLAB for advanced image enhancement and detailed analysis.</p>
+                <button class="toggle-btn" onclick="toggleDetails('matlabProject')">View Details</button>
+                <div class="details" id="matlabProject">
+                    <h4>Key Contributions:</h4>
+                    <ul>
+                        <li><i class="fas fa-filter"></i> Designed efficient modules for image **filtering**, **edge detection**, and **segmentation**.</li>
+                        <li><i class="fas fa-sync-alt"></i> Developed various **transformation algorithms** (e.g., Fourier, Wavelet) for better image feature extraction.</li>
+                        <li><i class="fas fa-tachometer-alt"></i> Optimized algorithms for robust performance and accuracy in real-world visual computing tasks.</li>
+                    </ul>
+                </div>
+            </div>
 
-    <!-- 🌟 Achievements Section -->
-    <section id="achievements" data-aos="fade-up">
-      <h2>Achievements & Certifications</h2>
-      <div class="achievement-card">
-        <i class="fa-solid fa-chart-line"></i>
-        <h3>Stock Price Prediction Using Machine Learning</h3>
-        <p>Certified for developing predictive models using ML algorithms and financial datasets.</p>
-      </div>
+            <div>
+                <h3><i class="fas fa-basketball-ball"></i> College Sports Management System (.NET, SQL)</h3>
+                <p>Created a comprehensive, multi-layered system for managing college sports events, participant registration, and results tracking.</p>
+                <a href="https://anikethan-ux.github.io/sports-management-system-designed-by-nalla-anikethanreddy/" 
+                    target="_blank" 
+                    class="toggle-btn"
+                    style="display:inline-block;margin-bottom:10px;text-decoration:none;">
+                    🔗 **Visit Project**
+                </a>
+                <button class="toggle-btn" onclick="toggleDetails('sportsProject')">View Details</button>
+                <div class="details" id="sportsProject">
+                    <h4>Key Contributions:</h4>
+                    <ul>
+                        <li><i class="fas fa-server"></i> Developed a multi-layered ASP.NET and SQL-based architecture for system stability.</li>
+                        <li><i class="fas fa-shield-alt"></i> Ensured data integrity and security with scalable database design and architecture.</li>
+                        <li><i class="fas fa-users"></i> Collaborated on UI/UX design to provide an intuitive and user-friendly experience.</li>
+                    </ul>
+                </div>
+            </div>
 
-      <div class="achievement-card">
-        <i class="fa-solid fa-code"></i>
-        <h3>C for Everyone – Programming</h3>
-        <p>Completed foundational C programming certification emphasizing structured problem-solving.</p>
-      </div>
+            <div>
+                <h3><i class="fas fa-search"></i> Open Book Library (Web API Integration)</h3>
+                <p>Built a responsive web tool using vanilla JavaScript to help users quickly find books by integrating with a public book API.</p>
+                <a href="https://anikethan-ux.github.io/book-finder-anikethan/" 
+                    target="_blank" 
+                    class="toggle-btn"
+                    style="display:inline-block;margin-bottom:10px;text-decoration:none;">
+                    🔗 **Visit Project**
+                </a>
+                <button class="toggle-btn" onclick="toggleDetails('open book library')">View Details</button>
+                <div class="details" id="open book library">
+                    <h4>Key Contributions:</h4>
+                    <ul>
+                        <li><i class="fas fa-book-open"></i> Designed and developed a responsive Book Finder web application (HTML, CSS, JavaScript).</li>
+                        <li><i class="fas fa-code"></i> Implemented dynamic search functionality and asynchronous **API data handling** for a fast user experience.</li>
+                        <li><i class="fab fa-github"></i> Deployed the project on GitHub Pages and managed version control using Git.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-      <div class="achievement-card">
-        <i class="fa-solid fa-car"></i>
-        <h3>Electronic Vehicle Technology</h3>
-        <p>Certified in advanced EV concepts, battery management, and green mobility systems.</p>
-      </div>
+        <!-- ACHIEVEMENTS SECTION (Refactored to stacked toggles) -->
+        <section id="achievements" data-aos="fade-up">
+            <h2>Achievements & Certifications</h2>
+            
+            <div>
+                <h3><i class="fa-solid fa-chart-line"></i> Stock Price Prediction Using Machine Learning</h3>
+                <p>Certified for developing predictive models using ML algorithms and financial datasets during the E-Code internship.</p>
+                <button class="toggle-btn" onclick="toggleDetails('achieve1')">View Details</button>
+                <div class="details" id="achieve1">
+                    <p><strong>Issuing Body:</strong> E-Code Learning Software Services</p>
+                    <p><strong>Skills Demonstrated:</strong> Time-Series Analysis, Python, Scikit-learn, Predictive Modeling.</p>
+                </div>
+            </div>
+            
+            <div>
+                <h3><i class="fa-brands fa-python"></i> Python in Machine Learning</h3>
+                <p>Gained certification in Python ML applications, covering model training and data analysis.</p>
+                <button class="toggle-btn" onclick="toggleDetails('achieve2')">View Details</button>
+                <div class="details" id="achieve2">
+                    <p><strong>Focus:</strong> Data preprocessing, algorithm selection, model evaluation, and implementation using popular Python libraries (Pandas, NumPy, TensorFlow/PyTorch concepts).</p>
+                </div>
+            </div>
+            
+            <div>
+                <h3><i class="fa-brands fa-pied-piper-alt"></i> GenAI Powered Data Analytics (TATA)</h3>
+                <p>Completed job simulation on GenAI-powered data analysis, risk profiling, and implementing AI-driven collections strategy.</p>
+                <button class="toggle-btn" onclick="toggleDetails('achieve3')">View Details</button>
+                <div class="details" id="achieve3">
+                    <p><strong>Modules Covered:</strong> Exploratory Data Analysis, Predicting Delinquency with AI, Business Reporting, and AI-Driven Strategy Implementation.</p>
+                </div>
+            </div>
 
-      <div class="achievement-card">
-        <i class="fa-brands fa-python"></i>
-        <h3>Python in Machine Learning</h3>
-        <p>Gained certification in Python ML applications, covering model training and data analysis.</p>
-      </div>
+            <div>
+                <h3><i class="fa-solid fa-laptop-code"></i> Software Engineering Job Simulation (JPMorgan Chase & Co)</h3>
+                <p>Certified in project setup, Kafka integration, H2 integration, and developing REST API controllers.</p>
+                <button class="toggle-btn" onclick="toggleDetails('achieve4')">View Details</button>
+                <div class="details" id="achieve4">
+                    <p><strong>Skills Gained:</strong> Project Setup, Kafka Integration, H2 Integration, REST API Controller Development, and Version Control.</p>
+                </div>
+            </div>
+            
+            <div>
+                <h3><i class="fa-solid fa-code"></i> C for Everyone – Programming</h3>
+                <p>Completed foundational C programming certification emphasizing structured problem-solving.</p>
+                <button class="toggle-btn" onclick="toggleDetails('achieve5')">View Details</button>
+                <div class="details" id="achieve5">
+                    <p><strong>Focus:</strong> Structured problem-solving, foundational data structures, and efficient memory management concepts in C.</p>
+                </div>
+            </div>
 
-      <div class="achievement-card">
-        <i class="fa-brands fa-TATA"></i>
-        <h3> GenAI	Powered	Data	Analytics	Job	Simulation (TATA COMPANY)</h3>
-        <p> Exploratory	data	analysis	and	risk	profiling,
- Predicting	delinquency	with	AI,
- Business	report	and	data	storytelling	for	collections	strategy,
- Implementing	an	AI-driven	collections	strategy.</p>
-      </div>
+            <div>
+                <h3><i class="fa-solid fa-cloud"></i> Microsoft Azure Fundamentals</h3>
+                <p>Certified in Azure cloud concepts, networking, and basic deployment management.</p>
+                <button class="toggle-btn" onclick="toggleDetails('achieve6')">View Details</button>
+                <div class="details" id="achieve6">
+                    <p><strong>Topics:</strong> Cloud concepts, core Azure services, security, privacy, compliance, and Azure pricing and support.</p>
+                </div>
+            </div>
+        </section>
 
-      <div class="achievement-card">
-        <i class="fa-brands fa-JPMorgan Chase & Co"></i>
-        <h3>Software	Engineering	Job	Simulation (JPMorgan Chase & Co)</h3>
-        <p>Gained certification in Project	Setup,
- Kafka	Integration,
- H2	Integration,
- REST	API	Integration,
- REST	API	Controlle.</p>
-      </div>
+        <!-- SKILLS SECTION -->
+        <section id="skills" data-aos="fade-up">
+            <h2>Technical Skills</h2>
+            <div>
+                <button class="toggle-btn" onclick="toggleDetails('frontendSkills')">💻 **Frontend Development**</button>
+                <div class="details" id="frontendSkills">
+                    <ul>
+                        <li><i class="fab fa-html5"></i> HTML5</li>
+                        <li><i class="fab fa-css3-alt"></i> CSS3</li>
+                        <li><i class="fab fa-js-square"></i> JavaScript (ES6+)</li>
+                        <li><i class="fab fa-react"></i> React JS</li>
+                    </ul>
+                </div>
+            </div>
 
-      <div class="achievement-card">
-        <i class="fa-solid fa-cloud"></i>
-        <h3>Microsoft Azure Fundamentals</h3>
-        <p>Certified in Azure cloud concepts, networking, and basic deployment management.</p>
-      </div>
-    </section>
+            <div>
+                <button class="toggle-btn" onclick="toggleDetails('backendSkills')">🖥️ **Backend & Databases**</button>
+                <div class="details" id="backendSkills">
+                    <ul>
+                        <li><i class="fa-brands fa-java"></i> Java</li>
+                        <li><i class="fa-brands fa-python"></i> Python</li>
+                        <li><i class="fas fa-database"></i> SQL (Database Management)</li>
+                        <li><i class="fas fa-cogs"></i> C++</li>
+                    </ul>
+                </div>
+            </div>
 
-    <section id="contact" data-aos="fade-up">
-  <h2>Contact Me</h2>
-  <div style="
-    background: rgba(255, 255, 255, 0.07);
-    border-radius: 15px;
-    padding: 25px 20px;
-    width: 85%;
-    max-width: 500px;
-    margin: 30px auto;
-    text-align: left;
-    box-shadow: 0 0 25px rgba(0,255,255,0.2);
-    transition: all 0.3s ease;
-  " onmouseover="this.style.boxShadow='0 0 35px rgba(255,0,255,0.4)';" 
-     onmouseout="this.style.boxShadow='0 0 25px rgba(0,255,255,0.2)';">
-    
-    <p style="display:flex; align-items:center; gap:10px; font-size:1em; margin:10px 0; color:#e0e0e0;">
-      <i class="fa-solid fa-envelope" style="color:#00ffe1; font-size:1.3em;"></i>
-      <a href="mailto:anikethanreddynalla@gmail.com" style="color:#fff; text-decoration:none;">
-        anikethanreddynalla@gmail.com
-      </a>
-    </p>
+            <div>
+                <button class="toggle-btn" onclick="toggleDetails('toolsSkills')">🛠️ **Tools & Concepts**</button>
+                <div class="details" id="toolsSkills">
+                    <ul>
+                        <li><i class="fab fa-git-alt"></i> Git & GitHub</li>
+                        <li><i class="fas fa-lightbulb"></i> Problem Solving & **DSA**</li>
+                        <li><i class="fas fa-project-diagram"></i> **OOPs** Concepts</li>
+                        <li><i class="fas fa-cloud"></i> Azure Fundamentals</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-    <p style="display:flex; align-items:center; gap:10px; font-size:1em; margin:10px 0; color:#e0e0e0;">
-      <i class="fab fa-linkedin" style="color:#00ffe1; font-size:1.3em;"></i>
-      <a href="https://www.linkedin.com/in/anikethan-reddy-nalla-bb9779317" target="_blank" style="color:#fff; text-decoration:none;">
-        linkedin.com/in/anikethan-reddy-nalla
-      </a>
-    </p>
+        <section id="contact" data-aos="fade-up">
+            <h2>Get In Touch</h2>
+            <div>
+                <p style="display:flex; align-items:center; gap:15px; font-size:1.1em; margin:15px 0;">
+                    <i class="fa-solid fa-envelope"></i>
+                    <a href="mailto:anikethanreddynalla@gmail.com" aria-label="Email">
+                        anikethanreddynalla@gmail.com
+                    </a>
+                </p>
 
-    <p style="display:flex; align-items:center; gap:10px; font-size:1em; margin:10px 0; color:#e0e0e0;">
-      <i class="fa-solid fa-phone" style="color:#00ffe1; font-size:1.3em;"></i>
-      <a href="tel:+917989461409" style="color:#fff; text-decoration:none;">+91 7989461409</a>
-    </p>
+                <p style="display:flex; align-items:center; gap:15px; font-size:1.1em; margin:15px 0;">
+                    <i class="fab fa-linkedin"></i>
+                    <a href="https://www.linkedin.com/in/anikethan-reddy-nalla-bb9779317" target="_blank" aria-label="LinkedIn">
+                        linkedin.com/in/anikethan-reddy-nalla
+                    </a>
+                </p>
 
-    <div style="text-align:center; margin-top:20px;">
-      <a href="mailto:anikethanreddynalla@gmail.com" 
-         class="toggle-btn" 
-         style="font-size:0.9em; padding:10px 20px;">
-         📩 Send Me a Message
-      </a>
-    </div>
-  </div>
-</section>
+                <p style="display:flex; align-items:center; gap:15px; font-size:1.1em; margin:15px 0;">
+                    <i class="fa-solid fa-phone"></i>
+                    <a href="tel:+917989461409" aria-label="Phone Number">+91 7989461409</a>
+                </p>
 
-  </main>
+                <div style="text-align:center; margin-top:30px;">
+                    <a href="mailto:anikethanreddynalla@gmail.com" 
+                        class="toggle-btn" 
+                        style="font-size:1em; padding:12px 25px;">
+                        📩 **Send Me a Message**
+                    </a>
+                </div>
+            </div>
+        </section>
 
-  <footer>
-    <p>THANK YOU FOR VISITING MY PORTFOLIO</p>
-    <p>© 2025 Nalla Anikethan Reddy — All Rights Reserved</p>
-  </footer>
+    </main>
 
-  <!-- JS for toggles -->
-  <script>
-    function toggleDetails(id) {
-      const el = document.getElementById(id);
-      el.style.display = (el.style.display === "block") ? "none" : "block";
-    }
-  </script>
+    <footer>
+        <p>THANK YOU FOR VISITING MY PORTFOLIO</p>
+        <p>© 2025 Nalla Anikethan Reddy — All Rights Reserved</p>
+    </footer>
 
-  <!-- VANTA Background -->
-  <script>
-    VANTA.GLOBE({
-      el: "#vanta-bg",
-      mouseControls: true,
-      touchControls: true,
-      gyroControls: false,
-      minHeight: 200.00,
-      minWidth: 200.00,
-      scale: 1.00,
-      scaleMobile: 1.00,
-      color: 0x00ffe1,
-      backgroundColor: 0x000010,
-    });
-  </script>
+    <!-- JS for toggles -->
+    <script>
+        function toggleDetails(id) {
+            const el = document.getElementById(id);
+            // Use smooth toggle for better UX
+            if (el.style.display === "block") {
+                el.style.display = "none";
+            } else {
+                el.style.display = "block";
+            }
+        }
+    </script>
 
-  <!-- AOS Init -->
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-  <script>
-    AOS.init({ once: true, duration: 1200 });
-  </script>
+    <!-- VANTA Background -->
+    <script>
+        VANTA.GLOBE({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x00ffe1,
+            backgroundColor: 0x000010,
+            size: 1.5, // Increased size for a stronger visual presence
+            spacing: 20.00 // Adjusted spacing
+        });
+    </script>
+
+    <!-- AOS Init -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, duration: 1200, easing: 'ease-out-cubic' });
+    </script>
 </body>
 </html>
