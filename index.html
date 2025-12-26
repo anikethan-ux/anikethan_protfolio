@@ -11,9 +11,75 @@
     <script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.globe.min.js"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+    <style>
+        :root {
+            --color-primary: #00ffe1;
+            --color-secondary: #ff00ff;
+            --color-text: #e0e0e0;
+            --color-background: #000010;
+            --color-card-bg: rgba(255, 255, 255, 0.05);
+            --glow-primary: 0 0 15px rgba(0, 255, 225, 0.7);
+            --glow-secondary: 0 0 15px rgba(255, 0, 255, 0.7);
+        }
+
+        /* ===== CUSTOM ROUND CURSOR ===== */
+        * { cursor: none; }
+
+        #cursor-dot {
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, #00ffe1, #00bfa6);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10001;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px rgba(0,255,225,0.9);
+        }
+
+        #cursor-outline {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
+            border: 2px solid rgba(255,0,255,0.7);
+            box-shadow: 0 0 15px rgba(255,0,255,0.6);
+            transition: transform 0.15s ease-out;
+        }
+
+        a:hover ~ #cursor-outline,
+        button:hover ~ #cursor-outline {
+            transform: translate(-50%, -50%) scale(1.4);
+        }
+
+        @media (max-width: 768px) {
+            * { cursor: auto; }
+            #cursor-dot, #cursor-outline { display: none; }
+        }
+
+        body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            color: var(--color-text);
+            background-color: var(--color-background);
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        header, main, footer { position: relative; z-index: 2; }
+    </style>
+</head>
+
+<body id="vanta-bg">
+
+    <!-- ===== CUSTOM CURSOR ===== -->
+    <div id="cursor-dot"></div>
+    <div id="cursor-outline"></div>
     <style>
         /* CSS Variables for Advanced Look */
         :root {
@@ -679,5 +745,30 @@
     <script>
         AOS.init({ once: true, duration: 1200, easing: 'ease-out-cubic' });
     </script>
+        <!-- ===== CURSOR SCRIPT ===== -->
+    <script>
+        const dot = document.getElementById("cursor-dot");
+        const outline = document.getElementById("cursor-outline");
+
+        let mouseX = 0, mouseY = 0;
+        let outlineX = 0, outlineY = 0;
+
+        window.addEventListener("mousemove", e => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            dot.style.left = mouseX + "px";
+            dot.style.top = mouseY + "px";
+        });
+
+        function animateCursor() {
+            outlineX += (mouseX - outlineX) * 0.15;
+            outlineY += (mouseY - outlineY) * 0.15;
+            outline.style.left = outlineX + "px";
+            outline.style.top = outlineY + "px";
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+    </script>
+
 </body>
 </html>
