@@ -1,0 +1,278 @@
+{
+  "profile": {
+    "name": "Nalla Anikethan Reddy",
+    "title": "Automation Developer | Python & Playwright",
+    "company": "KTECH PRODUCTS",
+    "photo": "Screenshot (31).png",
+    "resumeFile": "Nalla_Anikethan_Reddy_Resume_graduated_resume.pdf",
+    "email": "anikethanreddynalla@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/anikethan-reddy-nalla-bb9779317",
+    "phone": "+917989461409",
+    "phoneDisplay": "+91 7989461409"
+  },
+
+  "about": "I'm Nalla Anikethan Reddy, an Automation Developer currently at KTech Products, specializing in Python and Playwright test automation, backed by hands-on experience in AI-driven automation and data analysis. I build reliable, maintainable automation frameworks, integrate them into CI/CD pipelines, and use SQL and Python to validate data integrity end-to-end. Across my roles I've worked on automation frameworks, data analysis pipelines, and AI-assisted workflows, with strong fundamentals in Java, DBMS, SQL, and OOP concepts.",
+
+  "education": [
+    {
+      "icon": "🎓",
+      "degree": "B.Tech - ECE (AIML)",
+      "institution": "GITAM University",
+      "duration": "2021 – 2025",
+      "status": "Graduated"
+    },
+    {
+      "icon": "🏫",
+      "degree": "Intermediate - MPC",
+      "institution": "Sri Chaitanya Junior College",
+      "duration": "2019 – 2021"
+    },
+    {
+      "icon": "📘",
+      "degree": "High School - TBSE",
+      "institution": "Tejaswi High School",
+      "duration": "Completed: 2019"
+    }
+  ],
+
+  "experience": [
+    {
+      "company": "KTech Products",
+      "role": "Automation Developer",
+      "duration": "Jan 2026 – Present",
+      "current": true,
+      "summary": "Working as an Automation Developer, building and maintaining Python + Playwright test automation frameworks and CI/CD integrations.",
+      "points": [
+        { "icon": "fab fa-python", "text": "Building and maintaining Python + Playwright automation frameworks for web application testing." },
+        { "icon": "fas fa-code-branch", "text": "Integrating automated test suites into CI/CD pipelines for continuous quality checks." },
+        { "icon": "fas fa-database", "text": "Writing SQL-based validations to verify data integrity across application layers." }
+      ]
+    },
+    {
+      "company": "Polycab",
+      "role": "Python AI Automation & Data Analysis",
+      "duration": "July 2025 – Dec 2025",
+      "current": false,
+      "summary": "Worked on Python-based AI automation and data analysis, building scripts and pipelines to automate repetitive workflows and analyze business data.",
+      "points": [
+        { "icon": "fab fa-python", "text": "Developed Python automation scripts to streamline repetitive data-processing workflows." },
+        { "icon": "fas fa-robot", "text": "Applied AI-assisted techniques to support data analysis and reporting tasks." },
+        { "icon": "fas fa-chart-bar", "text": "Analyzed datasets to generate insights and support business decision-making." },
+        { "icon": "fas fa-cogs", "text": "Collaborated with teams to automate manual processes, improving efficiency." }
+      ]
+    },
+    {
+      "company": "E-Code Learning Software Services",
+      "role": "Machine Learning Intern",
+      "duration": "20 May 2024 – 21 July 2024",
+      "current": false,
+      "summary": "During this internship, I worked on a Stock Price Prediction project using machine learning to develop robust predictive models for financial analysis.",
+      "points": [
+        { "icon": "fas fa-microchip", "text": "Developed and deployed ML models (Linear Regression, LSTM, Random Forest)." },
+        { "icon": "fas fa-flask", "text": "Performed preprocessing, feature engineering, and time-series analysis on financial data." },
+        { "icon": "fas fa-link", "text": "Integrated APIs (Yahoo Finance, Alpha Vantage) for real-time data fetching." },
+        { "icon": "fas fa-chart-bar", "text": "Visualized data trends using Matplotlib, Seaborn, and Plotly for insights." }
+      ]
+    }
+  ],
+
+  "projects": [
+    {
+      "icon": "fas fa-robot",
+      "title": "Python + Playwright Web Automation Framework",
+      "summary": "Built a scalable end-to-end UI test automation framework in Python using Playwright, with Page Object Model design and parallel execution.",
+      "points": [
+        { "icon": "fab fa-python", "text": "Designed a Page Object Model (POM) framework using Python and Playwright for maintainable UI tests." },
+        { "icon": "fas fa-bolt", "text": "Enabled cross-browser (Chromium, Firefox, WebKit) and parallel test execution using Pytest." },
+        { "icon": "fas fa-file-code", "text": "Generated HTML/Allure test reports with screenshots and trace files on failure." },
+        { "icon": "fab fa-github", "text": "Integrated the suite into GitHub Actions CI/CD for automatic test runs on every commit." }
+      ],
+      "tech": "Technologies: Python, Playwright, Pytest, GitHub Actions | Tools: Allure Report, Git"
+    },
+    {
+      "icon": "fas fa-database",
+      "title": "SQL-Based Data Validation & Backend Testing Suite",
+      "summary": "Developed a Python + SQL testing suite to validate backend data integrity between application UI, APIs, and the database.",
+      "points": [
+        { "icon": "fas fa-database", "text": "Wrote complex SQL queries (joins, aggregations, subqueries) to validate data consistency across tables." },
+        { "icon": "fab fa-python", "text": "Automated DB assertions using Python (psycopg2/pyodbc) alongside UI test flows." },
+        { "icon": "fas fa-vial", "text": "Built reusable test data setup/teardown scripts to keep the test environment consistent." },
+        { "icon": "fas fa-chart-line", "text": "Reduced manual data-verification effort by automating recurring QA checks." }
+      ],
+      "tech": "Technologies: Python, SQL, Pytest | Tools: PostgreSQL/MySQL, DBeaver"
+    },
+    {
+      "icon": "fas fa-plug",
+      "title": "REST API Automation with Python",
+      "summary": "Created an API test automation suite to validate REST endpoints for functional correctness, schema, and performance.",
+      "points": [
+        { "icon": "fas fa-exchange-alt", "text": "Automated API tests using Python's Requests library with reusable request/response utilities." },
+        { "icon": "fas fa-check-double", "text": "Validated JSON schemas and response contracts to catch breaking changes early." },
+        { "icon": "fas fa-key", "text": "Handled authentication flows (tokens/OAuth) for secure endpoint testing." },
+        { "icon": "fas fa-tasks", "text": "Integrated API tests into the CI pipeline alongside UI automation for full-stack coverage." }
+      ],
+      "tech": "Technologies: Python, Requests, Pytest | Tools: Postman, GitHub Actions"
+    },
+    {
+      "icon": "fab fa-react",
+      "title": "Portfolio Application (React JS)",
+      "summary": "Developed a responsive and aesthetically pleasing portfolio using modern web technologies to professionally showcase my development skills and projects.",
+      "points": [
+        { "icon": "fab fa-react", "text": "Designed a responsive, component-based UI using React JS and advanced CSS." },
+        { "icon": "fas fa-route", "text": "Implemented front-end routing and optimized component lifecycle for performance." },
+        { "icon": "fab fa-github", "text": "Utilized GitHub for version control and collaborative development practices." }
+      ],
+      "tech": "Technologies: HTML, CSS, React JS | Tools: GitHub, Visual Studio Code"
+    },
+    {
+      "icon": "fas fa-lock",
+      "title": "AI-Powered Biometric Authentication System (IoT)",
+      "summary": "Designed a high-security, multimodal biometric authentication system integrating AI for secure bank locker access.",
+      "points": [
+        { "icon": "fas fa-fingerprint", "text": "Integrated Raspberry Pi, camera module, and fingerprint sensor for data acquisition." },
+        { "icon": "fas fa-shield-alt", "text": "Implemented secure encryption and data storage mechanisms for biometric templates." },
+        { "icon": "fas fa-cloud-upload-alt", "text": "Established communication protocols between hardware and cloud servers for remote management." }
+      ],
+      "tech": "Technologies: Python, Raspberry Pi, OpenCV"
+    },
+    {
+      "icon": "fas fa-image",
+      "title": "Advanced Visual Computing: MATLAB-Based Image Processing",
+      "summary": "Developed and optimized complex image processing algorithms in MATLAB for advanced image enhancement and detailed analysis.",
+      "points": [
+        { "icon": "fas fa-filter", "text": "Designed efficient modules for image filtering, edge detection, and segmentation." },
+        { "icon": "fas fa-sync-alt", "text": "Developed various transformation algorithms (e.g., Fourier, Wavelet) for better image feature extraction." },
+        { "icon": "fas fa-tachometer-alt", "text": "Optimized algorithms for robust performance and accuracy in real-world visual computing tasks." }
+      ],
+      "tech": "Technologies: MATLAB"
+    },
+    {
+      "icon": "fas fa-basketball-ball",
+      "title": "College Sports Management System (.NET, SQL)",
+      "summary": "Created a comprehensive, multi-layered system for managing college sports events, participant registration, and results tracking.",
+      "link": "https://anikethan-ux.github.io/sports-management-system-designed-by-nalla-anikethanreddy/",
+      "points": [
+        { "icon": "fas fa-server", "text": "Developed a multi-layered ASP.NET and SQL-based architecture for system stability." },
+        { "icon": "fas fa-shield-alt", "text": "Ensured data integrity and security with scalable database design and architecture." },
+        { "icon": "fas fa-users", "text": "Collaborated on UI/UX design to provide an intuitive and user-friendly experience." }
+      ],
+      "tech": "Technologies: ASP.NET, SQL"
+    },
+    {
+      "icon": "fas fa-search",
+      "title": "Open Book Library (Web API Integration)",
+      "summary": "Built a responsive web tool using vanilla JavaScript to help users quickly find books by integrating with a public book API.",
+      "link": "https://anikethan-ux.github.io/book-finder-anikethan/",
+      "points": [
+        { "icon": "fas fa-book-open", "text": "Designed and developed a responsive Book Finder web application (HTML, CSS, JavaScript)." },
+        { "icon": "fas fa-code", "text": "Implemented dynamic search functionality and asynchronous API data handling for a fast user experience." },
+        { "icon": "fab fa-github", "text": "Deployed the project on GitHub Pages and managed version control using Git." }
+      ],
+      "tech": "Technologies: HTML, CSS, JavaScript | Tools: GitHub Pages"
+    }
+  ],
+
+  "achievements": [
+    {
+      "icon": "fa-solid fa-chart-line",
+      "title": "Stock Price Prediction Using Machine Learning",
+      "summary": "Certified for developing predictive models using ML algorithms and financial datasets during the E-Code internship.",
+      "details": [
+        { "label": "Issuing Body", "text": "E-Code Learning Software Services" },
+        { "label": "Skills Demonstrated", "text": "Time-Series Analysis, Python, Scikit-learn, Predictive Modeling." }
+      ]
+    },
+    {
+      "icon": "fa-brands fa-python",
+      "title": "Python in Machine Learning",
+      "summary": "Gained certification in Python ML applications, covering model training and data analysis.",
+      "details": [
+        { "label": "Focus", "text": "Data preprocessing, algorithm selection, model evaluation, and implementation using popular Python libraries (Pandas, NumPy, TensorFlow/PyTorch concepts)." }
+      ]
+    },
+    {
+      "icon": "fa-brands fa-pied-piper-alt",
+      "title": "GenAI Powered Data Analytics (TATA)",
+      "summary": "Completed job simulation on GenAI-powered data analysis, risk profiling, and implementing AI-driven collections strategy.",
+      "details": [
+        { "label": "Modules Covered", "text": "Exploratory Data Analysis, Predicting Delinquency with AI, Business Reporting, and AI-Driven Strategy Implementation." }
+      ]
+    },
+    {
+      "icon": "fa-solid fa-laptop-code",
+      "title": "Software Engineering Job Simulation (JPMorgan Chase & Co)",
+      "summary": "Certified in project setup, Kafka integration, H2 integration, and developing REST API controllers.",
+      "details": [
+        { "label": "Skills Gained", "text": "Project Setup, Kafka Integration, H2 Integration, REST API Controller Development, and Version Control." }
+      ]
+    },
+    {
+      "icon": "fa-solid fa-code",
+      "title": "C for Everyone – Programming",
+      "summary": "Completed foundational C programming certification emphasizing structured problem-solving.",
+      "details": [
+        { "label": "Focus", "text": "Structured problem-solving, foundational data structures, and efficient memory management concepts in C." }
+      ]
+    },
+    {
+      "icon": "fa-solid fa-cloud",
+      "title": "Microsoft Azure Fundamentals",
+      "summary": "Certified in Azure cloud concepts, networking, and basic deployment management.",
+      "details": [
+        { "label": "Topics", "text": "Cloud concepts, core Azure services, security, privacy, compliance, and Azure pricing and support." }
+      ]
+    }
+  ],
+
+  "contactForm": {
+    "provider": "web3forms",
+    "endpoint": "https://api.web3forms.com/submit",
+    "accessKey": "84ee2abc-5fce-41e7-9c78-a1f8d5cb57de",
+    "successMessage": "Thanks! Your message has been sent.",
+    "errorMessage": "Something went wrong sending your message. Please try again or email me directly."
+  },
+
+  "skills": [
+    {
+      "id": "automationSkills",
+      "label": "🤖 Test Automation",
+      "items": [
+        { "icon": "fab fa-python", "text": "Python" },
+        { "icon": "fas fa-bolt", "text": "Playwright" },
+        { "icon": "fas fa-vial", "text": "Pytest" },
+        { "icon": "fas fa-robot", "text": "Selenium" }
+      ]
+    },
+    {
+      "id": "backendSkills",
+      "label": "🖥️ Backend & Databases",
+      "items": [
+        { "icon": "fa-brands fa-java", "text": "Java" },
+        { "icon": "fas fa-database", "text": "SQL (Database Management)" },
+        { "icon": "fas fa-cogs", "text": "C++" },
+        { "icon": "fas fa-plug", "text": "REST API Testing" }
+      ]
+    },
+    {
+      "id": "frontendSkills",
+      "label": "💻 Frontend Development",
+      "items": [
+        { "icon": "fab fa-html5", "text": "HTML5" },
+        { "icon": "fab fa-css3-alt", "text": "CSS3" },
+        { "icon": "fab fa-js-square", "text": "JavaScript (ES6+)" },
+        { "icon": "fab fa-react", "text": "React JS" }
+      ]
+    },
+    {
+      "id": "toolsSkills",
+      "label": "🛠️ Tools & Concepts",
+      "items": [
+        { "icon": "fab fa-git-alt", "text": "Git & GitHub" },
+        { "icon": "fas fa-lightbulb", "text": "Problem Solving & DSA" },
+        { "icon": "fas fa-project-diagram", "text": "OOPs Concepts" },
+        { "icon": "fas fa-cloud", "text": "Azure Fundamentals" },
+        { "icon": "fas fa-code-branch", "text": "CI/CD (GitHub Actions)" }
+      ]
+    }
+  ]
+}

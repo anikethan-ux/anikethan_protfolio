@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nalla Anikethan Reddy | Advanced Portfolio</title>
+    <title>Portfolio</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
 
@@ -20,42 +20,29 @@
             --color-text: #e0e0e0;
             --color-background: #000010;
             --color-card-bg: rgba(255, 255, 255, 0.05);
-            --glow-primary: 0 0 15px rgba(0, 255, 225, 0.7);
-            --glow-secondary: 0 0 15px rgba(255, 0, 255, 0.7);
+            --glow-primary: 0 0 15px rgba(0, 255, 225, 0.7), 0 0 30px rgba(0, 255, 225, 0.5);
+            --glow-secondary: 0 0 15px rgba(255, 0, 255, 0.7), 0 0 30px rgba(255, 0, 255, 0.5);
+            --color-divider: rgba(0, 255, 225, 0.5);
         }
 
-        /* ===== CUSTOM ROUND CURSOR ===== */
-        * { cursor: none; }
+        * { cursor: none; box-sizing: border-box; }
 
         #cursor-dot {
-            width: 10px;
-            height: 10px;
+            width: 10px; height: 10px;
             background: radial-gradient(circle, #00ffe1, #00bfa6);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 10001;
+            border-radius: 50%; position: fixed; pointer-events: none; z-index: 10001;
             transform: translate(-50%, -50%);
             box-shadow: 0 0 10px rgba(0,255,225,0.9);
         }
-
         #cursor-outline {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 10000;
+            width: 42px; height: 42px; border-radius: 50%;
+            position: fixed; pointer-events: none; z-index: 10000;
             transform: translate(-50%, -50%);
             border: 2px solid rgba(255,0,255,0.7);
             box-shadow: 0 0 15px rgba(255,0,255,0.6);
             transition: transform 0.15s ease-out;
         }
-
-        a:hover ~ #cursor-outline,
-        button:hover ~ #cursor-outline {
-            transform: translate(-50%, -50%) scale(1.4);
-        }
+        a:hover ~ #cursor-outline, button:hover ~ #cursor-outline { transform: translate(-50%, -50%) scale(1.4); }
 
         @media (max-width: 768px) {
             * { cursor: auto; }
@@ -63,57 +50,20 @@
         }
 
         body {
-            margin: 0;
-            font-family: "Poppins", sans-serif;
-            color: var(--color-text);
-            background-color: var(--color-background);
-            overflow-x: hidden;
-            text-align: center;
-        }
-
-        header, main, footer { position: relative; z-index: 2; }
-    </style>
-</head>
-
-<body id="vanta-bg">
-
-    <!-- ===== CUSTOM CURSOR ===== -->
-    <div id="cursor-dot"></div>
-    <div id="cursor-outline"></div>
-    <style>
-        /* CSS Variables for Advanced Look */
-        :root {
-            --color-primary: #00ffe1; /* Neon Cyan */
-            --color-secondary: #ff00ff; /* Neon Magenta */
-            --color-text: #e0e0e0;
-            --color-background: #000010;
-            --color-card-bg: rgba(255, 255, 255, 0.05);
-            --glow-primary: 0 0 15px rgba(0, 255, 225, 0.7), 0 0 30px rgba(0, 255, 225, 0.5);
-            --glow-secondary: 0 0 15px rgba(255, 0, 255, 0.7), 0 0 30px rgba(255, 0, 255, 0.5);
-            --color-divider: rgba(0, 255, 225, 0.5);
-        }
-
-        /* Base Styles */
-        body {
-            margin: 0;
-            font-family: "Poppins", sans-serif;
-            color: var(--color-text);
-            background-color: var(--color-background);
-            overflow-x: hidden;
-            text-align: center;
+            margin: 0; font-family: "Poppins", sans-serif;
+            color: var(--color-text); background-color: var(--color-background);
+            overflow-x: hidden; text-align: center;
         }
         header, main, footer { position: relative; z-index: 2; }
 
-        /* Subtle Technical Image Background (Layer 1) */
         main {
-            /* Image (abstract code/tech pattern), very faint, fixed to give depth */
             background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%2300ffe110" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)" /></svg>');
             background-repeat: repeat;
             background-attachment: fixed;
             margin-top: 50px;
+            min-height: 50vh;
         }
 
-        /* Neon Gradient Titles */
         h1, h2, h3 {
             font-weight: 700;
             background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-primary));
@@ -123,238 +73,226 @@
             letter-spacing: 1px;
         }
 
-        p, li {
-            color: var(--color-text);
-            line-height: 1.7;
-        }
+        p, li { color: var(--color-text); line-height: 1.7; }
 
-        /* Neon Links */
-        a {
-            color: var(--color-primary);
-            text-decoration: none;
-            transition: 0.3s ease;
-        }
-        a:hover {
-            color: #fff;
-            text-shadow: 0 0 5px var(--color-secondary), 0 0 15px var(--color-primary);
-        }
+        a { color: var(--color-primary); text-decoration: none; transition: 0.3s ease; }
+        a:hover { color: #fff; text-shadow: 0 0 5px var(--color-secondary), 0 0 15px var(--color-primary); }
 
-        /* Header Section */
         header { padding: 80px 20px 60px; }
-        .welcome-msg h2 {
-            font-size: 2.5em;
-            font-weight: 600;
-            margin-bottom: 30px;
-        }
+        .welcome-msg h2 { font-size: 2.5em; font-weight: 600; margin-bottom: 30px; }
         .profile-pic {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
+            width: 180px; height: 180px; border-radius: 50%;
             border: 4px solid var(--color-primary);
-            object-fit: cover;
-            box-shadow: var(--glow-primary);
-            margin-top: 20px;
-            animation: float 4s ease-in-out infinite;
+            object-fit: cover; box-shadow: var(--glow-primary);
+            margin-top: 20px; animation: float 4s ease-in-out infinite;
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
         h1 { font-size: 3em; margin-top: 25px; }
 
-        /* Social Icons */
         .social-icons { margin-top: 20px; }
-        .social-icons a {
-            font-size: 2em;
-            margin: 0 15px;
-            transition: 0.3s transform, 0.3s text-shadow;
-        }
+        .social-icons a { font-size: 2em; margin: 0 15px; transition: 0.3s transform, 0.3s text-shadow; }
         .social-icons a:hover {
-            transform: scale(1.2);
-            color: var(--color-secondary);
+            transform: scale(1.2); color: var(--color-secondary);
             text-shadow: 0 0 10px var(--color-primary), 0 0 20px var(--color-secondary);
         }
 
-        /* Section Styling (Advanced Card Look) */
         main section {
             background: var(--color-card-bg);
-            margin: 60px auto;
-            padding: 50px 30px;
-            width: 90%;
-            max-width: 1100px;
+            margin: 60px auto; padding: 50px 30px;
+            width: 90%; max-width: 1100px;
             border-radius: 25px;
             border: 1px solid rgba(0, 255, 225, 0.2);
             box-shadow: 0 0 50px rgba(0, 255, 255, 0.2);
             backdrop-filter: blur(12px);
             transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease;
-            transform-style: preserve-3d; 
-            perspective: 1000px;
+            transform-style: preserve-3d; perspective: 1000px;
         }
-        /* Sophisticated Hover Effect (3D Tilt) */
-        main section:hover {
-            transform: translateZ(10px);
-            box-shadow: var(--glow-secondary);
-        }
+        main section:hover { transform: translateZ(10px); box-shadow: var(--glow-secondary); }
         ul { list-style: none; padding: 0; }
 
-        /* Section Divider for Better Flow */
         .section-divider {
-            width: 50%;
-            height: 2px;
-            background: var(--color-divider);
-            margin: 40px auto;
-            border-radius: 1px;
-            box-shadow: var(--glow-primary);
-            opacity: 0.5;
+            width: 50%; height: 2px; background: var(--color-divider);
+            margin: 40px auto; border-radius: 1px;
+            box-shadow: var(--glow-primary); opacity: 0.5;
         }
 
-        /* Neon Buttons & Refined Pulse Effect */
         .toggle-btn, .resume-btn {
             background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
-            border: none;
-            padding: 12px 25px;
-            border-radius: 15px;
-            color: #000;
-            font-weight: 700;
-            cursor: pointer;
+            border: none; padding: 12px 25px; border-radius: 15px;
+            color: #000; font-weight: 700; cursor: pointer;
             transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            margin-top: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            margin-top: 15px; text-transform: uppercase; letter-spacing: 1px;
             box-shadow: 0 0 10px rgba(0, 255, 225, 0.5);
-            display: inline-flex; /* Use flex for button content alignment */
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            position: relative;
+            display: inline-flex; align-items: center; justify-content: center;
+            gap: 10px; position: relative;
         }
         .toggle-btn:hover, .resume-btn:hover {
             background: linear-gradient(90deg, var(--color-secondary), var(--color-primary));
             transform: scale(1.05) perspective(100px) rotateX(2deg);
-            box-shadow: 0 0 20px rgba(255, 0, 255, 0.8), 0 0 30px rgba(255, 0, 255, 0.6); /* Enhanced Glow */
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.8), 0 0 30px rgba(255, 0, 255, 0.6);
         }
-        /* Toggle Button Icon Styling */
-        .toggle-btn i.toggle-icon {
-            font-size: 1em;
-            transition: transform 0.3s ease;
-        }
-        /* Detail/Toggle Content */
+        .toggle-btn i.toggle-icon { font-size: 1em; transition: transform 0.3s ease; }
+
         .details {
-            display: none;
-            text-align: left;
-            margin-top: 20px;
-            padding: 20px;
+            display: none; text-align: left; margin-top: 20px; padding: 20px;
             border-left: 3px solid var(--color-primary);
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.2); border-radius: 10px;
             animation: fadeIn 0.5s ease-out;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .details ul {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            padding: 10px 0;
-            margin-top: 15px;
-        }
+        .details ul { display: flex; flex-wrap: wrap; gap: 15px; padding: 10px 0; margin-top: 15px; }
         .details li {
-            background: rgba(0, 255, 225, 0.15);
-            color: var(--color-primary);
-            padding: 10px 15px;
-            border-radius: 8px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: 0.3s;
-            border: 1px solid var(--color-primary);
-            cursor: default;
+            background: rgba(0, 255, 225, 0.15); color: var(--color-primary);
+            padding: 10px 15px; border-radius: 8px; font-weight: 600;
+            display: flex; align-items: center; gap: 10px; transition: 0.3s;
+            border: 1px solid var(--color-primary); cursor: default;
         }
         .details li:hover {
-            background: rgba(255, 0, 255, 0.3);
-            color: #fff;
-            transform: scale(1.05);
-            box-shadow: 0 0 10px var(--color-secondary);
+            background: rgba(255, 0, 255, 0.3); color: #fff;
+            transform: scale(1.05); box-shadow: 0 0 10px var(--color-secondary);
         }
+        .details p { margin: 8px 0; }
 
-        /* Projects, Skills, and ACHIEVEMENTS Card Styling (Stacked Look) */
         #projects > div, #skills > div, #achievements > div {
             background: rgba(0, 0, 0, 0.4);
             border: 1px solid rgba(0, 255, 225, 0.4);
-            border-radius: 15px;
-            padding: 25px;
-            margin: 20px 0;
-            transition: 0.4s ease;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
-            text-align: left; 
+            border-radius: 15px; padding: 25px; margin: 20px 0;
+            transition: 0.4s ease; box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+            text-align: left;
         }
         #projects > div:hover, #skills > div:hover, #achievements > div:hover {
             background: rgba(0, 255, 225, 0.1);
-            transform: scale(1.02);
-            box-shadow: var(--glow-primary);
+            transform: scale(1.02); box-shadow: var(--glow-primary);
         }
-        /* Icon styling inside the stacked achievement/project/skill cards */
-        #achievements h3 i, #projects h3 i {
-            margin-right: 10px;
-            color: var(--color-secondary);
-        }
-        
+        #achievements h3 i, #projects h3 i { margin-right: 10px; color: var(--color-secondary); }
 
-        /* Education Card Styling */
         #education > div {
-            display: grid;
-            gap: 30px;
+            display: grid; gap: 30px;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             margin-top: 30px;
         }
         #education > div > div {
-            background: var(--color-card-bg);
-            border-radius: 15px;
-            padding: 25px;
-            text-align: left;
-            border-left: 4px solid var(--color-secondary);
-            box-shadow: 0 0 20px rgba(255, 0, 255, 0.2);
-            transition: all 0.3s ease;
+            background: var(--color-card-bg); border-radius: 15px; padding: 25px;
+            text-align: left; border-left: 4px solid var(--color-secondary);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.2); transition: all 0.3s ease;
         }
-        #education > div > div:hover {
-            transform: translateY(-5px) scale(1.01);
-            box-shadow: var(--glow-secondary);
-        }
+        #education > div > div:hover { transform: translateY(-5px) scale(1.01); box-shadow: var(--glow-secondary); }
         #education h3 { color: var(--color-primary); margin-bottom: 10px; }
 
-
-        /* Contact Section Advanced */
         #contact > div {
-            background: rgba(255, 255, 255, 0.07);
-            border-radius: 20px;
-            padding: 30px;
-            width: 90%;
-            max-width: 600px;
-            margin: 30px auto;
-            text-align: left;
+            background: rgba(255, 255, 255, 0.07); border-radius: 20px; padding: 30px;
+            width: 90%; max-width: 600px; margin: 30px auto; text-align: left;
             box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
             border: 1px solid rgba(255, 0, 255, 0.3);
         }
         #contact a { color: #fff; }
         #contact i { color: var(--color-primary); font-size: 1.5em; }
+        #contact .contact-row { display:flex; align-items:center; gap:15px; font-size:1.1em; margin:15px 0; }
 
-        /* Footer */
         footer {
-            padding: 40px 0;
-            background: rgba(0,0,0,0.6);
-            border-top: 2px solid rgba(255,255,255,0.1);
-            margin-top: 80px;
+            padding: 40px 0; background: rgba(0,0,0,0.6);
+            border-top: 2px solid rgba(255,255,255,0.1); margin-top: 80px;
         }
-        footer p:first-child {
-            font-size: 1.8em;
+        footer p:first-child { font-size: 1.8em; font-weight: 700; }
+
+        .load-note { padding: 40px; opacity: 0.7; }
+
+        /* Experience table */
+        .exp-table-wrap { overflow-x: auto; margin-top: 20px; }
+        .exp-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        .exp-table thead th {
+            color: var(--color-primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85em;
+            padding: 12px 16px;
+            border-bottom: 2px solid rgba(0, 255, 225, 0.4);
+        }
+        .exp-table tbody tr.exp-row td {
+            padding: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            vertical-align: middle;
+        }
+        .exp-table tbody tr.exp-row:hover td {
+            background: rgba(0, 255, 225, 0.06);
+        }
+        .exp-badge {
+            display: inline-block;
+            margin-left: 10px;
+            padding: 3px 10px;
+            font-size: 0.7em;
             font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #000;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            border-radius: 20px;
+            vertical-align: middle;
+        }
+        .exp-toggle-btn { padding: 8px 16px; font-size: 0.8em; margin-top: 0; }
+        .exp-details-row .details { margin: 0 0 10px 0; }
+
+        @media (max-width: 700px) {
+            .exp-table thead { display: none; }
+            .exp-table, .exp-table tbody, .exp-table tr, .exp-table td { display: block; width: 100%; }
+            .exp-table tbody tr.exp-row {
+                border: 1px solid rgba(0, 255, 225, 0.3);
+                border-radius: 12px;
+                margin-bottom: 14px;
+                padding: 10px;
+            }
+            .exp-table tbody tr.exp-row td {
+                border-bottom: none;
+                padding: 6px 8px;
+            }
+            .exp-table tbody tr.exp-row td::before {
+                content: attr(data-label);
+                display: block;
+                font-size: 0.7em;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                color: var(--color-primary);
+                margin-bottom: 2px;
+            }
+            .exp-details-row td { padding: 0 8px 14px !important; }
         }
 
-        /* Responsive Adjustments */
+        /* Contact form */
+        .contact-form { display: flex; flex-direction: column; margin-top: 25px; }
+        .contact-form label {
+            color: var(--color-primary);
+            font-weight: 600;
+            font-size: 0.9em;
+            margin: 12px 0 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 255, 225, 0.3);
+            border-radius: 10px;
+            padding: 12px 14px;
+            color: var(--color-text);
+            font-family: inherit;
+            font-size: 1em;
+            resize: vertical;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 10px rgba(0, 255, 225, 0.4);
+        }
+        .cf-status { text-align: center; margin-top: 14px; min-height: 1.2em; font-weight: 600; }
+        .cf-status-success { color: var(--color-primary); }
+        .cf-status-error { color: #ff6b6b; }
+
         @media (max-width: 768px) {
             h1 { font-size: 2.5em; }
             .welcome-msg h2 { font-size: 2em; }
@@ -365,356 +303,33 @@
 </head>
 <body id="vanta-bg">
 
-    <header data-aos="fade-down">
-        <div class="welcome-msg"><h2>✨ Welcome to My Protfolio✨</h2></div>
-        <img src="Screenshot (31).png" alt="Nalla Anikethan Reddy" class="profile-pic" />
-        <h1>👋 Hi, I'm Nalla Anikethan Reddy</h1>
-        <p>ASSOCIATE SOFTWARE ENGINEER</p>
-        
-        <p>COMPANY-KTECH PRODUCTS</p>
-        <div class="social-icons">
-            <a href="mailto:anikethanreddynalla@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
-            <a href="https://www.linkedin.com/in/anikethan-reddy-nalla-bb9779317" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a href="tel:+917989461409" aria-label="Phone"><i class="fa-solid fa-phone"></i></a>
-        </div>
-        <a href="Nalla_Anikethan_Reddy_Resume_graduated_resume.pdf" download class="resume-btn">📄 **Download Resume**</a>
+    <div id="cursor-dot"></div>
+    <div id="cursor-outline"></div>
+
+    <header data-aos="fade-down" id="header-content">
+        <div class="load-note">Loading portfolio…</div>
     </header>
 
-    <main>
-        <section id="about" data-aos="fade-up">
-            <h2>About Me</h2>
-            <p>I’m Nalla Anikethan Reddy, a motivated and enthusiastic fresher skilled in **Web Development**, **Java**, **Python**, **Dbms**, **SQL**, **problem-solving** and **OOP** concepts. I possess a strong analytical mindset and problem-solving ability, proven through hands-on projects and internships. I am quick to learn, adaptable, and eager to contribute as a Software Developer / Web Developer in a dynamic and innovative environment, focusing on delivering high-quality, scalable solutions.</p>
-        </section>
-        
-        <div class="section-divider"></div>
+    <main id="main-content"></main>
 
-        <section id="education" data-aos="fade-up">
-            <h2>Education</h2>
-            <div>
-                <div>
-                    <h3>🎓 B.Tech - ECE (AIML)</h3>
-                    <p><strong>Institution:</strong> GITAM University</p>
-                    <p><strong>Duration:</strong> 2021 – 2025</p>
-                    <p><strong>Status:</strong> Graduated</p>
-                </div>
-
-                <div>
-                    <h3>🏫 Intermediate - MPC</h3>
-                    <p><strong>Institution:</strong> Sri Chaitanya Junior College</p>
-                    <p><strong>Duration:</strong> 2019 – 2021</p>
-                </div>
-
-                <div>
-                    <h3>📘 High School - TBSE</h3>
-                    <p><strong>Institution:</strong> Tejaswi High School</p>
-                    <p><strong>Completed:</strong> 2019</p>
-                </div>
-            </div>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <section id="internship" data-aos="fade-up">
-            <h2>Internship Experience</h2>
-            <p><strong>Company:</strong> E-Code Learning Software Services</p>
-            <p><strong>Project:</strong> Stock Price Prediction using Machine Learning</p>
-            <button class="toggle-btn" onclick="toggleDetails('internshipDetails')">
-                <span class="btn-text">View Details</span>
-                <i class="fas fa-plus toggle-icon" id="icon-internshipDetails"></i>
-            </button>
-            <div class="details" id="internshipDetails">
-                <p><strong>Duration:</strong> 20 May 2024 – 21 July 2024</p>
-                <p>During my internship, I worked on a Stock Price Prediction project using machine learning to develop robust predictive models for financial analysis.</p>
-                <ul>
-                    <li><i class="fas fa-microchip"></i> Developed and deployed ML models (Linear Regression, LSTM, Random Forest).</li>
-                    <li><i class="fas fa-flask"></i> Performed preprocessing, feature engineering, and time-series analysis on financial data.</li>
-                    <li><i class="fas fa-link"></i> Integrated APIs (Yahoo Finance, Alpha Vantage) for real-time data fetching.</li>
-                    <li><i class="fas fa-chart-bar"></i> Visualized data trends using Matplotlib, Seaborn, and Plotly for insights.</li>
-                </ul>
-            </div>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <section id="projects" data-aos="fade-up">
-            <h2>Featured Projects</h2>
-            <div>
-                <h3><i class="fab fa-react"></i> Portfolio Application (React JS)</h3>
-                <p>Developed a responsive and aesthetically pleasing portfolio using modern web technologies to professionally showcase my development skills and projects.</p>
-                <button class="toggle-btn" onclick="toggleDetails('portfolioProject')">
-                    <span class="btn-text">View Details</span>
-                    <i class="fas fa-plus toggle-icon" id="icon-portfolioProject"></i>
-                </button>
-                <div class="details" id="portfolioProject">
-                    <h4>Key Contributions:</h4>
-                    <ul>
-                        <li><i class="fab fa-react"></i> Designed a responsive, component-based UI using **React JS** and advanced CSS.</li>
-                        <li><i class="fas fa-route"></i> Implemented front-end routing and optimized component lifecycle for performance.</li>
-                        <li><i class="fab fa-github"></i> Utilized **GitHub** for version control and collaborative development practices.</li>
-                    </ul>
-                    <h4>Project Details:</h4>
-                    <p><strong>Technologies:</strong> HTML, CSS, React JS | **Tools:** GitHub, Visual Studio Code</p>
-                </div>
-            </div>
-
-            <div>
-                <h3><i class="fas fa-lock"></i> AI-Powered Biometric Authentication System (IoT)</h3>
-                <p>Designed a high-security, multimodal biometric authentication system integrating AI for secure bank locker access.</p>
-                <button class="toggle-btn" onclick="toggleDetails('biometricProject')">
-                    <span class="btn-text">View Details</span>
-                    <i class="fas fa-plus toggle-icon" id="icon-biometricProject"></i>
-                </button>
-                <div class="details" id="biometricProject">
-                    <p>This system utilizes a **Raspberry Pi** to integrate fingerprint and facial recognition, providing an enhanced layer of physical and digital security.</p>
-                    <h4>Key Contributions:</h4>
-                    <ul>
-                        <li><i class="fas fa-fingerprint"></i> Integrated **Raspberry Pi**, camera module, and fingerprint sensor for data acquisition.</li>
-                        <li><i class="fas fa-shield-alt"></i> Implemented secure encryption and data storage mechanisms for biometric templates.</li>
-                        <li><i class="fas fa-cloud-upload-alt"></i> Established communication protocols between hardware and cloud servers for remote management.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div>
-                <h3><i class="fas fa-image"></i> Advanced Visual Computing: MATLAB-Based Image Processing</h3>
-                <p>Developed and optimized complex image processing algorithms in MATLAB for advanced image enhancement and detailed analysis.</p>
-                <button class="toggle-btn" onclick="toggleDetails('matlabProject')">
-                    <span class="btn-text">View Details</span>
-                    <i class="fas fa-plus toggle-icon" id="icon-matlabProject"></i>
-                </button>
-                <div class="details" id="matlabProject">
-                    <h4>Key Contributions:</h4>
-                    <ul>
-                        <li><i class="fas fa-filter"></i> Designed efficient modules for image **filtering**, **edge detection**, and **segmentation**.</li>
-                        <li><i class="fas fa-sync-alt"></i> Developed various **transformation algorithms** (e.g., Fourier, Wavelet) for better image feature extraction.</li>
-                        <li><i class="fas fa-tachometer-alt"></i> Optimized algorithms for robust performance and accuracy in real-world visual computing tasks.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div>
-                <h3><i class="fas fa-basketball-ball"></i> College Sports Management System (.NET, SQL)</h3>
-                <p>Created a comprehensive, multi-layered system for managing college sports events, participant registration, and results tracking.</p>
-                <a href="https://anikethan-ux.github.io/sports-management-system-designed-by-nalla-anikethanreddy/" 
-                    target="_blank" 
-                    class="toggle-btn"
-                    style="display:inline-block;margin-bottom:10px;text-decoration:none;">
-                    🔗 **Visit Project**
-                </a>
-                <button class="toggle-btn" onclick="toggleDetails('sportsProject')">
-                    <span class="btn-text">View Details</span>
-                    <i class="fas fa-plus toggle-icon" id="icon-sportsProject"></i>
-                </button>
-                <div class="details" id="sportsProject">
-                    <h4>Key Contributions:</h4>
-                    <ul>
-                        <li><i class="fas fa-server"></i> Developed a multi-layered ASP.NET and SQL-based architecture for system stability.</li>
-                        <li><i class="fas fa-shield-alt"></i> Ensured data integrity and security with scalable database design and architecture.</li>
-                        <li><i class="fas fa-users"></i> Collaborated on UI/UX design to provide an intuitive and user-friendly experience.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div>
-                <h3><i class="fas fa-search"></i> Open Book Library (Web API Integration)</h3>
-                <p>Built a responsive web tool using vanilla JavaScript to help users quickly find books by integrating with a public book API.</p>
-                <a href="https://anikethan-ux.github.io/book-finder-anikethan/" 
-                    target="_blank" 
-                    class="toggle-btn"
-                    style="display:inline-block;margin-bottom:10px;text-decoration:none;">
-                    🔗 **Visit Project**
-                </a>
-                <button class="toggle-btn" onclick="toggleDetails('open book library')">
-                    <span class="btn-text">View Details</span>
-                    <i class="fas fa-plus toggle-icon" id="icon-open book library"></i>
-                </button>
-                <div class="details" id="open book library">
-                    <h4>Key Contributions:</h4>
-                    <ul>
-                        <li><i class="fas fa-book-open"></i> Designed and developed a responsive Book Finder web application (HTML, CSS, JavaScript).</li>
-                        <li><i class="fas fa-code"></i> Implemented dynamic search functionality and asynchronous **API data handling** for a fast user experience.</li>
-                        <li><i class="fab fa-github"></i> Deployed the project on GitHub Pages and managed version control using Git.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <section id="achievements" data-aos="fade-up">
-            <h2>Achievements & Certifications</h2>
-            
-            <div>
-                <h3><i class="fa-solid fa-chart-line"></i> Stock Price Prediction Using Machine Learning</h3>
-                <p>Certified for developing predictive models using ML algorithms and financial datasets during the E-Code internship.</p>
-                <button class="toggle-btn" onclick="toggleDetails('achieve1')">
-                    <span class="btn-text">View Details</span>
-                    <i class="fas fa-plus toggle-icon" id="icon-achieve1"></i>
-                </button>
-                <div class="details" id="achieve1">
-                    <p><strong>Issuing Body:</strong> E-Code Learning Software Services</p>
-                    <p><strong>Skills Demonstrated:</strong> Time-Series Analysis, Python, Scikit-learn, Predictive Modeling.</p>
-                </div>
-            </div>
-            
-            <div>
-                <h3><i class="fa-brands fa-python"></i> Python in Machine Learning</h3>
-                <p>Gained certification in Python ML applications, covering model training and data analysis.</p>
-                <button class="toggle-btn" onclick="toggleDetails('achieve2')">
-                    <span class="btn-text">View Details</span>
-                    <i class="fas fa-plus toggle-icon" id="icon-achieve2"></i>
-                </button>
-                <div class="details" id="achieve2">
-                    <p><strong>Focus:</strong> Data preprocessing, algorithm selection, model evaluation, and implementation using popular Python libraries (Pandas, NumPy, TensorFlow/PyTorch concepts).</p>
-                </div>
-            </div>
-            
-            <div>
-                <h3><i class="fa-brands fa-pied-piper-alt"></i> GenAI Powered Data Analytics (TATA)</h3>
-                <p>Completed job simulation on GenAI-powered data analysis, risk profiling, and implementing AI-driven collections strategy.</p>
-                <button class="toggle-btn" onclick="toggleDetails('achieve3')">
-                    <span class="btn-text">View Details</span>
-                    <i class="fas fa-plus toggle-icon" id="icon-achieve3"></i>
-                </button>
-                <div class="details" id="achieve3">
-                    <p><strong>Modules Covered:</strong> Exploratory Data Analysis, Predicting Delinquency with AI, Business Reporting, and AI-Driven Strategy Implementation.</p>
-                </div>
-            </div>
-
-            <div>
-                <h3><i class="fa-solid fa-laptop-code"></i> Software Engineering Job Simulation (JPMorgan Chase & Co)</h3>
-                <p>Certified in project setup, Kafka integration, H2 integration, and developing REST API controllers.</p>
-                <button class="toggle-btn" onclick="toggleDetails('achieve4')">
-                    <span class="btn-text">View Details</span>
-                    <i class="fas fa-plus toggle-icon" id="icon-achieve4"></i>
-                </button>
-                <div class="details" id="achieve4">
-                    <p><strong>Skills Gained:</strong> Project Setup, Kafka Integration, H2 Integration, REST API Controller Development, and Version Control.</p>
-                </div>
-            </div>
-            
-            <div>
-                <h3><i class="fa-solid fa-code"></i> C for Everyone – Programming</h3>
-                <p>Completed foundational C programming certification emphasizing structured problem-solving.</p>
-                <button class="toggle-btn" onclick="toggleDetails('achieve5')">
-                    <span class="btn-text">View Details</span>
-                    <i class="fas fa-plus toggle-icon" id="icon-achieve5"></i>
-                </button>
-                <div class="details" id="achieve5">
-                    <p><strong>Focus:</strong> Structured problem-solving, foundational data structures, and efficient memory management concepts in C.</p>
-                </div>
-            </div>
-
-            <div>
-                <h3><i class="fa-solid fa-cloud"></i> Microsoft Azure Fundamentals</h3>
-                <p>Certified in Azure cloud concepts, networking, and basic deployment management.</p>
-                <button class="toggle-btn" onclick="toggleDetails('achieve6')">
-                    <span class="btn-text">View Details</span>
-                    <i class="fas fa-plus toggle-icon" id="icon-achieve6"></i>
-                </button>
-                <div class="details" id="achieve6">
-                    <p><strong>Topics:</strong> Cloud concepts, core Azure services, security, privacy, compliance, and Azure pricing and support.</p>
-                </div>
-            </div>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <section id="skills" data-aos="fade-up">
-            <h2>Technical Skills</h2>
-            <div>
-                <button class="toggle-btn" onclick="toggleDetails('frontendSkills')">
-                    💻 **Frontend Development**
-                    <i class="fas fa-plus toggle-icon" id="icon-frontendSkills"></i>
-                </button>
-                <div class="details" id="frontendSkills">
-                    <ul>
-                        <li><i class="fab fa-html5"></i> HTML5</li>
-                        <li><i class="fab fa-css3-alt"></i> CSS3</li>
-                        <li><i class="fab fa-js-square"></i> JavaScript (ES6+)</li>
-                        <li><i class="fab fa-react"></i> React JS</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div>
-                <button class="toggle-btn" onclick="toggleDetails('backendSkills')">
-                    🖥️ **Backend & Databases**
-                    <i class="fas fa-plus toggle-icon" id="icon-backendSkills"></i>
-                </button>
-                <div class="details" id="backendSkills">
-                    <ul>
-                        <li><i class="fa-brands fa-java"></i> Java</li>
-                        <li><i class="fa-brands fa-python"></i> Python</li>
-                        <li><i class="fas fa-database"></i> SQL (Database Management)</li>
-                        <li><i class="fas fa-cogs"></i> C++</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div>
-                <button class="toggle-btn" onclick="toggleDetails('toolsSkills')">
-                    🛠️ **Tools & Concepts**
-                    <i class="fas fa-plus toggle-icon" id="icon-toolsSkills"></i>
-                </button>
-                <div class="details" id="toolsSkills">
-                    <ul>
-                        <li><i class="fab fa-git-alt"></i> Git & GitHub</li>
-                        <li><i class="fas fa-lightbulb"></i> Problem Solving & **DSA**</li>
-                        <li><i class="fas fa-project-diagram"></i> **OOPs** Concepts</li>
-                        <li><i class="fas fa-cloud"></i> Azure Fundamentals</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <section id="contact" data-aos="fade-up">
-            <h2>Get In Touch</h2>
-            <div>
-                <p style="display:flex; align-items:center; gap:15px; font-size:1.1em; margin:15px 0;">
-                    <i class="fa-solid fa-envelope"></i>
-                    <a href="mailto:anikethanreddynalla@gmail.com" aria-label="Email">
-                        anikethanreddynalla@gmail.com
-                    </a>
-                </p>
-
-                <p style="display:flex; align-items:center; gap:15px; font-size:1.1em; margin:15px 0;">
-                    <i class="fab fa-linkedin"></i>
-                    <a href="https://www.linkedin.com/in/anikethan-reddy-nalla-bb9779317" target="_blank" aria-label="LinkedIn">
-                        linkedin.com/in/anikethan-reddy-nalla
-                    </a>
-                </p>
-
-                <p style="display:flex; align-items:center; gap:15px; font-size:1.1em; margin:15px 0;">
-                    <i class="fa-solid fa-phone"></i>
-                    <a href="tel:+917989461409" aria-label="Phone Number">+91 7989461409</a>
-                </p>
-
-                <div style="text-align:center; margin-top:30px;">
-                    <a href="mailto:anikethanreddynalla@gmail.com" 
-                        class="toggle-btn" 
-                        style="font-size:1em; padding:12px 25px;">
-                        📩 **Send Me a Message**
-                    </a>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <footer>
-        <p>THANK YOU FOR VISITING MY PORTFOLIO</p>
-        <p>© 2026 Nalla Anikethan Reddy — All Rights Reserved</p>
-    </footer>
+    <footer id="footer-content"></footer>
 
     <script>
+        // ---------------------------------------------------------------
+        // All portfolio TEXT/DATA lives in data.json. Edit that file only
+        // to change content — this script just renders whatever it finds.
+        // ---------------------------------------------------------------
+
+        function esc(str) {
+            const div = document.createElement('div');
+            div.textContent = str == null ? '' : String(str);
+            return div.innerHTML;
+        }
+
         function toggleDetails(id) {
             const el = document.getElementById(id);
             const icon = document.getElementById('icon-' + id);
-            
-            // Use smooth toggle for better UX
+            if (!el) return;
             if (el.style.display === "block") {
                 el.style.display = "none";
                 if (icon) icon.classList.replace('fa-minus', 'fa-plus');
@@ -723,6 +338,310 @@
                 if (icon) icon.classList.replace('fa-plus', 'fa-minus');
             }
         }
+        window.toggleDetails = toggleDetails;
+
+        function renderHeader(profile) {
+            const header = document.getElementById('header-content');
+            header.innerHTML = `
+                <div class="welcome-msg"><h2>✨ Welcome to My Portfolio ✨</h2></div>
+                <img src="${esc(profile.photo)}" alt="${esc(profile.name)}" class="profile-pic" />
+                <h1>👋 Hi, I'm ${esc(profile.name)}</h1>
+                <p>${esc(profile.title)}</p>
+                <p>COMPANY - ${esc(profile.company)}</p>
+                <div class="social-icons">
+                    <a href="mailto:${esc(profile.email)}" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                    <a href="${esc(profile.linkedin)}" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="tel:${esc(profile.phone)}" aria-label="Phone"><i class="fa-solid fa-phone"></i></a>
+                </div>
+                <a href="${esc(profile.resumeFile)}" download class="resume-btn">📄 Download Resume</a>
+            `;
+        }
+
+        function renderAbout(aboutText) {
+            return `
+                <section id="about" data-aos="fade-up">
+                    <h2>About Me</h2>
+                    <p>${esc(aboutText)}</p>
+                </section>
+            `;
+        }
+
+        function renderEducation(education) {
+            const cards = education.map(e => `
+                <div>
+                    <h3>${esc(e.icon)} ${esc(e.degree)}</h3>
+                    <p><strong>Institution:</strong> ${esc(e.institution)}</p>
+                    <p><strong>Duration:</strong> ${esc(e.duration)}</p>
+                    ${e.status ? `<p><strong>Status:</strong> ${esc(e.status)}</p>` : ''}
+                </div>
+            `).join('');
+            return `
+                <section id="education" data-aos="fade-up">
+                    <h2>Education</h2>
+                    <div>${cards}</div>
+                </section>
+            `;
+        }
+
+        function renderExperience(experience) {
+            const rows = experience.map((exp, i) => {
+                const id = 'exp-' + i;
+                const points = exp.points.map(p => `<li><i class="${esc(p.icon)}"></i> ${esc(p.text)}</li>`).join('');
+                const badge = exp.current
+                    ? `<span class="exp-badge">Current</span>`
+                    : '';
+                return `
+                    <tr class="exp-row">
+                        <td data-label="Company"><strong>${esc(exp.company)}</strong>${badge}</td>
+                        <td data-label="Role">${esc(exp.role)}</td>
+                        <td data-label="Duration">${esc(exp.duration)}</td>
+                        <td data-label="">
+                            <button class="toggle-btn exp-toggle-btn" onclick="toggleDetails('${id}')">
+                                <span class="btn-text">View Details</span>
+                                <i class="fas fa-plus toggle-icon" id="icon-${id}"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="exp-details-row">
+                        <td colspan="4" style="padding:0; border:none;">
+                            <div class="details" id="${id}">
+                                <p>${esc(exp.summary)}</p>
+                                <ul>${points}</ul>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            return `
+                <section id="experience" data-aos="fade-up">
+                    <h2>Experience</h2>
+                    <div class="exp-table-wrap">
+                        <table class="exp-table">
+                            <thead>
+                                <tr>
+                                    <th>Company</th>
+                                    <th>Role</th>
+                                    <th>Duration</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>${rows}</tbody>
+                        </table>
+                    </div>
+                </section>
+            `;
+        }
+
+        function renderProjects(projects) {
+            const cards = projects.map((proj, i) => {
+                const id = 'project-' + i;
+                const points = proj.points.map(p => `<li><i class="${esc(p.icon)}"></i> ${esc(p.text)}</li>`).join('');
+                const linkBtn = proj.link ? `
+                    <a href="${esc(proj.link)}" target="_blank" class="toggle-btn" style="display:inline-block;margin-bottom:10px;text-decoration:none;">
+                        🔗 Visit Project
+                    </a>` : '';
+                return `
+                    <div>
+                        <h3><i class="${esc(proj.icon)}"></i> ${esc(proj.title)}</h3>
+                        <p>${esc(proj.summary)}</p>
+                        ${linkBtn}
+                        <button class="toggle-btn" onclick="toggleDetails('${id}')">
+                            <span class="btn-text">View Details</span>
+                            <i class="fas fa-plus toggle-icon" id="icon-${id}"></i>
+                        </button>
+                        <div class="details" id="${id}">
+                            <h4>Key Contributions:</h4>
+                            <ul>${points}</ul>
+                            ${proj.tech ? `<p>${esc(proj.tech)}</p>` : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            return `
+                <section id="projects" data-aos="fade-up">
+                    <h2>Featured Projects</h2>
+                    ${cards}
+                </section>
+            `;
+        }
+
+        function renderAchievements(achievements) {
+            const cards = achievements.map((a, i) => {
+                const id = 'achieve-' + i;
+                const details = a.details.map(d => `<p><strong>${esc(d.label)}:</strong> ${esc(d.text)}</p>`).join('');
+                return `
+                    <div>
+                        <h3><i class="${esc(a.icon)}"></i> ${esc(a.title)}</h3>
+                        <p>${esc(a.summary)}</p>
+                        <button class="toggle-btn" onclick="toggleDetails('${id}')">
+                            <span class="btn-text">View Details</span>
+                            <i class="fas fa-plus toggle-icon" id="icon-${id}"></i>
+                        </button>
+                        <div class="details" id="${id}">${details}</div>
+                    </div>
+                `;
+            }).join('');
+            return `
+                <section id="achievements" data-aos="fade-up">
+                    <h2>Achievements &amp; Certifications</h2>
+                    ${cards}
+                </section>
+            `;
+        }
+
+        function renderSkills(skillGroups) {
+            const groups = skillGroups.map(g => {
+                const items = g.items.map(it => `<li><i class="${esc(it.icon)}"></i> ${esc(it.text)}</li>`).join('');
+                return `
+                    <div>
+                        <button class="toggle-btn" onclick="toggleDetails('${esc(g.id)}')">
+                            ${esc(g.label)}
+                            <i class="fas fa-plus toggle-icon" id="icon-${esc(g.id)}"></i>
+                        </button>
+                        <div class="details" id="${esc(g.id)}">
+                            <ul>${items}</ul>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            return `
+                <section id="skills" data-aos="fade-up">
+                    <h2>Technical Skills</h2>
+                    ${groups}
+                </section>
+            `;
+        }
+
+        function renderContact(profile, contactForm) {
+            return `
+                <section id="contact" data-aos="fade-up">
+                    <h2>Get In Touch</h2>
+                    <div>
+                        <p class="contact-row">
+                            <i class="fa-solid fa-envelope"></i>
+                            <a href="mailto:${esc(profile.email)}" aria-label="Email">${esc(profile.email)}</a>
+                        </p>
+                        <p class="contact-row">
+                            <i class="fab fa-linkedin"></i>
+                            <a href="${esc(profile.linkedin)}" target="_blank" aria-label="LinkedIn">${esc(profile.linkedin.replace('https://www.', ''))}</a>
+                        </p>
+                        <p class="contact-row">
+                            <i class="fa-solid fa-phone"></i>
+                            <a href="tel:${esc(profile.phone)}" aria-label="Phone Number">${esc(profile.phoneDisplay)}</a>
+                        </p>
+
+                        <form id="contact-form" class="contact-form" novalidate>
+                            <input type="hidden" name="access_key" value="${esc(contactForm.accessKey)}" />
+                            <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
+
+                            <label for="cf-name">Name</label>
+                            <input type="text" id="cf-name" name="name" required />
+
+                            <label for="cf-email">Email</label>
+                            <input type="email" id="cf-email" name="email" required />
+
+                            <label for="cf-message">Message</label>
+                            <textarea id="cf-message" name="message" rows="4" required></textarea>
+
+                            <div style="text-align:center; margin-top:20px;">
+                                <button type="submit" class="toggle-btn" style="font-size:1em; padding:12px 25px;">
+                                    📩 Send Me a Message
+                                </button>
+                            </div>
+                            <p id="cf-status" class="cf-status" role="status"></p>
+                        </form>
+                    </div>
+                </section>
+            `;
+        }
+
+        function wireContactForm(contactForm) {
+            const form = document.getElementById('contact-form');
+            const status = document.getElementById('cf-status');
+            if (!form) return;
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                status.textContent = 'Sending…';
+                status.className = 'cf-status';
+
+                const formData = new FormData(form);
+                const payload = Object.fromEntries(formData.entries());
+
+                try {
+                    const res = await fetch(contactForm.endpoint, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    });
+                    const result = await res.json().catch(() => ({}));
+
+                    if (res.ok && result.success) {
+                        status.textContent = contactForm.successMessage || 'Message sent!';
+                        status.className = 'cf-status cf-status-success';
+                        form.reset();
+                    } else {
+                        status.textContent = result.message || contactForm.errorMessage || 'Something went wrong.';
+                        status.className = 'cf-status cf-status-error';
+                    }
+                } catch (err) {
+                    status.textContent = contactForm.errorMessage || 'Something went wrong sending your message.';
+                    status.className = 'cf-status cf-status-error';
+                    console.error(err);
+                }
+            });
+        }
+
+        function renderFooter(profile) {
+            const footer = document.getElementById('footer-content');
+            footer.innerHTML = `
+                <p>THANK YOU FOR VISITING MY PORTFOLIO</p>
+                <p>© ${new Date().getFullYear()} ${esc(profile.name)} — All Rights Reserved</p>
+            `;
+        }
+
+        function renderPortfolio(data) {
+            renderHeader(data.profile);
+
+            const main = document.getElementById('main-content');
+            main.innerHTML = [
+                renderAbout(data.about),
+                '<div class="section-divider"></div>',
+                renderEducation(data.education),
+                '<div class="section-divider"></div>',
+                renderExperience(data.experience),
+                '<div class="section-divider"></div>',
+                renderProjects(data.projects),
+                '<div class="section-divider"></div>',
+                renderAchievements(data.achievements),
+                '<div class="section-divider"></div>',
+                renderSkills(data.skills),
+                '<div class="section-divider"></div>',
+                renderContact(data.profile, data.contactForm)
+            ].join('');
+
+            renderFooter(data.profile);
+            wireContactForm(data.contactForm);
+
+            // Re-init AOS + effects now that content exists
+            if (window.AOS) AOS.init({ once: true, duration: 1200, easing: 'ease-out-cubic' });
+        }
+
+        fetch('data/data.json')
+            .then(res => {
+                if (!res.ok) throw new Error('Failed to load data/data.json (' + res.status + ')');
+                return res.json();
+            })
+            .then(renderPortfolio)
+            .catch(err => {
+                document.getElementById('main-content').innerHTML =
+                    `<div class="load-note">Couldn't load data/data.json: ${esc(err.message)}.<br>Make sure there's a "data" folder next to this file containing data.json (and that you're viewing this via a local server, not a plain file:// double-click).</div>`;
+                console.error(err);
+            });
     </script>
 
     <script>
@@ -737,35 +656,26 @@
             scaleMobile: 1.00,
             color: 0x00ffe1,
             backgroundColor: 0x000010,
-            size: 1.5, // Increased size for a stronger visual presence
-            spacing: 20.00 // Adjusted spacing
+            size: 1.5,
+            spacing: 20.00
         });
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <script>
-        AOS.init({ once: true, duration: 1200, easing: 'ease-out-cubic' });
-    </script>
-        <!-- ===== CURSOR SCRIPT ===== -->
+    <script>AOS.init({ once: true, duration: 1200, easing: 'ease-out-cubic' });</script>
+
     <script>
         const dot = document.getElementById("cursor-dot");
         const outline = document.getElementById("cursor-outline");
-
-        let mouseX = 0, mouseY = 0;
-        let outlineX = 0, outlineY = 0;
-
+        let mouseX = 0, mouseY = 0, outlineX = 0, outlineY = 0;
         window.addEventListener("mousemove", e => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            dot.style.left = mouseX + "px";
-            dot.style.top = mouseY + "px";
+            mouseX = e.clientX; mouseY = e.clientY;
+            dot.style.left = mouseX + "px"; dot.style.top = mouseY + "px";
         });
-
         function animateCursor() {
             outlineX += (mouseX - outlineX) * 0.15;
             outlineY += (mouseY - outlineY) * 0.15;
-            outline.style.left = outlineX + "px";
-            outline.style.top = outlineY + "px";
+            outline.style.left = outlineX + "px"; outline.style.top = outlineY + "px";
             requestAnimationFrame(animateCursor);
         }
         animateCursor();
