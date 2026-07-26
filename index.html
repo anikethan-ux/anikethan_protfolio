@@ -609,6 +609,65 @@
     font-size:0.7rem; cursor:pointer; padding:2px;
   }
   #chat-hint-close:hover{ color:var(--text); }
+
+  /* ===== Command palette ===== */
+  .cmdk-trigger{
+    display:flex; align-items:center; gap:8px;
+    background:var(--bg-elevated); border:1px solid var(--border); border-radius:8px;
+    padding:7px 10px; color:var(--text-dim); font-size:0.8rem; cursor:pointer;
+  }
+  .cmdk-trigger:hover{ border-color:var(--accent); color:var(--accent); }
+  .cmdk-kbd{
+    font-family:var(--mono); font-size:0.68rem; color:var(--text-faint);
+    border:1px solid var(--border); border-radius:4px; padding:1px 5px;
+  }
+  .cmdk-trigger:hover .cmdk-kbd{ color:var(--accent); border-color:var(--accent); }
+  @media (max-width:760px){ .cmdk-trigger .cmdk-kbd{ display:none; } }
+
+  #cmdk-overlay{
+    position:fixed; inset:0; z-index:100;
+    background:rgba(6,7,10,0.7); backdrop-filter:blur(3px);
+    display:none; align-items:flex-start; justify-content:center;
+    padding-top:12vh;
+  }
+  #cmdk-overlay.open{ display:flex; }
+
+  #cmdk-modal{
+    width:560px; max-width:90vw; max-height:60vh;
+    background:var(--bg-elevated); border:1px solid var(--border); border-radius:14px;
+    box-shadow:0 40px 80px -20px rgba(0,0,0,0.8);
+    display:flex; flex-direction:column; overflow:hidden;
+  }
+  .cmdk-input-row{
+    display:flex; align-items:center; gap:10px; padding:14px 16px;
+    border-bottom:1px solid var(--border); color:var(--text-faint);
+  }
+  #cmdk-input{
+    flex:1; background:none; border:none; outline:none;
+    color:var(--text); font-family:var(--body); font-size:0.98rem;
+  }
+  #cmdk-input::placeholder{ color:var(--text-faint); }
+  .cmdk-esc{
+    font-family:var(--mono); font-size:0.68rem; color:var(--text-faint);
+    border:1px solid var(--border); border-radius:4px; padding:2px 6px;
+  }
+
+  #cmdk-list{ overflow-y:auto; padding:8px; }
+  .cmdk-group-label{
+    font-family:var(--mono); font-size:0.66rem; text-transform:uppercase; letter-spacing:0.06em;
+    color:var(--text-faint); padding:10px 10px 6px;
+  }
+  .cmdk-item{
+    display:flex; align-items:center; gap:12px; padding:11px 12px; border-radius:9px;
+    cursor:pointer; color:var(--text);
+  }
+  .cmdk-item i{ width:16px; text-align:center; color:var(--text-dim); font-size:0.9rem; }
+  .cmdk-item .cmdk-item-title{ flex:1; font-size:0.9rem; }
+  .cmdk-item .cmdk-item-hint{ font-family:var(--mono); font-size:0.7rem; color:var(--text-faint); }
+  .cmdk-item.is-active{ background:var(--accent-dim); }
+  .cmdk-item.is-active i{ color:var(--accent); }
+  .cmdk-item.is-active .cmdk-item-hint{ color:var(--accent); }
+  .cmdk-empty{ padding:24px 12px; text-align:center; color:var(--text-faint); font-family:var(--mono); font-size:0.82rem; }
 </style>
 </head>
 <body>
@@ -626,6 +685,10 @@
       <a href="#contact">contact</a>
     </div>
     <a href="#" id="nav-resume-link" class="nav-resume" download>resume ↓</a>
+    <button id="cmdk-trigger" class="cmdk-trigger" aria-label="Open command palette">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <span class="cmdk-kbd">⌘K</span>
+    </button>
   </div>
 </nav>
 
@@ -663,6 +726,17 @@
     <input type="text" id="chat-input" placeholder="Ask a question…" autocomplete="off" />
     <button type="submit" aria-label="Send"><i class="fa-solid fa-paper-plane"></i></button>
   </form>
+</div>
+
+<div id="cmdk-overlay">
+  <div id="cmdk-modal" role="dialog" aria-modal="true" aria-label="Command palette">
+    <div class="cmdk-input-row">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="cmdk-input" placeholder="Jump to a section, or copy a contact detail…" autocomplete="off" />
+      <span class="cmdk-esc">esc</span>
+    </div>
+    <div id="cmdk-list"></div>
+  </div>
 </div>
 
 <script>
@@ -750,6 +824,14 @@
     const circuit = '59,130,246';
 
     let w, h, dpr, particles = [];
+    let mouse = { x: -9999, y: -9999, active: false };
+
+    document.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY + window.scrollY;
+      mouse.active = true;
+    });
+    document.addEventListener('mouseleave', () => { mouse.active = false; });
 
     function sizeCanvas(){
       dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -778,11 +860,21 @@
     }
 
     const LINK_DIST = 150;
+    const MOUSE_RADIUS = 170;
 
     function step(){
       ctx.clearRect(0, 0, w, h);
 
       for(const p of particles){
+        if(mouse.active){
+          const dx = mouse.x - p.x, dy = mouse.y - p.y;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          if(dist < MOUSE_RADIUS && dist > 0.01){
+            const pull = (1 - dist / MOUSE_RADIUS) * 0.035;
+            p.x += (dx / dist) * pull * 10;
+            p.y += (dy / dist) * pull * 10;
+          }
+        }
         p.x += p.vx;
         p.y += p.vy;
         if(p.x < -20) p.x = w + 20; if(p.x > w + 20) p.x = -20;
@@ -795,8 +887,13 @@
           const dx = a.x - b.x, dy = a.y - b.y;
           const dist = Math.sqrt(dx*dx + dy*dy);
           if(dist < LINK_DIST){
-            const alpha = (1 - dist / LINK_DIST) * 0.22;
-            ctx.strokeStyle = `rgba(${circuit},${alpha})`;
+            let alpha = (1 - dist / LINK_DIST) * 0.22;
+            if(mouse.active){
+              const mdx = mouse.x - (a.x + b.x) / 2, mdy = mouse.y - (a.y + b.y) / 2;
+              const mdist = Math.sqrt(mdx*mdx + mdy*mdy);
+              if(mdist < MOUSE_RADIUS) alpha += (1 - mdist / MOUSE_RADIUS) * 0.35;
+            }
+            ctx.strokeStyle = `rgba(${circuit},${Math.min(alpha, 0.55)})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
@@ -807,12 +904,17 @@
       }
 
       for(const p of particles){
+        let nearMouse = false;
+        if(mouse.active){
+          const dx = mouse.x - p.x, dy = mouse.y - p.y;
+          nearMouse = Math.sqrt(dx*dx + dy*dy) < MOUSE_RADIUS;
+        }
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = p.isNode ? `rgba(${accent},0.75)` : `rgba(${circuit},0.55)`;
-        if(p.isNode){
-          ctx.shadowColor = `rgba(${accent},0.9)`;
-          ctx.shadowBlur = 6;
+        ctx.arc(p.x, p.y, nearMouse ? p.r * 1.6 : p.r, 0, Math.PI * 2);
+        ctx.fillStyle = p.isNode ? `rgba(${accent},${nearMouse ? 1 : 0.75})` : `rgba(${circuit},${nearMouse ? 0.85 : 0.55})`;
+        if(p.isNode || nearMouse){
+          ctx.shadowColor = `rgba(${p.isNode ? accent : circuit},0.9)`;
+          ctx.shadowBlur = nearMouse ? 10 : 6;
         }else{
           ctx.shadowBlur = 0;
         }
@@ -893,8 +995,6 @@
   }
 
   function shortSkillLabel(text){
-    // Trim parenthetical detail so labels never run off the card edge,
-    // e.g. "SQL (Database Management)" -> "SQL".
     const stripped = String(text || '').replace(/\s*\([^)]*\)\s*/g, '').trim();
     const base = stripped || text || '';
     return base.length > 14 ? base.slice(0, 13) + '…' : base;
@@ -931,9 +1031,6 @@
       labels += `<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="${anchor}" class="sig-node-label">${esc(shortSkillLabel(s.text))}</text>`;
     });
 
-    // A slowly rotating radar sweep — driven by CSS (same technique as the
-    // hero photo ring), drawn on top and offset from the fixed spokes so it's
-    // always visible as it rotates anticlockwise.
     const sweep = `
       <g class="sig-sweep" style="transform-box:view-box; transform-origin:${cx}px ${cy}px;">
         <line x1="${cx}" y1="${cy}" x2="${cx}" y2="${(cy - R - 6).toFixed(1)}"
@@ -1011,7 +1108,6 @@
   function isInternship(exp){
     return /intern/i.test(exp.role || '') || /intern/i.test(exp.company || '');
   }
-  // Professional (non-internship) span: earliest full-time role to now.
   function computeProfessionalSpan(experience){
     if(!experience || !experience.length) return null;
     let earliest = null;
@@ -1025,7 +1121,6 @@
     const months = monthsBetween(earliest, new Date());
     return { months, label: formatMonths(months) };
   }
-  // Internship time: sum of duration across any entries flagged as internships.
   function computeInternshipMonths(experience){
     if(!experience || !experience.length) return null;
     let total = 0, found = false;
@@ -1414,7 +1509,6 @@
 
   /* ---------- Chatbot ---------- */
 
-  // Typo-tolerant HR-style intents layered on top of whatever the JSON defines.
   const BUILT_IN_HR_RULES = [
     { type: 'hr_duration', keywords: ['how many years', 'years of experience', 'total experience', 'how long have you', 'how much experience', 'experience do you have', 'duration of experience', 'how many months'] },
     { type: 'hr_notice', keywords: ['notice period', 'when can you join', 'join immediately'] },
@@ -1521,16 +1615,14 @@
     const lower = input.toLowerCase();
     const words = lower.split(/[^a-z0-9]+/).filter(Boolean);
 
-    // 1) exact substring match — fastest path
     for(const rule of rules){
       if(rule.keywords.some(kw => lower.includes(kw.toLowerCase()))) return rule.type;
     }
 
-    // 2) typo-tolerant fallback — catches "experiance", "salery", etc.
     for(const rule of rules){
       for(const kw of rule.keywords){
         const kwLower = kw.toLowerCase();
-        if(kwLower.includes(' ')) continue; // fuzzy matching is per-word only
+        if(kwLower.includes(' ')) continue;
         if(kwLower.length < 4) continue;
         for(const w of words){
           if(w.length < 4) continue;
@@ -1663,6 +1755,151 @@
     }
   }
 
+  /* ---------- Command palette ---------- */
+  function buildCommands(data){
+    const p = data.profile;
+    const sections = [
+      { title: 'Go to About', icon: 'fa-solid fa-arrow-right', hint: 'section', action: () => scrollToSection('about') },
+      { title: 'Go to Experience', icon: 'fa-solid fa-arrow-right', hint: 'section', action: () => scrollToSection('experience') },
+      { title: 'Go to Projects', icon: 'fa-solid fa-arrow-right', hint: 'section', action: () => scrollToSection('projects') },
+      { title: 'Go to Skills', icon: 'fa-solid fa-arrow-right', hint: 'section', action: () => scrollToSection('skills') },
+      { title: 'Go to Contact', icon: 'fa-solid fa-arrow-right', hint: 'section', action: () => scrollToSection('contact') }
+    ];
+    const actions = [
+      { title: `Copy email — ${p.email}`, icon: 'fa-solid fa-envelope', hint: 'copy', action: () => copyToClipboard(p.email, 'Email copied') },
+      { title: `Copy phone — ${p.phoneDisplay}`, icon: 'fa-solid fa-phone', hint: 'copy', action: () => copyToClipboard(p.phone, 'Phone copied') },
+      { title: 'Open LinkedIn', icon: 'fab fa-linkedin', hint: 'open ↗', action: () => window.open(p.linkedin, '_blank') },
+      { title: 'Download resume', icon: 'fa-solid fa-arrow-down', hint: 'download', action: () => { const a = document.createElement('a'); a.href = p.resumeFile; a.download = ''; a.click(); } },
+      { title: 'Ask Anikethan AI', icon: 'fa-solid fa-comment-dots', hint: 'chat', action: () => { document.getElementById('chat-toggle').click(); } }
+    ];
+    return { sections, actions };
+  }
+
+  function scrollToSection(id){
+    const el = document.getElementById(id);
+    if(el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function copyToClipboard(text, label){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).catch(() => {});
+    }
+    const list = document.getElementById('cmdk-list');
+    if(list){
+      const toast = document.createElement('div');
+      toast.className = 'cmdk-empty';
+      toast.textContent = `✓ ${label}`;
+      list.innerHTML = '';
+      list.appendChild(toast);
+      setTimeout(closeCmdk, 500);
+    }
+  }
+
+  let cmdkActiveIndex = 0;
+  let cmdkFlatCommands = [];
+
+  function renderCmdkList(commands, query){
+    const list = document.getElementById('cmdk-list');
+    const q = query.trim().toLowerCase();
+    const filterFn = c => c.title.toLowerCase().includes(q);
+    const sections = commands.sections.filter(filterFn);
+    const actions = commands.actions.filter(filterFn);
+    cmdkFlatCommands = [...sections, ...actions];
+    cmdkActiveIndex = 0;
+
+    if(!cmdkFlatCommands.length){
+      list.innerHTML = `<div class="cmdk-empty">No matching commands</div>`;
+      return;
+    }
+
+    let html = '';
+    if(sections.length){
+      html += `<div class="cmdk-group-label">Navigate</div>`;
+      sections.forEach((c, i) => html += cmdkItemHtml(c, i));
+    }
+    if(actions.length){
+      html += `<div class="cmdk-group-label">Actions</div>`;
+      actions.forEach((c, i) => html += cmdkItemHtml(c, sections.length + i));
+    }
+    list.innerHTML = html;
+    highlightCmdkActive();
+  }
+
+  function cmdkItemHtml(c, index){
+    return `<div class="cmdk-item" data-index="${index}">
+      <i class="${c.icon}"></i>
+      <span class="cmdk-item-title">${esc(c.title)}</span>
+      <span class="cmdk-item-hint">${esc(c.hint)}</span>
+    </div>`;
+  }
+
+  function highlightCmdkActive(){
+    const items = document.querySelectorAll('#cmdk-list .cmdk-item');
+    items.forEach(el => el.classList.toggle('is-active', parseInt(el.dataset.index, 10) === cmdkActiveIndex));
+    const active = document.querySelector('#cmdk-list .cmdk-item.is-active');
+    if(active) active.scrollIntoView({ block: 'nearest' });
+  }
+
+  function openCmdk(){
+    document.getElementById('cmdk-overlay').classList.add('open');
+    const input = document.getElementById('cmdk-input');
+    input.value = '';
+    input.focus();
+    renderCmdkList(window.__cmdkCommands, '');
+  }
+  function closeCmdk(){
+    document.getElementById('cmdk-overlay').classList.remove('open');
+  }
+
+  function wireCommandPalette(data){
+    const commands = buildCommands(data);
+    window.__cmdkCommands = commands;
+
+    const trigger = document.getElementById('cmdk-trigger');
+    const overlay = document.getElementById('cmdk-overlay');
+    const input = document.getElementById('cmdk-input');
+    const list = document.getElementById('cmdk-list');
+
+    trigger.addEventListener('click', openCmdk);
+
+    document.addEventListener('keydown', (e) => {
+      const isMeta = e.metaKey || e.ctrlKey;
+      if(isMeta && e.key.toLowerCase() === 'k'){
+        e.preventDefault();
+        overlay.classList.contains('open') ? closeCmdk() : openCmdk();
+      }else if(e.key === 'Escape' && overlay.classList.contains('open')){
+        closeCmdk();
+      }
+    });
+
+    overlay.addEventListener('click', (e) => { if(e.target === overlay) closeCmdk(); });
+
+    input.addEventListener('input', () => renderCmdkList(commands, input.value));
+
+    input.addEventListener('keydown', (e) => {
+      if(e.key === 'ArrowDown'){
+        e.preventDefault();
+        cmdkActiveIndex = Math.min(cmdkActiveIndex + 1, cmdkFlatCommands.length - 1);
+        highlightCmdkActive();
+      }else if(e.key === 'ArrowUp'){
+        e.preventDefault();
+        cmdkActiveIndex = Math.max(cmdkActiveIndex - 1, 0);
+        highlightCmdkActive();
+      }else if(e.key === 'Enter'){
+        e.preventDefault();
+        const cmd = cmdkFlatCommands[cmdkActiveIndex];
+        if(cmd){ closeCmdk(); cmd.action(); }
+      }
+    });
+
+    list.addEventListener('click', (e) => {
+      const item = e.target.closest('.cmdk-item');
+      if(!item) return;
+      const cmd = cmdkFlatCommands[parseInt(item.dataset.index, 10)];
+      if(cmd){ closeCmdk(); cmd.action(); }
+    });
+  }
+
   /* ---------- Footer ---------- */
   function renderFooter(profile){
     document.getElementById('footer-content').innerHTML = `
@@ -1711,6 +1948,7 @@
     wireContactForm(data.contactForm);
     wireFeedbackForm(data.profile, data.contactForm);
     wireChatbot(data);
+    wireCommandPalette(data);
     setupReveal();
 
     setTimeout(() => window.dispatchEvent(new Event('resize')), 100);

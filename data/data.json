@@ -248,7 +248,7 @@
   "contactForm": {
     "provider": "web3forms",
     "endpoint": "https://api.web3forms.com/submit",
-    "accessKey": "REPLACE_WITH_YOUR_WEB3FORMS_ACCESS_KEY",
+    "accessKey": "84ee2abc-5fce-41e7-9c78-a1f8d5cb57de",
     "successMessage": "Thanks! Your message has been sent.",
     "errorMessage": "Something went wrong sending your message. Please try again or email me directly."
   },
