@@ -1,685 +1,1735 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Portfolio</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.globe.min.js"></script>
+<style>
+  :root{
+    --bg:#0A0C10;
+    --bg-elevated:#12151C;
+    --border:rgba(255,255,255,0.09);
+    --border-soft:rgba(255,255,255,0.05);
+    --text:#DCE1E8;
+    --text-dim:#7C8798;
+    --text-faint:#4B5563;
+    --accent:#39FF88;
+    --accent-dim:rgba(57,255,136,0.12);
+    --accent-ink:#0A0C10;
+    --amber:#FFB454;
+    --amber-dim:rgba(255,180,84,0.12);
+    --circuit:#3B82F6;
+    --circuit-dim:rgba(59,130,246,0.14);
+    --danger:#ff6b6b;
+    --mono:'JetBrains Mono', ui-monospace, monospace;
+    --display:'Space Grotesk', sans-serif;
+    --body:'Inter', sans-serif;
+    --maxw:920px;
+  }
 
-    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--body);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
 
-    <style>
-        :root {
-            --color-primary: #00ffe1;
-            --color-secondary: #ff00ff;
-            --color-text: #e0e0e0;
-            --color-background: #000010;
-            --color-card-bg: rgba(255, 255, 255, 0.05);
-            --glow-primary: 0 0 15px rgba(0, 255, 225, 0.7), 0 0 30px rgba(0, 255, 225, 0.5);
-            --glow-secondary: 0 0 15px rgba(255, 0, 255, 0.7), 0 0 30px rgba(255, 0, 255, 0.5);
-            --color-divider: rgba(0, 255, 225, 0.5);
-        }
+  /* ===== Neural network background (full page) ===== */
+  #neural-bg{
+    position:fixed; inset:0; z-index:0; width:100%; height:100%;
+    display:block; pointer-events:none;
+  }
+  body::after{
+    content:"";
+    position:fixed; top:-10%; left:50%; transform:translateX(-50%);
+    width:900px; height:600px; max-width:140vw;
+    background:radial-gradient(ellipse at center, rgba(59,130,246,0.10), transparent 70%);
+    pointer-events:none;
+    z-index:0;
+    filter:blur(10px);
+  }
 
-        * { cursor: none; box-sizing: border-box; }
+  a{color:var(--accent); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  h1,h2,h3{font-family:var(--display); font-weight:600; margin:0; letter-spacing:-0.01em;}
+  p{margin:0;}
+  ul{list-style:none; margin:0; padding:0;}
+  button{font-family:inherit;}
 
-        #cursor-dot {
-            width: 10px; height: 10px;
-            background: radial-gradient(circle, #00ffe1, #00bfa6);
-            border-radius: 50%; position: fixed; pointer-events: none; z-index: 10001;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 10px rgba(0,255,225,0.9);
-        }
-        #cursor-outline {
-            width: 42px; height: 42px; border-radius: 50%;
-            position: fixed; pointer-events: none; z-index: 10000;
-            transform: translate(-50%, -50%);
-            border: 2px solid rgba(255,0,255,0.7);
-            box-shadow: 0 0 15px rgba(255,0,255,0.6);
-            transition: transform 0.15s ease-out;
-        }
-        a:hover ~ #cursor-outline, button:hover ~ #cursor-outline { transform: translate(-50%, -50%) scale(1.4); }
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px; position:relative; z-index:1;}
+  .eyebrow{
+    font-family:var(--mono); font-size:0.72rem; letter-spacing:0.14em;
+    text-transform:uppercase; color:var(--accent); display:flex; align-items:center; gap:8px;
+  }
+  .eyebrow::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--accent); box-shadow:0 0 8px var(--accent);}
 
-        @media (max-width: 768px) {
-            * { cursor: auto; }
-            #cursor-dot, #cursor-outline { display: none; }
-        }
+  /* ===== NAV ===== */
+  #topnav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(10,12,16,0.75); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  #topnav .wrap{display:flex; align-items:center; justify-content:space-between; padding:16px 24px; gap:16px;}
+  .nav-logo{font-family:var(--mono); font-size:0.9rem; color:var(--text); white-space:nowrap;}
+  .nav-logo span{color:var(--accent);}
+  .nav-links{display:flex; gap:22px; flex-wrap:wrap;}
+  .nav-links a{
+    font-family:var(--mono); font-size:0.78rem; color:var(--text-dim);
+    text-transform:lowercase; letter-spacing:0.02em;
+  }
+  .nav-links a:hover{color:var(--accent); text-decoration:none;}
+  .nav-resume{
+    font-family:var(--mono); font-size:0.75rem; color:var(--accent);
+    border:1px solid var(--accent); border-radius:6px; padding:7px 14px;
+    white-space:nowrap;
+  }
+  .nav-resume:hover{background:var(--accent-dim); text-decoration:none;}
+  @media (max-width:760px){ .nav-links{display:none;} }
 
-        body {
-            margin: 0; font-family: "Poppins", sans-serif;
-            color: var(--color-text); background-color: var(--color-background);
-            overflow-x: hidden; text-align: center;
-        }
-        header, main, footer { position: relative; z-index: 2; }
+  /* ===== HERO ===== */
+  header{padding:76px 0 60px; position:relative; z-index:1;}
+  .hero-grid{display:grid; grid-template-columns:1.15fr 0.85fr; gap:48px; align-items:center;}
+  @media (max-width:860px){ .hero-grid{grid-template-columns:1fr;} }
 
-        main {
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%2300ffe110" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)" /></svg>');
-            background-repeat: repeat;
-            background-attachment: fixed;
-            margin-top: 50px;
-            min-height: 50vh;
-        }
+  /* Profile photo — enlarged, ringed, badge */
+  .hero-photo-ring{ position:relative; width:104px; height:104px; }
+  .hero-photo-ring::before{
+    content:""; position:absolute; inset:-4px; border-radius:50%;
+    background:conic-gradient(from 0deg, var(--accent), var(--circuit), var(--accent));
+    animation:ringSpin 7s linear infinite;
+  }
+  .hero-photo-ring img{
+    position:relative; z-index:1; width:100%; height:100%; border-radius:50%;
+    object-fit:cover; display:block; border:3px solid var(--bg); background:var(--bg-elevated);
+  }
+  .hero-photo-badge{
+    position:absolute; z-index:2; bottom:1px; right:1px; width:20px; height:20px; border-radius:50%;
+    background:var(--accent); border:3px solid var(--bg); box-shadow:0 0 8px var(--accent);
+  }
+  @keyframes ringSpin{ to{ transform:rotate(360deg); } }
 
-        h1, h2, h3 {
-            font-weight: 700;
-            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-        }
+  .hero-name{font-size:clamp(2.1rem, 5vw, 3.1rem); margin-top:16px; line-height:1.08;}
+  .hero-role{font-family:var(--body); color:var(--text-dim); font-size:1.05rem; margin-top:14px;}
+  .hero-role strong{color:var(--text); font-weight:600;}
+  .hero-actions{display:flex; align-items:center; gap:18px; margin-top:28px; flex-wrap:wrap;}
+  .btn-primary{
+    font-family:var(--mono); font-size:0.85rem; font-weight:500;
+    background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+    padding:12px 20px; display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary:hover{filter:brightness(1.08); text-decoration:none;}
+  .social-row{display:flex; gap:16px;}
+  .social-row a{
+    width:38px; height:38px; border:1px solid var(--border); border-radius:8px;
+    display:flex; align-items:center; justify-content:center; color:var(--text-dim); font-size:1.05rem;
+  }
+  .social-row a:hover{color:var(--accent); border-color:var(--accent); text-decoration:none;}
 
-        p, li { color: var(--color-text); line-height: 1.7; }
+  /* Signature panel — the "core.signature" node map */
+  .signature-panel{
+    background:var(--bg-elevated); border:1px solid var(--border); border-radius:12px;
+    overflow:hidden; box-shadow:0 30px 60px -30px rgba(0,0,0,0.6);
+  }
+  .signature-bar{
+    display:flex; align-items:center; gap:8px; padding:11px 14px; border-bottom:1px solid var(--border);
+    background:rgba(255,255,255,0.02);
+  }
+  .signature-dot{width:10px; height:10px; border-radius:50%; background:#3a3f4b;}
+  .signature-title{
+    font-family:var(--mono); font-size:0.72rem; color:var(--text-faint); margin-left:6px;
+  }
+  .signature-body{padding:6px 6px 4px;}
+  .signature-body svg{width:100%; height:auto; display:block;}
+  .sig-node-label{
+    font-family:var(--mono); font-size:8.5px; fill:var(--text-dim);
+  }
+  .sig-core-label{
+    font-family:var(--mono); font-size:9.5px; fill:var(--accent-ink); font-weight:600;
+  }
+  .sig-caption{
+    font-family:var(--mono); font-size:0.68rem; color:var(--text-faint);
+    padding:2px 16px 14px; text-align:center;
+  }
+  .sig-sweep{
+    animation:sigSweepSpin 6s linear infinite;
+  }
+  @keyframes sigSweepSpin{
+    from{ transform:rotate(0deg); }
+    to{ transform:rotate(-360deg); }
+  }
 
-        a { color: var(--color-primary); text-decoration: none; transition: 0.3s ease; }
-        a:hover { color: #fff; text-shadow: 0 0 5px var(--color-secondary), 0 0 15px var(--color-primary); }
+  /* ===== SECTIONS ===== */
+  section{padding:56px 0; border-top:1px solid var(--border-soft); position:relative; z-index:1;}
+  section:first-of-type{border-top:none;}
+  .section-head{display:flex; align-items:baseline; gap:14px; margin-bottom:28px;}
+  .section-head h2{font-size:1.5rem;}
+  .section-head .idx{font-family:var(--mono); font-size:0.78rem; color:var(--text-faint);}
 
-        header { padding: 80px 20px 60px; }
-        .welcome-msg h2 { font-size: 2.5em; font-weight: 600; margin-bottom: 30px; }
-        .profile-pic {
-            width: 180px; height: 180px; border-radius: 50%;
-            border: 4px solid var(--color-primary);
-            object-fit: cover; box-shadow: var(--glow-primary);
-            margin-top: 20px; animation: float 4s ease-in-out infinite;
-        }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-        h1 { font-size: 3em; margin-top: 25px; }
+  .reveal{opacity:0; transform:translateY(16px); transition:opacity 0.6s ease, transform 0.6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
 
-        .social-icons { margin-top: 20px; }
-        .social-icons a { font-size: 2em; margin: 0 15px; transition: 0.3s transform, 0.3s text-shadow; }
-        .social-icons a:hover {
-            transform: scale(1.2); color: var(--color-secondary);
-            text-shadow: 0 0 10px var(--color-primary), 0 0 20px var(--color-secondary);
-        }
+  /* About — content + a slim row of stat pills underneath */
+  .about-layout{display:flex; flex-direction:column; gap:18px;}
+  #about p{max-width:68ch; color:var(--text-dim); font-size:1.02rem;}
+  .about-stats{display:flex; flex-wrap:wrap; gap:10px;}
+  .about-stat{
+    display:flex; align-items:baseline; gap:7px;
+    border:1px solid var(--border-soft); border-radius:20px; padding:7px 14px;
+    background:var(--bg-elevated);
+  }
+  .about-stat .num{font-family:var(--display); font-size:0.92rem; font-weight:700; color:var(--accent); line-height:1;}
+  .about-stat .lbl{font-family:var(--mono); font-size:0.66rem; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.04em;}
 
-        main section {
-            background: var(--color-card-bg);
-            margin: 60px auto; padding: 50px 30px;
-            width: 90%; max-width: 1100px;
-            border-radius: 25px;
-            border: 1px solid rgba(0, 255, 225, 0.2);
-            box-shadow: 0 0 50px rgba(0, 255, 255, 0.2);
-            backdrop-filter: blur(12px);
-            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease;
-            transform-style: preserve-3d; perspective: 1000px;
-        }
-        main section:hover { transform: translateZ(10px); box-shadow: var(--glow-secondary); }
-        ul { list-style: none; padding: 0; }
+  /* Education */
+  .edu-list{display:flex; flex-direction:column; gap:0;}
+  .edu-item{
+    display:grid; grid-template-columns:34px 120px 1fr auto; gap:16px; align-items:baseline;
+    padding:16px 0; border-bottom:1px solid var(--border-soft);
+  }
+  .edu-item:last-child{border-bottom:none;}
+  .edu-icon{font-size:1.1rem; align-self:center;}
+  .edu-item .edu-duration{font-family:var(--mono); font-size:0.78rem; color:var(--text-faint);}
+  .edu-item h3{font-size:1rem; font-weight:600;}
+  .edu-item .edu-inst{color:var(--text-dim); font-size:0.92rem; margin-top:2px;}
+  .edu-status{
+    font-family:var(--mono); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.06em;
+    color:var(--text-faint); white-space:nowrap;
+  }
+  @media (max-width:600px){ .edu-item{grid-template-columns:24px 1fr; gap:4px;} .edu-status{grid-column:2;} }
 
-        .section-divider {
-            width: 50%; height: 2px; background: var(--color-divider);
-            margin: 40px auto; border-radius: 1px;
-            box-shadow: var(--glow-primary); opacity: 0.5;
-        }
+  /* ===================================================================
+     Experience — pipeline. UNCHANGED from the original design on purpose.
+     =================================================================== */
+  .pipeline{position:relative; padding-left:28px;}
+  .pipeline::before{
+    content:""; position:absolute; left:5px; top:6px; bottom:6px; width:1px; background:var(--border);
+  }
+  .pipe-node{position:relative; padding-bottom:34px;}
+  .pipe-node:last-child{padding-bottom:0;}
+  .pipe-dot{
+    position:absolute; left:-28px; top:4px; width:11px; height:11px; border-radius:50%;
+    background:var(--bg); border:2px solid var(--text-faint);
+  }
+  .pipe-node.is-current .pipe-dot{border-color:var(--amber); box-shadow:0 0 0 4px var(--amber-dim);}
+  .pipe-node.is-done .pipe-dot{border-color:var(--accent); background:var(--accent);}
 
-        .toggle-btn, .resume-btn {
-            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
-            border: none; padding: 12px 25px; border-radius: 15px;
-            color: #000; font-weight: 700; cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            margin-top: 15px; text-transform: uppercase; letter-spacing: 1px;
-            box-shadow: 0 0 10px rgba(0, 255, 225, 0.5);
-            display: inline-flex; align-items: center; justify-content: center;
-            gap: 10px; position: relative;
-        }
-        .toggle-btn:hover, .resume-btn:hover {
-            background: linear-gradient(90deg, var(--color-secondary), var(--color-primary));
-            transform: scale(1.05) perspective(100px) rotateX(2deg);
-            box-shadow: 0 0 20px rgba(255, 0, 255, 0.8), 0 0 30px rgba(255, 0, 255, 0.6);
-        }
-        .toggle-btn i.toggle-icon { font-size: 1em; transition: transform 0.3s ease; }
+  .pipe-top{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  .pipe-role h3{font-size:1.05rem;}
+  .pipe-role .pipe-company{font-family:var(--mono); font-size:0.82rem; color:var(--text-dim); margin-top:3px;}
+  .pipe-meta{display:flex; align-items:center; gap:12px;}
+  .pipe-duration{font-family:var(--mono); font-size:0.75rem; color:var(--text-faint);}
+  .status-badge{
+    font-family:var(--mono); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.06em;
+    padding:4px 9px; border-radius:20px; display:inline-flex; align-items:center; gap:6px;
+  }
+  .status-badge.running{color:var(--amber); background:var(--amber-dim);}
+  .status-badge.running::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--amber); animation:pulse 1.4s ease-in-out infinite;}
+  .status-badge.passed{color:var(--accent); background:var(--accent-dim);}
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.35;} }
 
-        .details {
-            display: none; text-align: left; margin-top: 20px; padding: 20px;
-            border-left: 3px solid var(--color-primary);
-            background: rgba(0, 0, 0, 0.2); border-radius: 10px;
-            animation: fadeIn 0.5s ease-out;
-        }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .pipe-summary{color:var(--text-dim); font-size:0.94rem; margin-top:10px; max-width:64ch;}
+  .pipe-toggle{
+    font-family:var(--mono); font-size:0.75rem; color:var(--text-faint);
+    background:none; border:none; padding:8px 0 0; cursor:pointer;
+  }
+  .pipe-toggle:hover{color:var(--accent);}
+  .pipe-details{display:none; margin-top:10px;}
+  .pipe-details ul{display:flex; flex-direction:column; gap:7px;}
+  .pipe-details li{
+    color:var(--text-dim); font-size:0.9rem; padding-left:16px; position:relative;
+  }
+  .pipe-details li::before{content:"›"; position:absolute; left:0; color:var(--accent);}
+  /* ===================== end untouched experience block ===================== */
 
-        .details ul { display: flex; flex-wrap: wrap; gap: 15px; padding: 10px 0; margin-top: 15px; }
-        .details li {
-            background: rgba(0, 255, 225, 0.15); color: var(--color-primary);
-            padding: 10px 15px; border-radius: 8px; font-weight: 600;
-            display: flex; align-items: center; gap: 10px; transition: 0.3s;
-            border: 1px solid var(--color-primary); cursor: default;
-        }
-        .details li:hover {
-            background: rgba(255, 0, 255, 0.3); color: #fff;
-            transform: scale(1.05); box-shadow: 0 0 10px var(--color-secondary);
-        }
-        .details p { margin: 8px 0; }
+  /* Projects — upgraded */
+  .proj-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  @media (max-width:760px){ .proj-grid{grid-template-columns:1fr;} }
 
-        #projects > div, #skills > div, #achievements > div {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(0, 255, 225, 0.4);
-            border-radius: 15px; padding: 25px; margin: 20px 0;
-            transition: 0.4s ease; box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
-            text-align: left;
-        }
-        #projects > div:hover, #skills > div:hover, #achievements > div:hover {
-            background: rgba(0, 255, 225, 0.1);
-            transform: scale(1.02); box-shadow: var(--glow-primary);
-        }
-        #achievements h3 i, #projects h3 i { margin-right: 10px; color: var(--color-secondary); }
+  .proj-card{
+    position:relative; border:1px solid var(--border); border-radius:14px;
+    background:var(--bg-elevated); display:flex; flex-direction:column;
+    overflow:hidden;
+    transition:border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .proj-card:hover{
+    border-color:rgba(57,255,136,0.4); transform:translateY(-4px);
+    box-shadow:0 20px 40px -24px rgba(57,255,136,0.35);
+  }
+  .proj-card.featured{grid-column:1 / -1;}
+  .proj-card.featured .proj-art{height:108px;}
+  .proj-card.featured .proj-body{padding:26px 28px 24px;}
+  .proj-card.featured h3{font-size:1.2rem;}
 
-        #education > div {
-            display: grid; gap: 30px;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            margin-top: 30px;
-        }
-        #education > div > div {
-            background: var(--color-card-bg); border-radius: 15px; padding: 25px;
-            text-align: left; border-left: 4px solid var(--color-secondary);
-            box-shadow: 0 0 20px rgba(255, 0, 255, 0.2); transition: all 0.3s ease;
-        }
-        #education > div > div:hover { transform: translateY(-5px) scale(1.01); box-shadow: var(--glow-secondary); }
-        #education h3 { color: var(--color-primary); margin-bottom: 10px; }
+  .proj-art{
+    position:relative; height:78px; overflow:hidden;
+    background:
+      radial-gradient(120% 160% at 0% 0%, var(--accent-dim), transparent 60%),
+      radial-gradient(120% 160% at 100% 100%, var(--circuit-dim), transparent 60%),
+      var(--bg);
+    border-bottom:1px solid var(--border-soft);
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 18px;
+  }
+  .proj-art .proj-index{
+    font-family:var(--display); font-weight:700; font-size:2.6rem;
+    color:transparent; -webkit-text-stroke:1px rgba(220,225,232,0.16);
+    line-height:1;
+  }
+  .proj-art .proj-status{
+    font-family:var(--mono); font-size:0.65rem; text-transform:uppercase; letter-spacing:0.06em;
+    color:var(--accent); background:var(--accent-dim); border:1px solid rgba(57,255,136,0.25);
+    padding:4px 9px; border-radius:20px; white-space:nowrap;
+  }
 
-        #contact > div {
-            background: rgba(255, 255, 255, 0.07); border-radius: 20px; padding: 30px;
-            width: 90%; max-width: 600px; margin: 30px auto; text-align: left;
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
-            border: 1px solid rgba(255, 0, 255, 0.3);
-        }
-        #contact a { color: #fff; }
-        #contact i { color: var(--color-primary); font-size: 1.5em; }
-        #contact .contact-row { display:flex; align-items:center; gap:15px; font-size:1.1em; margin:15px 0; }
+  .proj-body{display:flex; flex-direction:column; gap:12px; padding:18px 20px 20px;}
+  .proj-head{display:flex; align-items:center; justify-content:space-between; gap:10px;}
+  .proj-card h3{font-size:1.02rem; display:flex; align-items:center; gap:8px;}
+  .proj-card h3 i.proj-title-icon{color:var(--accent); font-size:0.85em;}
+  .proj-link{
+    font-family:var(--mono); font-size:0.72rem; color:var(--text-dim); border:1px solid var(--border);
+    border-radius:6px; padding:5px 9px; display:inline-flex; align-items:center; gap:6px; white-space:nowrap;
+  }
+  .proj-link:hover{color:var(--accent); border-color:var(--accent); text-decoration:none;}
+  .proj-card p.proj-summary{color:var(--text-dim); font-size:0.9rem;}
+  .proj-tags{display:flex; flex-wrap:wrap; gap:6px;}
+  .tag{
+    font-family:var(--mono); font-size:0.68rem; color:var(--text-dim);
+    background:rgba(255,255,255,0.04); border:1px solid var(--border-soft);
+    padding:3px 8px; border-radius:5px;
+  }
+  .proj-toggle{
+    font-family:var(--mono); font-size:0.74rem; color:var(--text-faint);
+    background:none; border:none; padding:0; text-align:left; cursor:pointer; margin-top:2px;
+    display:flex; align-items:center; gap:6px;
+  }
+  .proj-toggle:hover{color:var(--accent);}
+  .proj-toggle i{transition:transform 0.25s ease; font-size:0.65rem;}
+  .proj-toggle.is-open i{transform:rotate(180deg);}
+  .proj-details{
+    max-height:0; opacity:0; overflow:hidden;
+    transition:max-height 0.35s ease, opacity 0.3s ease, margin-top 0.35s ease;
+  }
+  .proj-details.is-open{opacity:1; margin-top:2px;}
+  .proj-details ul{display:flex; flex-direction:column; gap:6px; padding-bottom:2px;}
+  .proj-details li{color:var(--text-dim); font-size:0.85rem; padding-left:14px; position:relative;}
+  .proj-details li::before{content:"›"; position:absolute; left:0; color:var(--accent);}
 
-        footer {
-            padding: 40px 0; background: rgba(0,0,0,0.6);
-            border-top: 2px solid rgba(255,255,255,0.1); margin-top: 80px;
-        }
-        footer p:first-child { font-size: 1.8em; font-weight: 700; }
+  /* Projects — compact line list, click a row to expand */
+  .proj-list{
+    display:flex; flex-direction:column;
+    border:1px solid var(--border); border-radius:12px; overflow:hidden;
+    background:var(--bg-elevated);
+  }
+  .proj-row{border-bottom:1px solid var(--border-soft);}
+  .proj-row:last-child{border-bottom:none;}
+  .proj-row-head{
+    display:flex; align-items:center; gap:14px; padding:15px 18px; cursor:pointer;
+    transition:background 0.2s ease; background:none; border:none; width:100%; text-align:left; color:inherit;
+  }
+  .proj-row-head:hover{background:rgba(255,255,255,0.03);}
+  .proj-row-index{font-family:var(--mono); font-size:0.74rem; color:var(--text-faint); width:22px; flex:none;}
+  .proj-row-icon{color:var(--accent); font-size:0.92rem; width:18px; text-align:center; flex:none;}
+  .proj-row-title{font-family:var(--display); font-size:0.96rem; font-weight:600; flex:1; min-width:0;}
+  .proj-row-hint{
+    font-family:var(--mono); font-size:0.68rem; color:var(--text-faint); white-space:nowrap; display:none;
+  }
+  @media (min-width:640px){ .proj-row-hint{display:inline;} }
+  .proj-row-chevron{color:var(--text-faint); font-size:0.72rem; transition:transform 0.25s ease; flex:none;}
+  .proj-row.is-open .proj-row-chevron{transform:rotate(180deg); color:var(--accent);}
+  .proj-row.is-open .proj-row-title{color:var(--accent);}
 
-        .load-note { padding: 40px; opacity: 0.7; }
+  .proj-row-body{max-height:0; opacity:0; overflow:hidden; transition:max-height 0.35s ease, opacity 0.3s ease;}
+  .proj-row-body.is-open{opacity:1;}
+  .proj-row-body-inner{padding:0 18px 18px 54px;}
+  .proj-row-body p.proj-row-summary{color:var(--text-dim); font-size:0.9rem; margin-bottom:10px;}
+  .proj-row-tags{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px;}
+  .proj-row-body ul{display:flex; flex-direction:column; gap:6px; margin-bottom:12px;}
+  .proj-row-body li{color:var(--text-dim); font-size:0.85rem; padding-left:14px; position:relative;}
+  .proj-row-body li::before{content:"›"; position:absolute; left:0; color:var(--accent);}
+  .proj-row-link{
+    font-family:var(--mono); font-size:0.72rem; color:var(--text-dim); border:1px solid var(--border);
+    border-radius:6px; padding:5px 9px; display:inline-flex; align-items:center; gap:6px;
+  }
+  .proj-row-link:hover{color:var(--accent); border-color:var(--accent); text-decoration:none;}
 
-        /* Experience table */
-        .exp-table-wrap { overflow-x: auto; margin-top: 20px; }
-        .exp-table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-        }
-        .exp-table thead th {
-            color: var(--color-primary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 0.85em;
-            padding: 12px 16px;
-            border-bottom: 2px solid rgba(0, 255, 225, 0.4);
-        }
-        .exp-table tbody tr.exp-row td {
-            padding: 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            vertical-align: middle;
-        }
-        .exp-table tbody tr.exp-row:hover td {
-            background: rgba(0, 255, 225, 0.06);
-        }
-        .exp-badge {
-            display: inline-block;
-            margin-left: 10px;
-            padding: 3px 10px;
-            font-size: 0.7em;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #000;
-            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
-            border-radius: 20px;
-            vertical-align: middle;
-        }
-        .exp-toggle-btn { padding: 8px 16px; font-size: 0.8em; margin-top: 0; }
-        .exp-details-row .details { margin: 0 0 10px 0; }
+  /* Achievements */
+  .ach-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  @media (max-width:760px){ .ach-grid{grid-template-columns:1fr;} }
+  .ach-card{
+    border:1px solid var(--border-soft); border-radius:12px; padding:18px;
+    transition:border-color 0.2s ease, transform 0.2s ease;
+  }
+  .ach-card:hover{border-color:rgba(57,255,136,0.3); transform:translateY(-2px);}
+  .ach-card h3{font-size:0.92rem; display:flex; align-items:center; gap:10px;}
+  .ach-card h3 .ach-icon{
+    width:26px; height:26px; border-radius:7px; background:var(--accent-dim);
+    display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:0.78em; flex:none;
+  }
+  .ach-card p.ach-summary{color:var(--text-dim); font-size:0.85rem; margin-top:8px;}
+  .ach-toggle{font-family:var(--mono); font-size:0.7rem; color:var(--text-faint); background:none; border:none; padding:8px 0 0; cursor:pointer;}
+  .ach-toggle:hover{color:var(--accent);}
+  .ach-details{max-height:0; opacity:0; overflow:hidden; transition:max-height 0.35s ease, opacity 0.3s ease;}
+  .ach-details.is-open{opacity:1;}
+  .ach-details p{color:var(--text-dim); font-size:0.82rem; margin-top:4px;}
+  .ach-details strong{color:var(--text);}
 
-        @media (max-width: 700px) {
-            .exp-table thead { display: none; }
-            .exp-table, .exp-table tbody, .exp-table tr, .exp-table td { display: block; width: 100%; }
-            .exp-table tbody tr.exp-row {
-                border: 1px solid rgba(0, 255, 225, 0.3);
-                border-radius: 12px;
-                margin-bottom: 14px;
-                padding: 10px;
-            }
-            .exp-table tbody tr.exp-row td {
-                border-bottom: none;
-                padding: 6px 8px;
-            }
-            .exp-table tbody tr.exp-row td::before {
-                content: attr(data-label);
-                display: block;
-                font-size: 0.7em;
-                text-transform: uppercase;
-                letter-spacing: 0.5px;
-                color: var(--color-primary);
-                margin-bottom: 2px;
-            }
-            .exp-details-row td { padding: 0 8px 14px !important; }
-        }
+  /* Skills */
+  .skill-groups{display:flex; flex-direction:column; gap:20px;}
+  .skill-group-label{font-family:var(--mono); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-faint); margin-bottom:10px;}
+  .chip-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{
+    font-family:var(--mono); font-size:0.8rem; color:var(--text);
+    border:1px solid var(--border); border-radius:7px; padding:7px 12px;
+    background:var(--bg-elevated); transition:border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    display:inline-flex; align-items:center; gap:7px;
+  }
+  .chip:hover{border-color:var(--accent); color:var(--accent); transform:translateY(-2px);}
 
-        /* Contact form */
-        .contact-form { display: flex; flex-direction: column; margin-top: 25px; }
-        .contact-form label {
-            color: var(--color-primary);
-            font-weight: 600;
-            font-size: 0.9em;
-            margin: 12px 0 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .contact-form input,
-        .contact-form textarea {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(0, 255, 225, 0.3);
-            border-radius: 10px;
-            padding: 12px 14px;
-            color: var(--color-text);
-            font-family: inherit;
-            font-size: 1em;
-            resize: vertical;
-        }
-        .contact-form input:focus,
-        .contact-form textarea:focus {
-            outline: none;
-            border-color: var(--color-primary);
-            box-shadow: 0 0 10px rgba(0, 255, 225, 0.4);
-        }
-        .cf-status { text-align: center; margin-top: 14px; min-height: 1.2em; font-weight: 600; }
-        .cf-status-success { color: var(--color-primary); }
-        .cf-status-error { color: #ff6b6b; }
+  /* Contact */
+  .contact-grid{display:grid; grid-template-columns:0.85fr 1.15fr; gap:36px;}
+  @media (max-width:760px){ .contact-grid{grid-template-columns:1fr;} }
+  .contact-info-list{display:flex; flex-direction:column; gap:16px;}
+  .contact-info-row{display:flex; align-items:center; gap:12px;}
+  .contact-info-row i{color:var(--accent); width:18px; text-align:center;}
+  .contact-info-row a, .contact-info-row span{color:var(--text-dim); font-size:0.94rem;}
+  .contact-info-row a:hover{color:var(--accent);}
 
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5em; }
-            .welcome-msg h2 { font-size: 2em; }
-            main section { padding: 30px 20px; }
-            .details ul { flex-direction: column; gap: 10px; }
-        }
-    </style>
+  .contact-panel{border:1px solid var(--border); border-radius:12px; padding:26px; background:var(--bg-elevated);}
+  .contact-form{display:flex; flex-direction:column;}
+  .contact-form label{
+    font-family:var(--mono); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.06em;
+    color:var(--text-faint); margin:14px 0 6px;
+  }
+  .contact-form label:first-of-type{margin-top:0;}
+  .contact-form input, .contact-form textarea{
+    background:var(--bg); border:1px solid var(--border); border-radius:8px;
+    padding:11px 13px; color:var(--text); font-family:var(--body); font-size:0.94rem; resize:vertical;
+  }
+  .contact-form input:focus, .contact-form textarea:focus{outline:none; border-color:var(--accent);}
+  .contact-form button[type=submit]{
+    margin-top:18px; font-family:var(--mono); font-size:0.85rem; font-weight:500;
+    background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+    padding:12px 20px; cursor:pointer;
+  }
+  .contact-form button[type=submit]:hover{filter:brightness(1.08);}
+  .cf-status{font-family:var(--mono); font-size:0.8rem; margin-top:12px; min-height:1.2em;}
+  .cf-status-success{color:var(--accent);}
+  .cf-status-error{color:var(--danger);}
+
+  /* Feedback strip — deliberately quiet, sits low on the page */
+  #feedback{padding:36px 0 40px;}
+  .feedback-box{
+    border:1px solid var(--border-soft); border-radius:12px; padding:22px 24px;
+    background:rgba(255,255,255,0.015);
+  }
+  .feedback-head{display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .feedback-head h2{font-size:0.98rem; color:var(--text-dim); font-weight:600;}
+  .feedback-head span{font-family:var(--mono); font-size:0.68rem; color:var(--text-faint);}
+  .rating-row{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px;}
+  .rating-pill{
+    font-family:var(--mono); font-size:0.76rem; color:var(--text-dim);
+    border:1px solid var(--border); border-radius:20px; padding:7px 14px;
+    background:none; cursor:pointer; transition:all 0.2s ease;
+  }
+  .rating-pill:hover{border-color:var(--text-dim); color:var(--text);}
+  .rating-pill[aria-pressed="true"]{border-color:var(--accent); color:var(--accent); background:var(--accent-dim);}
+  .rating-pill[aria-pressed="true"].neg{border-color:var(--danger); color:var(--danger); background:rgba(255,107,107,0.1);}
+  .feedback-fields{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;}
+  @media (max-width:600px){ .feedback-fields{grid-template-columns:1fr;} }
+  .feedback-box input, .feedback-box textarea{
+    background:var(--bg); border:1px solid var(--border); border-radius:8px;
+    padding:9px 11px; color:var(--text); font-family:var(--body); font-size:0.86rem; resize:vertical; width:100%;
+  }
+  .feedback-box input:focus, .feedback-box textarea:focus{outline:none; border-color:var(--accent);}
+  .feedback-box textarea{grid-column:1 / -1;}
+  .feedback-actions{display:flex; align-items:center; gap:14px; margin-top:6px;}
+  .feedback-actions button{
+    font-family:var(--mono); font-size:0.78rem; color:var(--text); border:1px solid var(--border);
+    border-radius:8px; padding:9px 16px; background:none; cursor:pointer;
+  }
+  .feedback-actions button:hover{border-color:var(--accent); color:var(--accent);}
+  .fb-status{font-family:var(--mono); font-size:0.74rem;}
+  .fb-status-success{color:var(--accent);}
+  .fb-status-error{color:var(--danger);}
+
+  footer{border-top:1px solid var(--border-soft); padding:32px 0; position:relative; z-index:1;}
+  footer .wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;}
+  footer p{font-family:var(--mono); font-size:0.75rem; color:var(--text-faint);}
+
+  .load-note{padding:60px 24px; color:var(--text-dim); font-family:var(--mono); font-size:0.85rem; text-align:center;}
+
+  ::selection{background:var(--accent-dim); color:var(--accent);}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+
+  /* ===== Chatbot widget ===== */
+  #chat-toggle{
+    position:fixed; right:22px; bottom:22px; z-index:80;
+    width:52px; height:52px; border-radius:50%; border:none; cursor:pointer;
+    background:var(--accent); color:var(--accent-ink); font-size:1.2rem;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 10px 30px -8px rgba(57,255,136,0.5);
+  }
+  #chat-toggle:hover{ filter:brightness(1.06); }
+  #chat-toggle .fa-xmark{ display:none; }
+  #chat-toggle.open .fa-comment-dots{ display:none; }
+  #chat-toggle.open .fa-xmark{ display:inline; }
+  #chat-toggle::before{
+    content:""; position:absolute; inset:-4px; border-radius:50%;
+    border:1.5px solid var(--accent); opacity:0.6;
+    animation:togglePulse 2.2s infinite ease-out;
+  }
+  @keyframes togglePulse{
+    0%{ transform:scale(1); opacity:0.6; }
+    100%{ transform:scale(1.5); opacity:0; }
+  }
+
+  #chat-panel{
+    position:fixed; right:22px; bottom:86px; z-index:80;
+    width:340px; max-width:calc(100vw - 44px); height:440px; max-height:70vh;
+    background:var(--bg-elevated); border:1px solid var(--border); border-radius:14px;
+    display:none; flex-direction:column; overflow:hidden;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.7);
+  }
+  #chat-panel.open{ display:flex; }
+
+  .chat-header{
+    padding:14px 16px; border-bottom:1px solid var(--border);
+    display:flex; align-items:center; gap:10px;
+    background:rgba(255,255,255,0.02);
+  }
+  .chat-header .chat-dot{ width:8px; height:8px; border-radius:50%; background:var(--accent); box-shadow:0 0 8px var(--accent); }
+  .chat-header .chat-title{ font-family:var(--mono); font-size:0.82rem; color:var(--text); }
+  .chat-header .chat-sub{ font-family:var(--mono); font-size:0.68rem; color:var(--text-faint); }
+
+  .chat-messages{
+    flex:1; overflow-y:auto; padding:14px 14px 6px;
+    display:flex; flex-direction:column; gap:10px;
+  }
+  .chat-msg{ max-width:86%; font-size:0.86rem; line-height:1.5; padding:9px 12px; border-radius:10px; }
+  .chat-msg.bot{
+    align-self:flex-start; background:rgba(255,255,255,0.04); color:var(--text-dim);
+    border:1px solid var(--border-soft);
+  }
+  .chat-msg.user{
+    align-self:flex-end; background:var(--accent-dim); color:var(--accent); border:1px solid rgba(57,255,136,0.25);
+  }
+  .chat-msg ul{ margin-top:4px; padding-left:16px; list-style:disc; }
+  .chat-msg a{ color:var(--accent); }
+  .chat-typing{ align-self:flex-start; display:flex; gap:4px; padding:10px 12px; }
+  .chat-typing span{
+    width:5px; height:5px; border-radius:50%; background:var(--text-faint);
+    animation:typingBounce 1s infinite ease-in-out;
+  }
+  .chat-typing span:nth-child(2){ animation-delay:0.15s; }
+  .chat-typing span:nth-child(3){ animation-delay:0.3s; }
+  @keyframes typingBounce{ 0%,60%,100%{ transform:translateY(0); opacity:0.4; } 30%{ transform:translateY(-3px); opacity:1; } }
+
+  .chat-fallback-card{
+    border:1px solid var(--border); border-radius:10px; padding:10px 12px; margin-top:8px;
+    background:rgba(255,255,255,0.03);
+  }
+  .chat-fallback-card p{color:var(--text-dim); font-size:0.8rem; margin-bottom:8px; line-height:1.45;}
+  .chat-fallback-btn{
+    font-family:var(--mono); font-size:0.74rem; color:var(--accent-ink); background:var(--accent);
+    border:none; border-radius:7px; padding:8px 12px; cursor:pointer; display:inline-flex; align-items:center; gap:7px;
+  }
+  .chat-fallback-btn:hover{ filter:brightness(1.08); }
+  .chat-fallback-btn i{ transition:transform 0.3s ease; }
+  .chat-fallback-btn:hover i{ transform:rotate(18deg); }
+
+  .chat-suggestions{ display:flex; flex-wrap:wrap; gap:6px; padding:0 14px 10px; }
+  .chat-chip{
+    font-family:var(--mono); font-size:0.7rem; color:var(--text-dim);
+    border:1px solid var(--border); border-radius:20px; padding:6px 10px;
+    background:none; cursor:pointer;
+  }
+  .chat-chip:hover{ color:var(--accent); border-color:var(--accent); }
+
+  .chat-input-row{
+    display:flex; gap:8px; padding:10px; border-top:1px solid var(--border);
+  }
+  .chat-input-row input{
+    flex:1; background:var(--bg); border:1px solid var(--border); border-radius:8px;
+    padding:9px 11px; color:var(--text); font-family:var(--body); font-size:0.86rem;
+  }
+  .chat-input-row input:focus{ outline:none; border-color:var(--accent); }
+  .chat-input-row button{
+    background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+    width:38px; display:flex; align-items:center; justify-content:center; cursor:pointer;
+  }
+  .chat-input-row button:hover{ filter:brightness(1.08); }
+
+  @media (max-width:480px){
+    #chat-panel{ right:12px; left:12px; width:auto; bottom:80px; }
+    #chat-toggle{ right:16px; bottom:16px; }
+  }
+
+  /* Chat hint bubble */
+  #chat-hint{
+    position:fixed; right:22px; bottom:82px; z-index:79;
+    max-width:230px;
+    background:var(--bg-elevated); border:1px solid var(--border); border-radius:12px;
+    padding:11px 14px; font-family:var(--body); font-size:0.82rem; color:var(--text);
+    box-shadow:0 20px 40px -18px rgba(0,0,0,0.7);
+    opacity:0; transform:translateY(8px) scale(0.97);
+    pointer-events:none;
+    transition:opacity 0.4s ease, transform 0.4s ease;
+  }
+  #chat-hint.show{ opacity:1; transform:translateY(0) scale(1); pointer-events:auto; }
+  #chat-hint::after{
+    content:""; position:absolute; bottom:-6px; right:22px;
+    width:12px; height:12px; background:var(--bg-elevated);
+    border-right:1px solid var(--border); border-bottom:1px solid var(--border);
+    transform:rotate(45deg);
+  }
+  .chat-hint-top{ display:flex; align-items:center; gap:7px; margin-bottom:4px; }
+  .chat-hint-name{ font-family:var(--mono); font-size:0.72rem; color:var(--accent); font-weight:600; }
+  .chat-hint-lights{ display:flex; gap:4px; margin-left:auto; }
+  .chat-hint-lights span{
+    width:5px; height:5px; border-radius:50%; background:var(--accent);
+    animation:hintBlink 1.4s infinite ease-in-out;
+  }
+  .chat-hint-lights span:nth-child(2){ animation-delay:0.2s; }
+  .chat-hint-lights span:nth-child(3){ animation-delay:0.4s; }
+  @keyframes hintBlink{ 0%,100%{ opacity:0.25; } 50%{ opacity:1; box-shadow:0 0 6px var(--accent); } }
+  #chat-hint-close{
+    position:absolute; top:6px; right:8px; background:none; border:none; color:var(--text-faint);
+    font-size:0.7rem; cursor:pointer; padding:2px;
+  }
+  #chat-hint-close:hover{ color:var(--text); }
+</style>
 </head>
-<body id="vanta-bg">
+<body>
 
-    <div id="cursor-dot"></div>
-    <div id="cursor-outline"></div>
+<canvas id="neural-bg"></canvas>
 
-    <header data-aos="fade-down" id="header-content">
-        <div class="load-note">Loading portfolio…</div>
-    </header>
+<nav id="topnav">
+  <div class="wrap">
+    <span class="nav-logo" id="nav-logo">nar<span>.</span></span>
+    <div class="nav-links">
+      <a href="#about">about</a>
+      <a href="#experience">experience</a>
+      <a href="#projects">projects</a>
+      <a href="#skills">skills</a>
+      <a href="#contact">contact</a>
+    </div>
+    <a href="#" id="nav-resume-link" class="nav-resume" download>resume ↓</a>
+  </div>
+</nav>
 
-    <main id="main-content"></main>
+<header id="header-content">
+  <div class="wrap"><p class="load-note">Loading portfolio…</p></div>
+</header>
 
-    <footer id="footer-content"></footer>
+<main id="main-content"></main>
 
-    <script>
-        // ---------------------------------------------------------------
-        // All portfolio TEXT/DATA lives in data.json. Edit that file only
-        // to change content — this script just renders whatever it finds.
-        // ---------------------------------------------------------------
+<footer id="footer-content"></footer>
 
-        function esc(str) {
-            const div = document.createElement('div');
-            div.textContent = str == null ? '' : String(str);
-            return div.innerHTML;
-        }
+<div id="chat-hint">
+  <button id="chat-hint-close" aria-label="Dismiss">✕</button>
+  <div class="chat-hint-top">
+    <span class="chat-hint-name">Anikethan AI</span>
+    <span class="chat-hint-lights"><span></span><span></span><span></span></span>
+  </div>
+  <div>Hi, I'm Anikethan AI — I'll help you with quick answers. Ask me anything!</div>
+</div>
+<button id="chat-toggle" aria-label="Open chat assistant">
+  <i class="fa-solid fa-comment-dots"></i>
+  <i class="fa-solid fa-xmark"></i>
+</button>
+<div id="chat-panel">
+  <div class="chat-header">
+    <div class="chat-dot"></div>
+    <div>
+      <div class="chat-title">Anikethan AI</div>
+      <div class="chat-sub">quick answers, no waiting</div>
+    </div>
+  </div>
+  <div class="chat-messages" id="chat-messages"></div>
+  <div class="chat-suggestions" id="chat-suggestions"></div>
+  <form class="chat-input-row" id="chat-form">
+    <input type="text" id="chat-input" placeholder="Ask a question…" autocomplete="off" />
+    <button type="submit" aria-label="Send"><i class="fa-solid fa-paper-plane"></i></button>
+  </form>
+</div>
 
-        function toggleDetails(id) {
-            const el = document.getElementById(id);
-            const icon = document.getElementById('icon-' + id);
-            if (!el) return;
-            if (el.style.display === "block") {
-                el.style.display = "none";
-                if (icon) icon.classList.replace('fa-minus', 'fa-plus');
-            } else {
-                el.style.display = "block";
-                if (icon) icon.classList.replace('fa-plus', 'fa-minus');
-            }
-        }
-        window.toggleDetails = toggleDetails;
+<script>
+  // -----------------------------------------------------------------
+  // All content lives in data/data.json — this script just renders it.
+  // -----------------------------------------------------------------
 
-        function renderHeader(profile) {
-            const header = document.getElementById('header-content');
-            header.innerHTML = `
-                <div class="welcome-msg"><h2>✨ Welcome to My Portfolio ✨</h2></div>
-                <img src="${esc(profile.photo)}" alt="${esc(profile.name)}" class="profile-pic" />
-                <h1>👋 Hi, I'm ${esc(profile.name)}</h1>
-                <p>${esc(profile.title)}</p>
-                <p>COMPANY - ${esc(profile.company)}</p>
-                <div class="social-icons">
-                    <a href="mailto:${esc(profile.email)}" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
-                    <a href="${esc(profile.linkedin)}" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                    <a href="tel:${esc(profile.phone)}" aria-label="Phone"><i class="fa-solid fa-phone"></i></a>
-                </div>
-                <a href="${esc(profile.resumeFile)}" download class="resume-btn">📄 Download Resume</a>
-            `;
-        }
+  function esc(str){
+    const div = document.createElement('div');
+    div.textContent = str == null ? '' : String(str);
+    return div.innerHTML;
+  }
+  function slug(str){
+    return String(str).toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+  }
 
-        function renderAbout(aboutText) {
-            return `
-                <section id="about" data-aos="fade-up">
-                    <h2>About Me</h2>
-                    <p>${esc(aboutText)}</p>
-                </section>
-            `;
-        }
+  /* Experience toggle — kept exactly as the original implementation. */
+  function toggleDetails(id){
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+  }
+  window.toggleDetails = toggleDetails;
 
-        function renderEducation(education) {
-            const cards = education.map(e => `
-                <div>
-                    <h3>${esc(e.icon)} ${esc(e.degree)}</h3>
-                    <p><strong>Institution:</strong> ${esc(e.institution)}</p>
-                    <p><strong>Duration:</strong> ${esc(e.duration)}</p>
-                    ${e.status ? `<p><strong>Status:</strong> ${esc(e.status)}</p>` : ''}
-                </div>
-            `).join('');
-            return `
-                <section id="education" data-aos="fade-up">
-                    <h2>Education</h2>
-                    <div>${cards}</div>
-                </section>
-            `;
-        }
+  /* Smooth accordion toggle used by the upgraded Projects / Achievements cards. */
+  function toggleSmooth(id, btn){
+    const el = document.getElementById(id);
+    if(!el) return;
+    const isOpen = el.classList.contains('is-open');
+    if(isOpen){
+      el.style.maxHeight = el.scrollHeight + 'px';
+      requestAnimationFrame(() => {
+        el.style.maxHeight = '0px';
+        el.classList.remove('is-open');
+      });
+      if(btn) btn.classList.remove('is-open');
+    }else{
+      el.classList.add('is-open');
+      el.style.maxHeight = el.scrollHeight + 'px';
+      el.addEventListener('transitionend', function handler(){
+        if(el.classList.contains('is-open')) el.style.maxHeight = 'none';
+        el.removeEventListener('transitionend', handler);
+      });
+      if(btn) btn.classList.add('is-open');
+    }
+  }
+  window.toggleSmooth = toggleSmooth;
 
-        function renderExperience(experience) {
-            const rows = experience.map((exp, i) => {
-                const id = 'exp-' + i;
-                const points = exp.points.map(p => `<li><i class="${esc(p.icon)}"></i> ${esc(p.text)}</li>`).join('');
-                const badge = exp.current
-                    ? `<span class="exp-badge">Current</span>`
-                    : '';
-                return `
-                    <tr class="exp-row">
-                        <td data-label="Company"><strong>${esc(exp.company)}</strong>${badge}</td>
-                        <td data-label="Role">${esc(exp.role)}</td>
-                        <td data-label="Duration">${esc(exp.duration)}</td>
-                        <td data-label="">
-                            <button class="toggle-btn exp-toggle-btn" onclick="toggleDetails('${id}')">
-                                <span class="btn-text">View Details</span>
-                                <i class="fas fa-plus toggle-icon" id="icon-${id}"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr class="exp-details-row">
-                        <td colspan="4" style="padding:0; border:none;">
-                            <div class="details" id="${id}">
-                                <p>${esc(exp.summary)}</p>
-                                <ul>${points}</ul>
-                            </div>
-                        </td>
-                    </tr>
-                `;
-            }).join('');
+  /* Project row expand/collapse — rotates the chevron and unrolls the body. */
+  function toggleProjectRow(id){
+    const row = document.getElementById('row-' + id);
+    const body = document.getElementById(id);
+    const head = row ? row.querySelector('.proj-row-head') : null;
+    if(!row || !body) return;
+    const isOpen = row.classList.contains('is-open');
+    if(isOpen){
+      body.style.maxHeight = body.scrollHeight + 'px';
+      requestAnimationFrame(() => {
+        body.style.maxHeight = '0px';
+        body.classList.remove('is-open');
+        row.classList.remove('is-open');
+      });
+      if(head) head.setAttribute('aria-expanded', 'false');
+    }else{
+      body.classList.add('is-open');
+      row.classList.add('is-open');
+      body.style.maxHeight = body.scrollHeight + 'px';
+      body.addEventListener('transitionend', function handler(){
+        if(body.classList.contains('is-open')) body.style.maxHeight = 'none';
+        body.removeEventListener('transitionend', handler);
+      });
+      if(head) head.setAttribute('aria-expanded', 'true');
+    }
+  }
+  window.toggleProjectRow = toggleProjectRow;
 
-            return `
-                <section id="experience" data-aos="fade-up">
-                    <h2>Experience</h2>
-                    <div class="exp-table-wrap">
-                        <table class="exp-table">
-                            <thead>
-                                <tr>
-                                    <th>Company</th>
-                                    <th>Role</th>
-                                    <th>Duration</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>${rows}</tbody>
-                        </table>
-                    </div>
-                </section>
-            `;
-        }
+  /* ---------- Neural network background ---------- */
+  function initNeuralBackground(){
+    const canvas = document.getElementById('neural-bg');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        function renderProjects(projects) {
-            const cards = projects.map((proj, i) => {
-                const id = 'project-' + i;
-                const points = proj.points.map(p => `<li><i class="${esc(p.icon)}"></i> ${esc(p.text)}</li>`).join('');
-                const linkBtn = proj.link ? `
-                    <a href="${esc(proj.link)}" target="_blank" class="toggle-btn" style="display:inline-block;margin-bottom:10px;text-decoration:none;">
-                        🔗 Visit Project
-                    </a>` : '';
-                return `
-                    <div>
-                        <h3><i class="${esc(proj.icon)}"></i> ${esc(proj.title)}</h3>
-                        <p>${esc(proj.summary)}</p>
-                        ${linkBtn}
-                        <button class="toggle-btn" onclick="toggleDetails('${id}')">
-                            <span class="btn-text">View Details</span>
-                            <i class="fas fa-plus toggle-icon" id="icon-${id}"></i>
-                        </button>
-                        <div class="details" id="${id}">
-                            <h4>Key Contributions:</h4>
-                            <ul>${points}</ul>
-                            ${proj.tech ? `<p>${esc(proj.tech)}</p>` : ''}
-                        </div>
-                    </div>
-                `;
-            }).join('');
-            return `
-                <section id="projects" data-aos="fade-up">
-                    <h2>Featured Projects</h2>
-                    ${cards}
-                </section>
-            `;
-        }
+    const accent = '57,255,136';
+    const circuit = '59,130,246';
 
-        function renderAchievements(achievements) {
-            const cards = achievements.map((a, i) => {
-                const id = 'achieve-' + i;
-                const details = a.details.map(d => `<p><strong>${esc(d.label)}:</strong> ${esc(d.text)}</p>`).join('');
-                return `
-                    <div>
-                        <h3><i class="${esc(a.icon)}"></i> ${esc(a.title)}</h3>
-                        <p>${esc(a.summary)}</p>
-                        <button class="toggle-btn" onclick="toggleDetails('${id}')">
-                            <span class="btn-text">View Details</span>
-                            <i class="fas fa-plus toggle-icon" id="icon-${id}"></i>
-                        </button>
-                        <div class="details" id="${id}">${details}</div>
-                    </div>
-                `;
-            }).join('');
-            return `
-                <section id="achievements" data-aos="fade-up">
-                    <h2>Achievements &amp; Certifications</h2>
-                    ${cards}
-                </section>
-            `;
-        }
+    let w, h, dpr, particles = [];
 
-        function renderSkills(skillGroups) {
-            const groups = skillGroups.map(g => {
-                const items = g.items.map(it => `<li><i class="${esc(it.icon)}"></i> ${esc(it.text)}</li>`).join('');
-                return `
-                    <div>
-                        <button class="toggle-btn" onclick="toggleDetails('${esc(g.id)}')">
-                            ${esc(g.label)}
-                            <i class="fas fa-plus toggle-icon" id="icon-${esc(g.id)}"></i>
-                        </button>
-                        <div class="details" id="${esc(g.id)}">
-                            <ul>${items}</ul>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-            return `
-                <section id="skills" data-aos="fade-up">
-                    <h2>Technical Skills</h2>
-                    ${groups}
-                </section>
-            `;
-        }
+    function sizeCanvas(){
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = window.innerWidth;
+      h = document.documentElement.scrollHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      canvas.style.width = w + 'px';
+      canvas.style.height = h + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
 
-        function renderContact(profile, contactForm) {
-            return `
-                <section id="contact" data-aos="fade-up">
-                    <h2>Get In Touch</h2>
-                    <div>
-                        <p class="contact-row">
-                            <i class="fa-solid fa-envelope"></i>
-                            <a href="mailto:${esc(profile.email)}" aria-label="Email">${esc(profile.email)}</a>
-                        </p>
-                        <p class="contact-row">
-                            <i class="fab fa-linkedin"></i>
-                            <a href="${esc(profile.linkedin)}" target="_blank" aria-label="LinkedIn">${esc(profile.linkedin.replace('https://www.', ''))}</a>
-                        </p>
-                        <p class="contact-row">
-                            <i class="fa-solid fa-phone"></i>
-                            <a href="tel:${esc(profile.phone)}" aria-label="Phone Number">${esc(profile.phoneDisplay)}</a>
-                        </p>
-
-                        <form id="contact-form" class="contact-form" novalidate>
-                            <input type="hidden" name="access_key" value="${esc(contactForm.accessKey)}" />
-                            <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
-
-                            <label for="cf-name">Name</label>
-                            <input type="text" id="cf-name" name="name" required />
-
-                            <label for="cf-email">Email</label>
-                            <input type="email" id="cf-email" name="email" required />
-
-                            <label for="cf-message">Message</label>
-                            <textarea id="cf-message" name="message" rows="4" required></textarea>
-
-                            <div style="text-align:center; margin-top:20px;">
-                                <button type="submit" class="toggle-btn" style="font-size:1em; padding:12px 25px;">
-                                    📩 Send Me a Message
-                                </button>
-                            </div>
-                            <p id="cf-status" class="cf-status" role="status"></p>
-                        </form>
-                    </div>
-                </section>
-            `;
-        }
-
-        function wireContactForm(contactForm) {
-            const form = document.getElementById('contact-form');
-            const status = document.getElementById('cf-status');
-            if (!form) return;
-
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                status.textContent = 'Sending…';
-                status.className = 'cf-status';
-
-                const formData = new FormData(form);
-                const payload = Object.fromEntries(formData.entries());
-
-                try {
-                    const res = await fetch(contactForm.endpoint, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json'
-                        },
-                        body: JSON.stringify(payload)
-                    });
-                    const result = await res.json().catch(() => ({}));
-
-                    if (res.ok && result.success) {
-                        status.textContent = contactForm.successMessage || 'Message sent!';
-                        status.className = 'cf-status cf-status-success';
-                        form.reset();
-                    } else {
-                        status.textContent = result.message || contactForm.errorMessage || 'Something went wrong.';
-                        status.className = 'cf-status cf-status-error';
-                    }
-                } catch (err) {
-                    status.textContent = contactForm.errorMessage || 'Something went wrong sending your message.';
-                    status.className = 'cf-status cf-status-error';
-                    console.error(err);
-                }
-            });
-        }
-
-        function renderFooter(profile) {
-            const footer = document.getElementById('footer-content');
-            footer.innerHTML = `
-                <p>THANK YOU FOR VISITING MY PORTFOLIO</p>
-                <p>© ${new Date().getFullYear()} ${esc(profile.name)} — All Rights Reserved</p>
-            `;
-        }
-
-        function renderPortfolio(data) {
-            renderHeader(data.profile);
-
-            const main = document.getElementById('main-content');
-            main.innerHTML = [
-                renderAbout(data.about),
-                '<div class="section-divider"></div>',
-                renderEducation(data.education),
-                '<div class="section-divider"></div>',
-                renderExperience(data.experience),
-                '<div class="section-divider"></div>',
-                renderProjects(data.projects),
-                '<div class="section-divider"></div>',
-                renderAchievements(data.achievements),
-                '<div class="section-divider"></div>',
-                renderSkills(data.skills),
-                '<div class="section-divider"></div>',
-                renderContact(data.profile, data.contactForm)
-            ].join('');
-
-            renderFooter(data.profile);
-            wireContactForm(data.contactForm);
-
-            // Re-init AOS + effects now that content exists
-            if (window.AOS) AOS.init({ once: true, duration: 1200, easing: 'ease-out-cubic' });
-        }
-
-        fetch('data/data.json')
-            .then(res => {
-                if (!res.ok) throw new Error('Failed to load data/data.json (' + res.status + ')');
-                return res.json();
-            })
-            .then(renderPortfolio)
-            .catch(err => {
-                document.getElementById('main-content').innerHTML =
-                    `<div class="load-note">Couldn't load data/data.json: ${esc(err.message)}.<br>Make sure there's a "data" folder next to this file containing data.json (and that you're viewing this via a local server, not a plain file:// double-click).</div>`;
-                console.error(err);
-            });
-    </script>
-
-    <script>
-        VANTA.GLOBE({
-            el: "#vanta-bg",
-            mouseControls: true,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            scale: 1.00,
-            scaleMobile: 1.00,
-            color: 0x00ffe1,
-            backgroundColor: 0x000010,
-            size: 1.5,
-            spacing: 20.00
+    function seedParticles(){
+      const density = Math.min(120, Math.floor((w * h) / 16000));
+      particles = [];
+      for(let i = 0; i < density; i++){
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.18,
+          vy: (Math.random() - 0.5) * 0.18,
+          r: Math.random() * 1.4 + 0.9,
+          isNode: Math.random() < 0.22
         });
-    </script>
+      }
+    }
 
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <script>AOS.init({ once: true, duration: 1200, easing: 'ease-out-cubic' });</script>
+    const LINK_DIST = 150;
 
-    <script>
-        const dot = document.getElementById("cursor-dot");
-        const outline = document.getElementById("cursor-outline");
-        let mouseX = 0, mouseY = 0, outlineX = 0, outlineY = 0;
-        window.addEventListener("mousemove", e => {
-            mouseX = e.clientX; mouseY = e.clientY;
-            dot.style.left = mouseX + "px"; dot.style.top = mouseY + "px";
-        });
-        function animateCursor() {
-            outlineX += (mouseX - outlineX) * 0.15;
-            outlineY += (mouseY - outlineY) * 0.15;
-            outline.style.left = outlineX + "px"; outline.style.top = outlineY + "px";
-            requestAnimationFrame(animateCursor);
+    function step(){
+      ctx.clearRect(0, 0, w, h);
+
+      for(const p of particles){
+        p.x += p.vx;
+        p.y += p.vy;
+        if(p.x < -20) p.x = w + 20; if(p.x > w + 20) p.x = -20;
+        if(p.y < -20) p.y = h + 20; if(p.y > h + 20) p.y = -20;
+      }
+
+      for(let i = 0; i < particles.length; i++){
+        for(let j = i + 1; j < particles.length; j++){
+          const a = particles[i], b = particles[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          if(dist < LINK_DIST){
+            const alpha = (1 - dist / LINK_DIST) * 0.22;
+            ctx.strokeStyle = `rgba(${circuit},${alpha})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
         }
-        animateCursor();
-    </script>
+      }
+
+      for(const p of particles){
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = p.isNode ? `rgba(${accent},0.75)` : `rgba(${circuit},0.55)`;
+        if(p.isNode){
+          ctx.shadowColor = `rgba(${accent},0.9)`;
+          ctx.shadowBlur = 6;
+        }else{
+          ctx.shadowBlur = 0;
+        }
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+
+      if(!reduceMotion) requestAnimationFrame(step);
+    }
+
+    sizeCanvas();
+    seedParticles();
+    step();
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => { sizeCanvas(); seedParticles(); if(reduceMotion) step(); }, 200);
+    });
+
+    setTimeout(() => { sizeCanvas(); seedParticles(); if(reduceMotion) step(); }, 800);
+  }
+
+  /* ---------- Header / Hero ---------- */
+  function renderHeader(profile, skills){
+    const header = document.getElementById('header-content');
+    document.getElementById('nav-logo').innerHTML = initials(profile.name) + '<span>.</span>';
+    document.getElementById('nav-resume-link').setAttribute('href', profile.resumeFile);
+
+    const seen = new Set();
+    const flatSkills = (skills || [])
+      .flatMap(g => g.items)
+      .filter(s => {
+        const key = (s.text || '').trim().toLowerCase();
+        if(!key || key === 'selenium' || seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      })
+      .slice(0, 6);
+
+    header.innerHTML = `
+      <div class="wrap hero-grid">
+        <div>
+          <div class="hero-photo-ring">
+            <img src="${esc(profile.photo)}" alt="${esc(profile.name)}" />
+            <span class="hero-photo-badge" title="Available for opportunities"></span>
+          </div>
+          <div class="eyebrow" style="margin-top:16px;">available for opportunities</div>
+          <h1 class="hero-name">${esc(profile.name)}</h1>
+          <p class="hero-role"><strong>${esc(profile.title)}</strong> — ${esc(profile.company)}</p>
+          <div class="hero-actions">
+            <a href="${esc(profile.resumeFile)}" download class="btn-primary">
+              <i class="fa-solid fa-arrow-down"></i> Download resume
+            </a>
+            <div class="social-row">
+              <a href="mailto:${esc(profile.email)}" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+              <a href="${esc(profile.linkedin)}" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+              <a href="tel:${esc(profile.phone)}" aria-label="Phone"><i class="fa-solid fa-phone"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="signature-panel">
+          <div class="signature-bar">
+            <div class="signature-dot"></div><div class="signature-dot"></div><div class="signature-dot"></div>
+            <span class="signature-title">core.signature</span>
+          </div>
+          <div class="signature-body" id="sig-body"></div>
+          <div class="sig-caption">// live map of core focus areas</div>
+        </div>
+      </div>
+    `;
+
+    renderSignaturePanel(profile, flatSkills);
+  }
+
+  function initials(name){
+    return (name || '').split(' ').filter(Boolean).slice(0,2).map(w => w[0]).join('').toLowerCase();
+  }
+
+  function shortSkillLabel(text){
+    // Trim parenthetical detail so labels never run off the card edge,
+    // e.g. "SQL (Database Management)" -> "SQL".
+    const stripped = String(text || '').replace(/\s*\([^)]*\)\s*/g, '').trim();
+    const base = stripped || text || '';
+    return base.length > 14 ? base.slice(0, 13) + '…' : base;
+  }
+
+  function renderSignaturePanel(profile, flatSkills){
+    const mount = document.getElementById('sig-body');
+    if(!mount) return;
+
+    const W = 320, H = 240, cx = W / 2, cy = H / 2 + 4, R = 78;
+    const n = Math.max(flatSkills.length, 1);
+
+    let lines = '';
+    let nodes = '';
+    let labels = '';
+
+    flatSkills.forEach((s, i) => {
+      const angle = (Math.PI * 2 * i) / n - Math.PI / 2;
+      const nx = cx + R * Math.cos(angle);
+      const ny = cy + R * Math.sin(angle);
+      const dur = (3 + (i % 4) * 0.6).toFixed(1);
+
+      lines += `<line x1="${cx}" y1="${cy}" x2="${nx.toFixed(1)}" y2="${ny.toFixed(1)}" stroke="var(--circuit)" stroke-opacity="0.35" stroke-width="1">
+        <animate attributeName="stroke-opacity" values="0.15;0.5;0.15" dur="${dur}s" repeatCount="indefinite" />
+      </line>`;
+
+      nodes += `<circle cx="${nx.toFixed(1)}" cy="${ny.toFixed(1)}" r="4" fill="var(--circuit)">
+        <animate attributeName="r" values="3.2;5;3.2" dur="${dur}s" repeatCount="indefinite" />
+      </circle>`;
+
+      const anchor = Math.cos(angle) > 0.35 ? 'start' : (Math.cos(angle) < -0.35 ? 'end' : 'middle');
+      const lx = cx + (R + 16) * Math.cos(angle);
+      const ly = cy + (R + 16) * Math.sin(angle) + 3;
+      labels += `<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="${anchor}" class="sig-node-label">${esc(shortSkillLabel(s.text))}</text>`;
+    });
+
+    // A slowly rotating radar sweep — driven by CSS (same technique as the
+    // hero photo ring), drawn on top and offset from the fixed spokes so it's
+    // always visible as it rotates anticlockwise.
+    const sweep = `
+      <g class="sig-sweep" style="transform-box:view-box; transform-origin:${cx}px ${cy}px;">
+        <line x1="${cx}" y1="${cy}" x2="${cx}" y2="${(cy - R - 6).toFixed(1)}"
+              stroke="url(#sweepGradient)" stroke-width="2.5" stroke-linecap="round" />
+        <circle cx="${cx}" cy="${(cy - R - 6).toFixed(1)}" r="3" fill="var(--accent)" />
+      </g>
+    `;
+
+    const svg = `
+      <svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="sweepGradient" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0%" stop-color="var(--accent)" stop-opacity="0" />
+            <stop offset="100%" stop-color="var(--accent)" stop-opacity="0.9" />
+          </linearGradient>
+        </defs>
+        <circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="var(--border)" stroke-width="1" />
+        ${lines}
+        <circle cx="${cx}" cy="${cy}" r="26" fill="var(--accent)" opacity="0.14">
+          <animate attributeName="r" values="24;29;24" dur="3.2s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="${cx}" cy="${cy}" r="17" fill="var(--accent)" />
+        <text x="${cx}" y="${cy + 3.5}" text-anchor="middle" class="sig-core-label">${esc(initials(profile.name).toUpperCase())}</text>
+        ${nodes}
+        ${labels}
+        ${sweep}
+      </svg>
+    `;
+    mount.innerHTML = svg;
+  }
+
+  /* ---------- Experience duration helpers (used by About stats + chatbot) ---------- */
+  const MONTHS = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
+  function parseMonthYear(str){
+    if(!str) return null;
+    if(/present/i.test(str)) return new Date();
+    const m = str.match(/([A-Za-z]+)\.?\s+(\d{4})/);
+    if(!m) return null;
+    const monIdx = MONTHS.findIndex(mo => m[1].toLowerCase().startsWith(mo));
+    if(monIdx === -1) return null;
+    return new Date(parseInt(m[2], 10), monIdx, 1);
+  }
+  function monthsBetween(start, end){
+    let months = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
+    return Math.max(months, 0);
+  }
+  function formatMonths(months){
+    const years = Math.floor(months / 12);
+    const rem = months % 12;
+    if(years > 0 && rem > 0) return `${years} yr ${rem} mo`;
+    if(years > 0) return `${years} yr`;
+    return `${months} mo`;
+  }
+  function computeExperienceSpan(experience){
+    if(!experience || !experience.length) return null;
+    let earliest = null;
+    experience.forEach(e => {
+      const parts = String(e.duration || '').split(/[–—-]/).map(s => s.trim());
+      const start = parseMonthYear(parts[0]);
+      if(start && (!earliest || start < earliest)) earliest = start;
+    });
+    if(!earliest) return null;
+    const months = monthsBetween(earliest, new Date());
+    return { months, label: formatMonths(months) };
+  }
+  function computeCurrentRoleDuration(experience){
+    if(!experience || !experience.length) return null;
+    const current = experience.find(e => e.current) || experience[0];
+    const parts = String(current.duration || '').split(/[–—-]/).map(s => s.trim());
+    const start = parseMonthYear(parts[0]);
+    if(!start) return null;
+    const months = monthsBetween(start, new Date());
+    return { months, label: formatMonths(months), role: current.role, company: current.company };
+  }
+  function isInternship(exp){
+    return /intern/i.test(exp.role || '') || /intern/i.test(exp.company || '');
+  }
+  // Professional (non-internship) span: earliest full-time role to now.
+  function computeProfessionalSpan(experience){
+    if(!experience || !experience.length) return null;
+    let earliest = null;
+    experience.forEach(e => {
+      if(isInternship(e)) return;
+      const parts = String(e.duration || '').split(/[–—-]/).map(s => s.trim());
+      const start = parseMonthYear(parts[0]);
+      if(start && (!earliest || start < earliest)) earliest = start;
+    });
+    if(!earliest) return null;
+    const months = monthsBetween(earliest, new Date());
+    return { months, label: formatMonths(months) };
+  }
+  // Internship time: sum of duration across any entries flagged as internships.
+  function computeInternshipMonths(experience){
+    if(!experience || !experience.length) return null;
+    let total = 0, found = false;
+    experience.forEach(e => {
+      if(!isInternship(e)) return;
+      found = true;
+      const parts = String(e.duration || '').split(/[–—-]/).map(s => s.trim());
+      const start = parseMonthYear(parts[0]);
+      const end = parts[1] && /present/i.test(parts[1]) ? new Date() : parseMonthYear(parts[1]);
+      if(start && end) total += Math.max(monthsBetween(start, end), 1);
+    });
+    if(!found) return null;
+    return { months: total, label: formatMonths(total) };
+  }
+
+  /* ---------- About ---------- */
+  function renderAbout(data){
+    const pro = computeProfessionalSpan(data.experience);
+    const intern = computeInternshipMonths(data.experience);
+    const fallbackSpan = computeExperienceSpan(data.experience);
+
+    const stats = [];
+    if(pro){
+      stats.push({ num: pro.label, lbl: 'experience' });
+    }else if(fallbackSpan){
+      stats.push({ num: fallbackSpan.label, lbl: 'experience' });
+    }
+    if(intern){
+      stats.push({ num: intern.label, lbl: 'internship' });
+    }
+    stats.push({ num: String((data.projects || []).length), lbl: 'projects shipped' });
+    stats.push({ num: String((data.achievements || []).length), lbl: 'certifications' });
+
+    const statHtml = stats.map(s => `
+      <div class="about-stat">
+        <div class="num">${esc(s.num)}</div>
+        <div class="lbl">${esc(s.lbl)}</div>
+      </div>
+    `).join('');
+
+    return `
+      <section id="about">
+        <div class="wrap reveal">
+          <div class="section-head"><span class="idx">01</span><h2>About</h2></div>
+          <div class="about-layout">
+            <p>${esc(data.about)}</p>
+            <div class="about-stats">${statHtml}</div>
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  /* ---------- Education ---------- */
+  function renderEducation(education){
+    const items = education.map(e => `
+      <div class="edu-item">
+        <div class="edu-icon">${esc(e.icon || '🎓')}</div>
+        <div class="edu-duration">${esc(e.duration)}</div>
+        <div>
+          <h3>${esc(e.degree)}</h3>
+          <div class="edu-inst">${esc(e.institution)}</div>
+        </div>
+        <div class="edu-status">${esc(e.status || '')}</div>
+      </div>
+    `).join('');
+    return `
+      <section id="education">
+        <div class="wrap reveal">
+          <div class="section-head"><span class="idx">02</span><h2>Education</h2></div>
+          <div class="edu-list">${items}</div>
+        </div>
+      </section>
+    `;
+  }
+
+  /* ==========================================================
+     Experience (pipeline) — markup/logic UNCHANGED on purpose.
+     ========================================================== */
+  function renderExperience(experience){
+    const nodes = experience.map((exp, i) => {
+      const id = 'exp-' + i;
+      const points = exp.points.map(p => `<li>${esc(p.text)}</li>`).join('');
+      const badge = exp.current
+        ? `<span class="status-badge running">running</span>`
+        : `<span class="status-badge passed">✓ passed</span>`;
+      return `
+        <div class="pipe-node ${exp.current ? 'is-current' : 'is-done'}">
+          <div class="pipe-dot"></div>
+          <div class="pipe-top">
+            <div class="pipe-role">
+              <h3>${esc(exp.role)}</h3>
+              <div class="pipe-company">${esc(exp.company)}</div>
+            </div>
+            <div class="pipe-meta">
+              <span class="pipe-duration">${esc(exp.duration)}</span>
+              ${badge}
+            </div>
+          </div>
+          <p class="pipe-summary">${esc(exp.summary)}</p>
+          <button class="pipe-toggle" onclick="toggleDetails('${id}')">+ details</button>
+          <div class="pipe-details" id="${id}"><ul>${points}</ul></div>
+        </div>
+      `;
+    }).join('');
+
+    return `
+      <section id="experience">
+        <div class="wrap reveal">
+          <div class="section-head"><span class="idx">03</span><h2>Experience</h2></div>
+          <div class="pipeline">${nodes}</div>
+        </div>
+      </section>
+    `;
+  }
+  /* ===================== end untouched experience block ===================== */
+
+  /* ---------- Projects — compact line list, click a row to expand ---------- */
+  function renderProjects(projects){
+    const rows = projects.map((proj, i) => {
+      const id = 'proj-' + i;
+      const points = proj.points.map(p => `<li>${esc(p.text)}</li>`).join('');
+      const tags = (proj.tech || '')
+        .replace(/^Technologies:\s*/i, '')
+        .split(/[|,]/)
+        .map(t => t.trim())
+        .filter(Boolean)
+        .map(t => `<span class="tag">${esc(t)}</span>`)
+        .join('');
+      const link = proj.link
+        ? `<a href="${esc(proj.link)}" target="_blank" class="proj-row-link" onclick="event.stopPropagation()">visit <i class="fa-solid fa-arrow-up-right-from-square"></i></a>`
+        : '';
+      const icon = proj.icon ? `<i class="${esc(proj.icon)}"></i>` : `<i class="fa-solid fa-diagram-project"></i>`;
+      const firstTag = tags ? (proj.tech || '').replace(/^Technologies:\s*/i, '').split(/[|,]/)[0].trim() : '';
+
+      return `
+        <div class="proj-row" id="row-${id}">
+          <button type="button" class="proj-row-head" onclick="toggleProjectRow('${id}')" aria-expanded="false">
+            <span class="proj-row-index">${String(i + 1).padStart(2, '0')}</span>
+            <span class="proj-row-icon">${icon}</span>
+            <span class="proj-row-title">${esc(proj.title)}</span>
+            <span class="proj-row-hint">${esc(firstTag)}</span>
+            <i class="fa-solid fa-chevron-down proj-row-chevron"></i>
+          </button>
+          <div class="proj-row-body" id="${id}">
+            <div class="proj-row-body-inner">
+              <p class="proj-row-summary">${esc(proj.summary)}</p>
+              <div class="proj-row-tags">${tags}</div>
+              <ul>${points}</ul>
+              ${link}
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    return `
+      <section id="projects">
+        <div class="wrap reveal">
+          <div class="section-head"><span class="idx">04</span><h2>Projects</h2></div>
+          <div class="proj-list">${rows}</div>
+        </div>
+      </section>
+    `;
+  }
+
+  /* ---------- Achievements ---------- */
+  function renderAchievements(achievements){
+    const cards = achievements.map((a, i) => {
+      const id = 'ach-' + i;
+      const details = a.details.map(d => `<p><strong>${esc(d.label)}:</strong> ${esc(d.text)}</p>`).join('');
+      return `
+        <div class="ach-card">
+          <h3><span class="ach-icon"><i class="${esc(a.icon)}"></i></span> ${esc(a.title)}</h3>
+          <p class="ach-summary">${esc(a.summary)}</p>
+          <button class="ach-toggle" onclick="toggleSmooth('${id}', this)">+ details</button>
+          <div class="ach-details" id="${id}">${details}</div>
+        </div>
+      `;
+    }).join('');
+
+    return `
+      <section id="achievements">
+        <div class="wrap reveal">
+          <div class="section-head"><span class="idx">05</span><h2>Achievements &amp; certifications</h2></div>
+          <div class="ach-grid">${cards}</div>
+        </div>
+      </section>
+    `;
+  }
+
+  /* ---------- Skills ---------- */
+  function renderSkills(skillGroups){
+    const groups = skillGroups.map(g => {
+      const chips = g.items.map(it => {
+        const icon = it.icon ? `<i class="${esc(it.icon)}"></i>` : '';
+        return `<span class="chip">${icon}${esc(it.text)}</span>`;
+      }).join('');
+      return `
+        <div>
+          <div class="skill-group-label">${esc(g.label.replace(/^[^\w]*\s*/, ''))}</div>
+          <div class="chip-row">${chips}</div>
+        </div>
+      `;
+    }).join('');
+
+    return `
+      <section id="skills">
+        <div class="wrap reveal">
+          <div class="section-head"><span class="idx">06</span><h2>Skills</h2></div>
+          <div class="skill-groups">${groups}</div>
+        </div>
+      </section>
+    `;
+  }
+
+  /* ---------- Contact ---------- */
+  function renderContact(profile, contactForm){
+    return `
+      <section id="contact">
+        <div class="wrap reveal">
+          <div class="section-head"><span class="idx">07</span><h2>Get in touch</h2></div>
+          <div class="contact-grid">
+            <div class="contact-info-list">
+              <div class="contact-info-row"><i class="fa-solid fa-envelope"></i><a href="mailto:${esc(profile.email)}">${esc(profile.email)}</a></div>
+              <div class="contact-info-row"><i class="fab fa-linkedin"></i><a href="${esc(profile.linkedin)}" target="_blank">${esc(profile.linkedin.replace('https://www.', ''))}</a></div>
+              <div class="contact-info-row"><i class="fa-solid fa-phone"></i><a href="tel:${esc(profile.phone)}">${esc(profile.phoneDisplay)}</a></div>
+            </div>
+            <div class="contact-panel">
+              <form id="contact-form" class="contact-form" novalidate>
+                <input type="hidden" name="access_key" value="${esc(contactForm.accessKey)}" />
+                <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
+
+                <label for="cf-name">Name</label>
+                <input type="text" id="cf-name" name="name" required />
+
+                <label for="cf-email">Email</label>
+                <input type="email" id="cf-email" name="email" required />
+
+                <label for="cf-message">Message</label>
+                <textarea id="cf-message" name="message" rows="4" required></textarea>
+
+                <button type="submit">Send message →</button>
+                <p id="cf-status" class="cf-status" role="status"></p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function wireContactForm(contactForm){
+    const form = document.getElementById('contact-form');
+    const status = document.getElementById('cf-status');
+    if(!form) return;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.textContent = 'Sending…';
+      status.className = 'cf-status';
+
+      const formData = new FormData(form);
+      const payload = Object.fromEntries(formData.entries());
+      payload.subject = 'New portfolio contact message';
+
+      try{
+        const res = await fetch(contactForm.endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const result = await res.json().catch(() => ({}));
+
+        if(res.ok && result.success){
+          status.textContent = contactForm.successMessage || 'Message sent!';
+          status.className = 'cf-status cf-status-success';
+          form.reset();
+        }else{
+          status.textContent = result.message || contactForm.errorMessage || 'Something went wrong.';
+          status.className = 'cf-status cf-status-error';
+        }
+      }catch(err){
+        status.textContent = contactForm.errorMessage || 'Something went wrong sending your message.';
+        status.className = 'cf-status cf-status-error';
+        console.error(err);
+      }
+    });
+  }
+
+  /* ---------- Feedback strip (rating + optional note, emailed via the same form provider) ---------- */
+  function renderFeedback(profile){
+    return `
+      <section id="feedback">
+        <div class="wrap reveal">
+          <div class="feedback-box">
+            <div class="feedback-head">
+              <h2>Was this portfolio helpful?</h2>
+              <span>your rating gets emailed straight to ${esc((profile.name || '').split(' ')[0] || 'me')}</span>
+            </div>
+            <div class="rating-row" id="fb-ratings" role="group" aria-label="Rate this portfolio">
+              <button type="button" class="rating-pill" data-rating="Excellent" aria-pressed="false">🤩 Excellent</button>
+              <button type="button" class="rating-pill" data-rating="Good" aria-pressed="false">🙂 Good</button>
+              <button type="button" class="rating-pill" data-rating="Average" aria-pressed="false">😐 Average</button>
+              <button type="button" class="rating-pill neg" data-rating="Poor" aria-pressed="false">🙁 Poor</button>
+              <button type="button" class="rating-pill neg" data-rating="Bad" aria-pressed="false">😞 Bad</button>
+            </div>
+            <form id="feedback-form">
+              <div class="feedback-fields">
+                <input type="text" id="fb-name" name="name" placeholder="Your name (optional)" />
+                <input type="email" id="fb-email" name="email" placeholder="Your email (optional)" />
+                <textarea id="fb-comment" name="comment" rows="2" placeholder="Anything that could be better? (optional)"></textarea>
+              </div>
+              <div class="feedback-actions">
+                <button type="submit">Send feedback</button>
+                <span class="fb-status" id="fb-status"></span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function wireFeedbackForm(profile, contactForm){
+    const ratingsWrap = document.getElementById('fb-ratings');
+    const form = document.getElementById('feedback-form');
+    const status = document.getElementById('fb-status');
+    if(!ratingsWrap || !form) return;
+
+    let selectedRating = null;
+
+    ratingsWrap.addEventListener('click', (e) => {
+      const btn = e.target.closest('.rating-pill');
+      if(!btn) return;
+      ratingsWrap.querySelectorAll('.rating-pill').forEach(b => b.setAttribute('aria-pressed', 'false'));
+      btn.setAttribute('aria-pressed', 'true');
+      selectedRating = btn.dataset.rating;
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if(!selectedRating){
+        status.textContent = 'Pick a rating first';
+        status.className = 'fb-status fb-status-error';
+        return;
+      }
+      status.textContent = 'Sending…';
+      status.className = 'fb-status';
+
+      const name = document.getElementById('fb-name').value || 'Anonymous visitor';
+      const email = document.getElementById('fb-email').value || 'not provided';
+      const comment = document.getElementById('fb-comment').value || '(no comment left)';
+
+      const payload = {
+        access_key: contactForm.accessKey,
+        subject: `Portfolio feedback: ${selectedRating}`,
+        name, email,
+        message: `Rating: ${selectedRating}\nName: ${name}\nEmail: ${email}\nComment: ${comment}\nPage: ${window.location.href}`
+      };
+
+      try{
+        const res = await fetch(contactForm.endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const result = await res.json().catch(() => ({}));
+        if(res.ok && result.success){
+          status.textContent = 'Thanks — feedback sent!';
+          status.className = 'fb-status fb-status-success';
+          form.reset();
+          ratingsWrap.querySelectorAll('.rating-pill').forEach(b => b.setAttribute('aria-pressed', 'false'));
+          selectedRating = null;
+        }else{
+          status.textContent = 'Could not send — try again later.';
+          status.className = 'fb-status fb-status-error';
+        }
+      }catch(err){
+        status.textContent = 'Could not send — try again later.';
+        status.className = 'fb-status fb-status-error';
+        console.error(err);
+      }
+    });
+  }
+
+  /* ---------- Chatbot ---------- */
+
+  // Typo-tolerant HR-style intents layered on top of whatever the JSON defines.
+  const BUILT_IN_HR_RULES = [
+    { type: 'hr_duration', keywords: ['how many years', 'years of experience', 'total experience', 'how long have you', 'how much experience', 'experience do you have', 'duration of experience', 'how many months'] },
+    { type: 'hr_notice', keywords: ['notice period', 'when can you join', 'join immediately'] },
+    { type: 'hr_relocate', keywords: ['relocate', 'relocation', 'willing to move', 'open to relocate'] },
+    { type: 'hr_salary', keywords: ['salary', 'ctc', 'compensation', 'pay expectation', 'expected salary'] },
+    { type: 'hr_availability', keywords: ['availability', 'available to start', 'start date', 'when are you free'] },
+    { type: 'hr_why', keywords: ['why should we hire', 'why hire you', 'why should i hire'] },
+    { type: 'hr_strength', keywords: ['strength', 'strengths', 'best skill', 'top skill'] }
+  ];
+
+  function buildChatAnswer(type, data){
+    const p = data.profile;
+    switch(type){
+      case 'skills': {
+        const all = data.skills.flatMap(g => g.items.map(i => i.text));
+        return `Here's the toolkit: ${all.join(', ')}.`;
+      }
+      case 'experience': {
+        const items = data.experience.map(e =>
+          `<li>${esc(e.role)} at <strong>${esc(e.company)}</strong> (${esc(e.duration)})</li>`
+        ).join('');
+        return `Current & past roles:<ul>${items}</ul>`;
+      }
+      case 'projects': {
+        const items = data.projects.slice(0, 5).map(pr =>
+          `<li><strong>${esc(pr.title)}</strong> — ${esc(pr.summary)}</li>`
+        ).join('');
+        return `A few things ${esc(p.name.split(' ')[0])}'s built:<ul>${items}</ul>`;
+      }
+      case 'education': {
+        const items = data.education.map(e =>
+          `<li>${esc(e.degree)} — ${esc(e.institution)} (${esc(e.duration)})</li>`
+        ).join('');
+        return `Education:<ul>${items}</ul>`;
+      }
+      case 'contact': {
+        return `You can reach out directly:<ul>
+          <li>Email: <a href="mailto:${esc(p.email)}">${esc(p.email)}</a></li>
+          <li>Phone: <a href="tel:${esc(p.phone)}">${esc(p.phoneDisplay)}</a></li>
+          <li>LinkedIn: <a href="${esc(p.linkedin)}" target="_blank">${esc(p.linkedin.replace('https://www.',''))}</a></li>
+        </ul>Or just use the contact form below.`;
+      }
+      case 'resume': {
+        return `You can download the resume here: <a href="${esc(p.resumeFile)}" download>${esc(p.resumeFile)}</a>`;
+      }
+      case 'about': {
+        return `${esc(p.name)} is a ${esc(p.title)} at ${esc(p.company)}. ${esc(data.about)}`;
+      }
+      case 'achievements': {
+        const items = data.achievements.slice(0, 4).map(a => `<li>${esc(a.title)}</li>`).join('');
+        return `Certifications & achievements:<ul>${items}</ul>`;
+      }
+      case 'hr_duration': {
+        const span = computeExperienceSpan(data.experience);
+        const current = computeCurrentRoleDuration(data.experience);
+        if(!span) return `${esc(p.name.split(' ')[0])} has hands-on professional experience — check the Experience section for the full timeline.`;
+        let out = `Professionally active since ${span.label ? 'roughly ' + span.label + ' ago' : 'a while back'} (~${span.label} total).`;
+        if(current && current.role){
+          out += ` Currently ${esc(current.role)} at <strong>${esc(current.company)}</strong> for about ${current.label} so far.`;
+        }
+        return out;
+      }
+      case 'hr_notice': {
+        return `Currently employed full-time, so a short notice period would typically apply — happy to align on exact timelines directly. Reach out via the contact form below.`;
+      }
+      case 'hr_relocate': {
+        return `Open to relocating for the right opportunity — feel free to share more details via the contact form and we can discuss.`;
+      }
+      case 'hr_salary': {
+        return `Compensation is best discussed directly rather than over chat — drop a message in the contact form and ${esc(p.name.split(' ')[0])} will get back to you.`;
+      }
+      case 'hr_availability': {
+        const current = computeCurrentRoleDuration(data.experience);
+        return `Currently working as ${current && current.role ? esc(current.role) + ' at ' + esc(current.company) : 'employed full-time'}. For exact availability, it's best to ask directly via the contact form.`;
+      }
+      case 'hr_why': {
+        const topSkills = (data.skills[0] && data.skills[0].items || []).slice(0, 3).map(s => s.text).join(', ');
+        return `${esc(p.name.split(' ')[0])} brings hands-on ${esc(p.title)} experience, strong fundamentals in ${esc(topSkills)}, and a track record across ${data.projects.length} shipped projects. Full details are in the Experience and Projects sections above.`;
+      }
+      case 'hr_strength': {
+        const items = data.skills.map(g => `<li><strong>${esc(g.label.replace(/^[^\w]*\s*/, ''))}:</strong> ${g.items.map(i => esc(i.text)).join(', ')}</li>`).join('');
+        return `Core strengths, grouped:<ul>${items}</ul>`;
+      }
+      default:
+        return null;
+    }
+  }
+
+  function levenshtein(a, b){
+    const m = a.length, n = b.length;
+    if(!m) return n; if(!n) return m;
+    const dp = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0));
+    for(let i = 0; i <= m; i++) dp[i][0] = i;
+    for(let j = 0; j <= n; j++) dp[0][j] = j;
+    for(let i = 1; i <= m; i++){
+      for(let j = 1; j <= n; j++){
+        dp[i][j] = a[i - 1] === b[j - 1] ? dp[i - 1][j - 1] : 1 + Math.min(dp[i - 1][j - 1], dp[i - 1][j], dp[i][j - 1]);
+      }
+    }
+    return dp[m][n];
+  }
+
+  function matchChatIntent(input, rules){
+    const lower = input.toLowerCase();
+    const words = lower.split(/[^a-z0-9]+/).filter(Boolean);
+
+    // 1) exact substring match — fastest path
+    for(const rule of rules){
+      if(rule.keywords.some(kw => lower.includes(kw.toLowerCase()))) return rule.type;
+    }
+
+    // 2) typo-tolerant fallback — catches "experiance", "salery", etc.
+    for(const rule of rules){
+      for(const kw of rule.keywords){
+        const kwLower = kw.toLowerCase();
+        if(kwLower.includes(' ')) continue; // fuzzy matching is per-word only
+        if(kwLower.length < 4) continue;
+        for(const w of words){
+          if(w.length < 4) continue;
+          const maxDist = kwLower.length > 7 ? 2 : 1;
+          if(levenshtein(w, kwLower) <= maxDist) return rule.type;
+        }
+      }
+    }
+    return null;
+  }
+
+  function appendChatMessage(role, html){
+    const list = document.getElementById('chat-messages');
+    const div = document.createElement('div');
+    div.className = 'chat-msg ' + role;
+    div.innerHTML = html;
+    list.appendChild(div);
+    list.scrollTop = list.scrollHeight;
+    return div;
+  }
+
+  function showChatTyping(){
+    const list = document.getElementById('chat-messages');
+    const div = document.createElement('div');
+    div.className = 'chat-typing';
+    div.innerHTML = '<span></span><span></span><span></span>';
+    list.appendChild(div);
+    list.scrollTop = list.scrollHeight;
+    return div;
+  }
+
+  function wireChatbot(data){
+    const chatbot = data.chatbot;
+    if(!chatbot) return;
+
+    const toggle = document.getElementById('chat-toggle');
+    const panel = document.getElementById('chat-panel');
+    const suggestionsEl = document.getElementById('chat-suggestions');
+    const form = document.getElementById('chat-form');
+    const input = document.getElementById('chat-input');
+
+    const allRules = [...(chatbot.rules || []), ...BUILT_IN_HR_RULES];
+
+    const firstName = (data.profile.name || '').split(' ')[0] || 'there';
+    const greetingVariants = [
+      chatbot.greeting,
+      `Hey! I can walk you through ${firstName}'s experience, projects, or skills — what would you like to know?`,
+      `Hi there 👋 Ask me anything — experience, notice period, projects, you name it.`
+    ].filter(Boolean);
+    const greeting = greetingVariants[Math.floor(Math.random() * greetingVariants.length)];
+    appendChatMessage('bot', esc(greeting));
+
+    const allSuggestions = [...(chatbot.suggestions || []), 'How many years of experience?', "What's your notice period?"];
+    suggestionsEl.innerHTML = allSuggestions.map(q =>
+      `<button type="button" class="chat-chip">${esc(q)}</button>`
+    ).join('');
+
+    function handleQuestion(text){
+      if(!text.trim()) return;
+      appendChatMessage('user', esc(text));
+      input.value = '';
+      const typing = showChatTyping();
+      setTimeout(() => {
+        typing.remove();
+        const type = matchChatIntent(text, allRules);
+        const answer = type ? buildChatAnswer(type, data) : null;
+
+        if(answer){
+          appendChatMessage('bot', answer);
+          return;
+        }
+
+        const fallbackHtml = `
+          ${esc(chatbot.fallback)}
+          <div class="chat-fallback-card">
+            <p>I'll personally reply within about 5 minutes if you send it through the contact form.</p>
+            <button type="button" class="chat-fallback-btn"><i class="fa-solid fa-paper-plane"></i> Ask directly</button>
+          </div>
+        `;
+        const card = appendChatMessage('bot', fallbackHtml);
+        const btn = card.querySelector('.chat-fallback-btn');
+        if(btn){
+          btn.addEventListener('click', () => {
+            panel.classList.remove('open');
+            toggle.classList.remove('open');
+            const contactSection = document.getElementById('contact');
+            if(contactSection) contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            setTimeout(() => {
+              const msgField = document.getElementById('cf-message');
+              if(msgField){
+                if(!msgField.value) msgField.value = text;
+                msgField.focus();
+              }
+            }, 500);
+          });
+        }
+      }, 500);
+    }
+
+    suggestionsEl.addEventListener('click', (e) => {
+      const btn = e.target.closest('.chat-chip');
+      if(btn) handleQuestion(btn.textContent);
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      handleQuestion(input.value);
+    });
+
+    toggle.addEventListener('click', () => {
+      const isOpen = panel.classList.toggle('open');
+      toggle.classList.toggle('open', isOpen);
+      if(isOpen) input.focus();
+      hideHint();
+    });
+
+    const hint = document.getElementById('chat-hint');
+    const hintClose = document.getElementById('chat-hint-close');
+    function hideHint(){ if(hint) hint.classList.remove('show'); }
+
+    if(hint){
+      const hintTimer = setTimeout(() => hint.classList.add('show'), 2200);
+      hintClose.addEventListener('click', (e) => { e.stopPropagation(); clearTimeout(hintTimer); hideHint(); });
+      hint.addEventListener('click', () => {
+        hideHint();
+        panel.classList.add('open');
+        toggle.classList.add('open');
+        input.focus();
+      });
+    }
+  }
+
+  /* ---------- Footer ---------- */
+  function renderFooter(profile){
+    document.getElementById('footer-content').innerHTML = `
+      <div class="wrap">
+        <p>${esc(profile.name)} — © ${new Date().getFullYear()}</p>
+        <p>built with python, playwright &amp; a bit of ci/cd</p>
+      </div>
+    `;
+  }
+
+  /* ---------- Scroll reveal ---------- */
+  function setupReveal(){
+    const els = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){
+      els.forEach(el => el.classList.add('in'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(el => io.observe(el));
+  }
+
+  /* ---------- Orchestration ---------- */
+  function renderPortfolio(data){
+    renderHeader(data.profile, data.skills);
+
+    const main = document.getElementById('main-content');
+    main.innerHTML = [
+      renderAbout(data),
+      renderEducation(data.education),
+      renderExperience(data.experience),
+      renderProjects(data.projects),
+      renderAchievements(data.achievements),
+      renderSkills(data.skills),
+      renderContact(data.profile, data.contactForm),
+      renderFeedback(data.profile)
+    ].join('');
+
+    renderFooter(data.profile);
+    wireContactForm(data.contactForm);
+    wireFeedbackForm(data.profile, data.contactForm);
+    wireChatbot(data);
+    setupReveal();
+
+    setTimeout(() => window.dispatchEvent(new Event('resize')), 100);
+  }
+
+  initNeuralBackground();
+
+  fetch('data/data.json')
+    .then(res => {
+      if(!res.ok) throw new Error('Failed to load data/data.json (' + res.status + ')');
+      return res.json();
+    })
+    .then(renderPortfolio)
+    .catch(err => {
+      document.getElementById('main-content').innerHTML =
+        `<div class="load-note">Couldn't load data/data.json: ${esc(err.message)}.<br>Make sure there's a "data" folder next to this file containing data.json, and that you're viewing this via a local server (not file://).</div>`;
+      console.error(err);
+    });
+</script>
 
 </body>
 </html>
