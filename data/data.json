@@ -11,7 +11,7 @@
     "phoneDisplay": "+91 7989461409"
   },
 
-  "about": "I'm Nalla Anikethan Reddy, an Automation Developer currently at KTech Products, specializing in Python and Playwright test automation, backed by hands-on experience in AI-driven automation and data analysis. I build reliable, maintainable automation frameworks, integrate them into CI/CD pipelines, and use SQL and Python to validate data integrity end-to-end. Across my roles I've worked on automation frameworks, data analysis pipelines, and AI-assisted workflows, with strong fundamentals in Java, DBMS, SQL, and OOP concepts.",
+  "about": "I'm Nalla Anikethan Reddy, an Automation Developer currently at KTech Products, specializing in Python and Playwright automation, backed by hands-on experience in AI-driven automation and data analysis. I build reliable, maintainable automation frameworks, integrate them into CI/CD pipelines, and use SQL and Python to validate data integrity end-to-end. Across my roles I've worked on automation frameworks, data analysis pipelines, and AI-assisted workflows, with strong fundamentals in Java, DBMS, SQL, and OOP concepts.",
 
   "education": [
     {
@@ -41,10 +41,10 @@
       "role": "Automation Developer",
       "duration": "Jan 2026 – Present",
       "current": true,
-      "summary": "Working as an Automation Developer, building and maintaining Python + Playwright test automation frameworks and CI/CD integrations.",
+      "summary": "Working as an Automation Developer, building and maintaining Python + Playwright automation frameworks and CI/CD integrations.",
       "points": [
-        { "icon": "fab fa-python", "text": "Building and maintaining Python + Playwright automation frameworks for web application testing." },
-        { "icon": "fas fa-code-branch", "text": "Integrating automated test suites into CI/CD pipelines for continuous quality checks." },
+        { "icon": "fab fa-python", "text": "Building and maintaining Python + Playwright automation frameworks for web application." },
+        { "icon": "fas fa-code-branch", "text": "Integrating automated suites into CI/CD pipelines for continuous quality checks." },
         { "icon": "fas fa-database", "text": "Writing SQL-based validations to verify data integrity across application layers." }
       ]
     },
@@ -63,7 +63,7 @@
     },
     {
       "company": "E-Code Learning Software Services",
-      "role": "Machine Learning Intern",
+      "role": "Intern",
       "duration": "20 May 2024 – 21 July 2024",
       "current": false,
       "summary": "During this internship, I worked on a Stock Price Prediction project using machine learning to develop robust predictive models for financial analysis.",
@@ -80,12 +80,12 @@
     {
       "icon": "fas fa-robot",
       "title": "Python + Playwright Web Automation Framework",
-      "summary": "Built a scalable end-to-end UI test automation framework in Python using Playwright, with Page Object Model design and parallel execution.",
+      "summary": "Built a scalable end-to-end UI automation framework in Python using Playwright, with Page Object Model design and parallel execution.",
       "points": [
-        { "icon": "fab fa-python", "text": "Designed a Page Object Model (POM) framework using Python and Playwright for maintainable UI tests." },
-        { "icon": "fas fa-bolt", "text": "Enabled cross-browser (Chromium, Firefox, WebKit) and parallel test execution using Pytest." },
-        { "icon": "fas fa-file-code", "text": "Generated HTML/Allure test reports with screenshots and trace files on failure." },
-        { "icon": "fab fa-github", "text": "Integrated the suite into GitHub Actions CI/CD for automatic test runs on every commit." }
+        { "icon": "fab fa-python", "text": "Designed a Page Object Model (POM) framework using Python and Playwright for maintainable UI ." },
+        { "icon": "fas fa-bolt", "text": "Enabled cross-browser (Chromium, Firefox, WebKit) and parallel  execution using Pytest." },
+        { "icon": "fas fa-file-code", "text": "Generated HTML/Allure reports with screenshots and trace files on failure." },
+        { "icon": "fab fa-github", "text": "Integrated the suite into GitHub Actions CI/CD for automatic  runs on every commit." }
       ],
       "tech": "Technologies: Python, Playwright, Pytest, GitHub Actions | Tools: Allure Report, Git"
     },
@@ -95,8 +95,8 @@
       "summary": "Developed a Python + SQL testing suite to validate backend data integrity between application UI, APIs, and the database.",
       "points": [
         { "icon": "fas fa-database", "text": "Wrote complex SQL queries (joins, aggregations, subqueries) to validate data consistency across tables." },
-        { "icon": "fab fa-python", "text": "Automated DB assertions using Python (psycopg2/pyodbc) alongside UI test flows." },
-        { "icon": "fas fa-vial", "text": "Built reusable test data setup/teardown scripts to keep the test environment consistent." },
+        { "icon": "fab fa-python", "text": "Automated DB assertions using Python (psycopg2/pyodbc) alongside UI  flows." },
+        { "icon": "fas fa-vial", "text": "Built reusable  data setup/teardown scripts to keep the  environment consistent." },
         { "icon": "fas fa-chart-line", "text": "Reduced manual data-verification effort by automating recurring QA checks." }
       ],
       "tech": "Technologies: Python, SQL, Pytest | Tools: PostgreSQL/MySQL, DBeaver"
@@ -104,12 +104,12 @@
     {
       "icon": "fas fa-plug",
       "title": "REST API Automation with Python",
-      "summary": "Created an API test automation suite to validate REST endpoints for functional correctness, schema, and performance.",
+      "summary": "Created an API automation suite to validate REST endpoints for functional correctness, schema, and performance.",
       "points": [
-        { "icon": "fas fa-exchange-alt", "text": "Automated API tests using Python's Requests library with reusable request/response utilities." },
+        { "icon": "fas fa-exchange-alt", "text": "Automated API using Python's Requests library with reusable request/response utilities." },
         { "icon": "fas fa-check-double", "text": "Validated JSON schemas and response contracts to catch breaking changes early." },
         { "icon": "fas fa-key", "text": "Handled authentication flows (tokens/OAuth) for secure endpoint testing." },
-        { "icon": "fas fa-tasks", "text": "Integrated API tests into the CI pipeline alongside UI automation for full-stack coverage." }
+        { "icon": "fas fa-tasks", "text": "Integrated API into the CI pipeline alongside UI automation for full-stack coverage." }
       ],
       "tech": "Technologies: Python, Requests, Pytest | Tools: Postman, GitHub Actions"
     },
@@ -242,7 +242,7 @@
       { "keywords": ["about", "who are you", "yourself", "introduce", "hello", "hi"], "type": "about" },
       { "keywords": ["achievement", "certification", "certificate", "award"], "type": "achievements" }
     ],
-    "fallback": "I don't have a canned answer for that yet — try asking about skills, experience, projects, education, or how to get in touch."
+    "fallback": "Thank you for your question. For a better understanding of your request and to provide the most accurate response, please reach out to me through the Contact.Thank you for your understanding"
   },
 
   "contactForm": {
@@ -256,7 +256,7 @@
   "skills": [
     {
       "id": "automationSkills",
-      "label": "🤖 Test Automation",
+      "label": "🤖 Automation",
       "items": [
         { "icon": "fab fa-python", "text": "Python" },
         { "icon": "fas fa-bolt", "text": "Playwright" },
@@ -269,9 +269,9 @@
       "label": "🖥️ Backend & Databases",
       "items": [
         { "icon": "fa-brands fa-java", "text": "Java" },
-        { "icon": "fas fa-database", "text": "SQL (Database Management)" },
+        { "icon": "fas fa-database", "text": "SQL" },
         { "icon": "fas fa-cogs", "text": "python" },
-        { "icon": "fas fa-plug", "text": "REST API Testing" }
+        { "icon": "fas fa-plug", "text": "REST API" }
       ]
     },
     {
@@ -292,7 +292,7 @@
         { "icon": "fas fa-lightbulb", "text": "Problem Solving & DSA" },
         { "icon": "fas fa-project-diagram", "text": "OOPs Concepts" },
         { "icon": "fas fa-cloud", "text": "Azure Fundamentals" },
-        { "icon": "fas fa-code-branch", "text": "CI/CD (GitHub Actions)" }
+        { "icon": "fas fa-code-branch", "text": "CI/CD " }
       ]
     }
   ]

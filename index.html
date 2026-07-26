@@ -71,6 +71,12 @@
     text-transform:uppercase; color:var(--accent); display:flex; align-items:center; gap:8px;
   }
   .eyebrow::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--accent); box-shadow:0 0 8px var(--accent);}
+  .hero-greeting{
+    font-family:var(--display); font-size:1.35rem; font-weight:600; color:var(--text);
+    margin-bottom:14px; display:flex; align-items:center; gap:10px;
+    text-shadow:0 0 24px rgba(57,255,136,0.18);
+  }
+  .hero-greeting .greeting-emoji{ font-size:1.5rem; }
 
   /* ===== NAV ===== */
   #topnav{
@@ -81,19 +87,12 @@
   #topnav .wrap{display:flex; align-items:center; justify-content:space-between; padding:16px 24px; gap:16px;}
   .nav-logo{font-family:var(--mono); font-size:0.9rem; color:var(--text); white-space:nowrap;}
   .nav-logo span{color:var(--accent);}
-  .nav-links{display:flex; gap:22px; flex-wrap:wrap;}
-  .nav-links a{
-    font-family:var(--mono); font-size:0.78rem; color:var(--text-dim);
-    text-transform:lowercase; letter-spacing:0.02em;
-  }
-  .nav-links a:hover{color:var(--accent); text-decoration:none;}
   .nav-resume{
     font-family:var(--mono); font-size:0.75rem; color:var(--accent);
     border:1px solid var(--accent); border-radius:6px; padding:7px 14px;
     white-space:nowrap;
   }
   .nav-resume:hover{background:var(--accent-dim); text-decoration:none;}
-  @media (max-width:760px){ .nav-links{display:none;} }
 
   /* ===== HERO ===== */
   header{padding:76px 0 60px; position:relative; z-index:1;}
@@ -250,79 +249,6 @@
   .pipe-details li::before{content:"›"; position:absolute; left:0; color:var(--accent);}
   /* ===================== end untouched experience block ===================== */
 
-  /* Projects — upgraded */
-  .proj-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
-  @media (max-width:760px){ .proj-grid{grid-template-columns:1fr;} }
-
-  .proj-card{
-    position:relative; border:1px solid var(--border); border-radius:14px;
-    background:var(--bg-elevated); display:flex; flex-direction:column;
-    overflow:hidden;
-    transition:border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-  }
-  .proj-card:hover{
-    border-color:rgba(57,255,136,0.4); transform:translateY(-4px);
-    box-shadow:0 20px 40px -24px rgba(57,255,136,0.35);
-  }
-  .proj-card.featured{grid-column:1 / -1;}
-  .proj-card.featured .proj-art{height:108px;}
-  .proj-card.featured .proj-body{padding:26px 28px 24px;}
-  .proj-card.featured h3{font-size:1.2rem;}
-
-  .proj-art{
-    position:relative; height:78px; overflow:hidden;
-    background:
-      radial-gradient(120% 160% at 0% 0%, var(--accent-dim), transparent 60%),
-      radial-gradient(120% 160% at 100% 100%, var(--circuit-dim), transparent 60%),
-      var(--bg);
-    border-bottom:1px solid var(--border-soft);
-    display:flex; align-items:center; justify-content:space-between;
-    padding:0 18px;
-  }
-  .proj-art .proj-index{
-    font-family:var(--display); font-weight:700; font-size:2.6rem;
-    color:transparent; -webkit-text-stroke:1px rgba(220,225,232,0.16);
-    line-height:1;
-  }
-  .proj-art .proj-status{
-    font-family:var(--mono); font-size:0.65rem; text-transform:uppercase; letter-spacing:0.06em;
-    color:var(--accent); background:var(--accent-dim); border:1px solid rgba(57,255,136,0.25);
-    padding:4px 9px; border-radius:20px; white-space:nowrap;
-  }
-
-  .proj-body{display:flex; flex-direction:column; gap:12px; padding:18px 20px 20px;}
-  .proj-head{display:flex; align-items:center; justify-content:space-between; gap:10px;}
-  .proj-card h3{font-size:1.02rem; display:flex; align-items:center; gap:8px;}
-  .proj-card h3 i.proj-title-icon{color:var(--accent); font-size:0.85em;}
-  .proj-link{
-    font-family:var(--mono); font-size:0.72rem; color:var(--text-dim); border:1px solid var(--border);
-    border-radius:6px; padding:5px 9px; display:inline-flex; align-items:center; gap:6px; white-space:nowrap;
-  }
-  .proj-link:hover{color:var(--accent); border-color:var(--accent); text-decoration:none;}
-  .proj-card p.proj-summary{color:var(--text-dim); font-size:0.9rem;}
-  .proj-tags{display:flex; flex-wrap:wrap; gap:6px;}
-  .tag{
-    font-family:var(--mono); font-size:0.68rem; color:var(--text-dim);
-    background:rgba(255,255,255,0.04); border:1px solid var(--border-soft);
-    padding:3px 8px; border-radius:5px;
-  }
-  .proj-toggle{
-    font-family:var(--mono); font-size:0.74rem; color:var(--text-faint);
-    background:none; border:none; padding:0; text-align:left; cursor:pointer; margin-top:2px;
-    display:flex; align-items:center; gap:6px;
-  }
-  .proj-toggle:hover{color:var(--accent);}
-  .proj-toggle i{transition:transform 0.25s ease; font-size:0.65rem;}
-  .proj-toggle.is-open i{transform:rotate(180deg);}
-  .proj-details{
-    max-height:0; opacity:0; overflow:hidden;
-    transition:max-height 0.35s ease, opacity 0.3s ease, margin-top 0.35s ease;
-  }
-  .proj-details.is-open{opacity:1; margin-top:2px;}
-  .proj-details ul{display:flex; flex-direction:column; gap:6px; padding-bottom:2px;}
-  .proj-details li{color:var(--text-dim); font-size:0.85rem; padding-left:14px; position:relative;}
-  .proj-details li::before{content:"›"; position:absolute; left:0; color:var(--accent);}
-
   /* Projects — compact line list, click a row to expand */
   .proj-list{
     display:flex; flex-direction:column;
@@ -361,6 +287,13 @@
   }
   .proj-row-link:hover{color:var(--accent); border-color:var(--accent); text-decoration:none;}
 
+  /* Project tech-flow mini diagram (inside expanded project rows) */
+  .proj-flow{ margin-bottom:12px; overflow-x:auto; }
+  .proj-flow svg{ display:block; }
+  .proj-flow-box{ fill:var(--bg); stroke:var(--border); }
+  .proj-flow-text{ font-family:var(--mono); font-size:10px; fill:var(--text-dim); }
+  .proj-flow-arrow{ stroke:var(--circuit); stroke-width:1.2; }
+
   /* Achievements */
   .ach-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
   @media (max-width:760px){ .ach-grid{grid-template-columns:1fr;} }
@@ -382,17 +315,61 @@
   .ach-details p{color:var(--text-dim); font-size:0.82rem; margin-top:4px;}
   .ach-details strong{color:var(--text);}
 
-  /* Skills */
-  .skill-groups{display:flex; flex-direction:column; gap:20px;}
-  .skill-group-label{font-family:var(--mono); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-faint); margin-bottom:10px;}
-  .chip-row{display:flex; flex-wrap:wrap; gap:8px;}
-  .chip{
-    font-family:var(--mono); font-size:0.8rem; color:var(--text);
-    border:1px solid var(--border); border-radius:7px; padding:7px 12px;
-    background:var(--bg-elevated); transition:border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
-    display:inline-flex; align-items:center; gap:7px;
+  /* Skills — clean card grid with animated reveal bars */
+  .skills-grid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); gap:16px;
   }
-  .chip:hover{border-color:var(--accent); color:var(--accent); transform:translateY(-2px);}
+  .skill-card{
+    border:1px solid var(--border); border-radius:12px; padding:20px;
+    background:var(--bg-elevated); transition:border-color 0.2s ease, transform 0.2s ease;
+  }
+  .skill-card:hover{ border-color:rgba(57,255,136,0.3); transform:translateY(-2px); }
+  .skill-card-head{
+    display:flex; align-items:center; gap:9px; margin-bottom:16px;
+    font-family:var(--display); font-weight:600; font-size:0.94rem; color:var(--text);
+  }
+  .skill-card-head .skill-card-emoji{ font-size:1.1rem; }
+  .skill-row{ margin-bottom:13px; }
+  .skill-row:last-child{ margin-bottom:0; }
+  .skill-row-top{
+    display:flex; align-items:center; gap:7px; margin-bottom:6px;
+    font-family:var(--mono); font-size:0.8rem; color:var(--text-dim);
+  }
+  .skill-row-top i{ color:var(--accent); width:14px; text-align:center; font-size:0.78rem; }
+  .skill-bar-track{
+    height:4px; background:rgba(255,255,255,0.07); border-radius:3px; overflow:hidden;
+  }
+  .skill-bar-fill{
+    height:100%; width:0%; border-radius:3px;
+    background:linear-gradient(90deg, var(--circuit), var(--accent));
+    transition:width 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* GitHub live activity panel */
+  .gh-panel{
+    background:var(--bg-elevated); border:1px solid var(--border); border-radius:12px; overflow:hidden;
+  }
+  .gh-head{
+    display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    padding:16px 18px; border-bottom:1px solid var(--border);
+  }
+  .gh-head-user{display:flex; align-items:center; gap:10px;}
+  .gh-head-user img{width:34px; height:34px; border-radius:50%; border:1px solid var(--border);}
+  .gh-head-user .name{font-family:var(--display); font-size:0.94rem; font-weight:600;}
+  .gh-head-user .handle{font-family:var(--mono); font-size:0.74rem; color:var(--text-faint);}
+  .gh-badges{display:flex; gap:6px; flex-wrap:wrap;}
+  .gh-badges img{height:20px; display:block;}
+  .gh-events{padding:6px 18px 16px;}
+  .gh-event{
+    display:flex; align-items:flex-start; gap:10px; padding:9px 0; border-bottom:1px solid var(--border-soft);
+    font-size:0.86rem;
+  }
+  .gh-event:last-child{border-bottom:none;}
+  .gh-event i{color:var(--accent); font-size:0.8rem; margin-top:3px; width:14px; text-align:center; flex:none;}
+  .gh-event .gh-event-text{color:var(--text-dim); line-height:1.5;}
+  .gh-event .gh-event-text strong{color:var(--text); font-weight:600;}
+  .gh-event .gh-event-time{font-family:var(--mono); font-size:0.68rem; color:var(--text-faint); white-space:nowrap; margin-left:auto; padding-left:8px;}
+  .gh-loading, .gh-error{padding:24px 18px; font-family:var(--mono); font-size:0.82rem; color:var(--text-faint); text-align:center;}
 
   /* Contact */
   .contact-grid{display:grid; grid-template-columns:0.85fr 1.15fr; gap:36px;}
@@ -576,6 +553,93 @@
     #chat-toggle{ right:16px; bottom:16px; }
   }
 
+  /* ===== Digitize demo widget (automation-themed, replaces the dog) ===== */
+  #digitize-toggle{
+    position:fixed; left:22px; bottom:22px; z-index:80;
+    width:52px; height:52px; border-radius:50%; border:1px solid var(--border); cursor:pointer;
+    background:var(--bg-elevated); font-size:1.15rem; color:var(--accent);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 10px 30px -8px rgba(0,0,0,0.5);
+  }
+  #digitize-toggle:hover{ border-color:var(--accent); }
+  #digitize-toggle i{ animation:digitizeIdlePulse 2.4s ease-in-out infinite; }
+  @keyframes digitizeIdlePulse{
+    0%, 100%{ opacity:0.85; } 50%{ opacity:1; text-shadow:0 0 10px var(--accent); }
+  }
+
+  #digitize-panel{
+    position:fixed; left:22px; bottom:86px; z-index:80;
+    width:310px; max-width:calc(100vw - 44px);
+    background:var(--bg-elevated); border:1px solid var(--border); border-radius:14px;
+    display:none; flex-direction:column; overflow:hidden;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.7);
+  }
+  #digitize-panel.open{ display:flex; }
+  .digitize-head{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:10px 12px; border-bottom:1px solid var(--border);
+    font-family:var(--mono); font-size:0.76rem; color:var(--text-dim);
+    background:rgba(255,255,255,0.02);
+  }
+  .digitize-head button{
+    background:none; border:none; color:var(--text-faint); cursor:pointer; font-size:0.8rem; padding:2px;
+  }
+  .digitize-head button:hover{ color:var(--text); }
+
+  .digitize-stage{
+    padding:14px; display:flex; flex-direction:column; gap:10px; background:var(--bg);
+  }
+
+  .rpa-doc{
+    position:relative; border:1px solid var(--border); border-radius:8px;
+    background:var(--bg-elevated); padding:10px 12px; overflow:hidden;
+  }
+  .rpa-doc-header{
+    font-family:var(--mono); font-size:0.72rem; color:var(--text-dim);
+    margin-bottom:8px; display:flex; align-items:center; gap:6px;
+    padding-bottom:8px; border-bottom:1px dashed var(--border-soft);
+  }
+  .rpa-doc-header i{ color:var(--accent); }
+  .rpa-field{
+    display:flex; justify-content:space-between; gap:8px; padding:5px 6px; border-radius:5px;
+    font-family:var(--mono); font-size:0.72rem; color:var(--text-dim);
+    transition:background 0.3s ease, box-shadow 0.3s ease;
+  }
+  .rpa-field .rpa-label{ color:var(--text-faint); }
+  .rpa-field .rpa-value{ color:var(--text); }
+  .rpa-field.captured{ background:var(--accent-dim); box-shadow:inset 0 0 0 1px rgba(57,255,136,0.4); }
+  .rpa-scanline{
+    position:absolute; left:0; right:0; top:0; height:2px;
+    background:linear-gradient(90deg, transparent, var(--accent), transparent);
+    box-shadow:0 0 10px var(--accent); opacity:0;
+  }
+  .rpa-scanline.scanning{ opacity:1; animation:rpaScan 2.3s linear forwards; }
+  @keyframes rpaScan{ from{ top:6%; } to{ top:96%; } }
+
+  .rpa-output{ border:1px solid var(--border); border-radius:8px; background:var(--bg-elevated); padding:10px 12px; }
+  .rpa-output-head{
+    font-family:var(--mono); font-size:0.66rem; color:var(--text-faint); margin-bottom:6px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .rpa-output-head .rpa-status{ color:var(--amber); }
+  .rpa-output-head .rpa-status.done{ color:var(--accent); }
+  #rpa-json{
+    font-family:var(--mono); font-size:0.72rem; color:var(--accent); white-space:pre-wrap;
+    margin:0; min-height:76px;
+  }
+
+  .digitize-run-btn{
+    font-family:var(--mono); font-size:0.76rem; color:var(--text); background:none;
+    border:none; border-top:1px solid var(--border); padding:10px; cursor:pointer;
+  }
+  .digitize-run-btn:hover{ color:var(--accent); background:var(--accent-dim); }
+  .digitize-run-btn:disabled{ opacity:0.5; cursor:default; }
+
+  @media (max-width:480px){
+    #digitize-panel{ left:12px; bottom:80px; }
+    #digitize-toggle{ left:16px; bottom:16px; }
+  }
+
   /* Chat hint bubble */
   #chat-hint{
     position:fixed; right:22px; bottom:82px; z-index:79;
@@ -612,16 +676,19 @@
 
   /* ===== Command palette ===== */
   .cmdk-trigger{
-    display:flex; align-items:center; gap:8px;
-    background:var(--bg-elevated); border:1px solid var(--border); border-radius:8px;
-    padding:7px 10px; color:var(--text-dim); font-size:0.8rem; cursor:pointer;
+    flex:1; max-width:360px;
+    display:flex; align-items:center; gap:9px;
+    background:var(--bg-elevated); border:1px solid var(--border); border-radius:9px;
+    padding:8px 12px; color:var(--text-faint); font-size:0.82rem; cursor:pointer;
   }
   .cmdk-trigger:hover{ border-color:var(--accent); color:var(--accent); }
+  .cmdk-trigger-text{ flex:1; text-align:left; }
   .cmdk-kbd{
     font-family:var(--mono); font-size:0.68rem; color:var(--text-faint);
     border:1px solid var(--border); border-radius:4px; padding:1px 5px;
   }
   .cmdk-trigger:hover .cmdk-kbd{ color:var(--accent); border-color:var(--accent); }
+  @media (max-width:600px){ .cmdk-trigger-text{ display:none; } .cmdk-trigger{ max-width:none; flex:none; } }
   @media (max-width:760px){ .cmdk-trigger .cmdk-kbd{ display:none; } }
 
   #cmdk-overlay{
@@ -677,18 +744,12 @@
 <nav id="topnav">
   <div class="wrap">
     <span class="nav-logo" id="nav-logo">nar<span>.</span></span>
-    <div class="nav-links">
-      <a href="#about">about</a>
-      <a href="#experience">experience</a>
-      <a href="#projects">projects</a>
-      <a href="#skills">skills</a>
-      <a href="#contact">contact</a>
-    </div>
-    <a href="#" id="nav-resume-link" class="nav-resume" download>resume ↓</a>
     <button id="cmdk-trigger" class="cmdk-trigger" aria-label="Open command palette">
       <i class="fa-solid fa-magnifying-glass"></i>
+      <span class="cmdk-trigger-text">Quick search…</span>
       <span class="cmdk-kbd">⌘K</span>
     </button>
+    <a href="#" id="nav-resume-link" class="nav-resume" download>resume ↓</a>
   </div>
 </nav>
 
@@ -726,6 +787,35 @@
     <input type="text" id="chat-input" placeholder="Ask a question…" autocomplete="off" />
     <button type="submit" aria-label="Send"><i class="fa-solid fa-paper-plane"></i></button>
   </form>
+</div>
+
+<button id="digitize-toggle" aria-label="Run an RPA extraction demo">
+  <i class="fa-solid fa-file-invoice"></i>
+</button>
+<div id="digitize-panel">
+  <div class="digitize-head">
+    <span>⚙️ RPA extraction demo</span>
+    <button id="digitize-close" aria-label="Close">✕</button>
+  </div>
+  <div class="digitize-stage" id="digitize-stage">
+    <div class="rpa-doc" id="rpa-doc">
+      <div class="rpa-doc-header"><i class="fa-solid fa-file-invoice"></i> INVOICE #KT-20417</div>
+      <div class="rpa-field" data-field="vendor"><span class="rpa-label">Vendor</span><span class="rpa-value">client</span></div>
+      <div class="rpa-field" data-field="date"><span class="rpa-label">Date</span><span class="rpa-value">24 Jul 2026</span></div>
+      <div class="rpa-field" data-field="amount"><span class="rpa-label">Amount</span><span class="rpa-value">$4,250.00</span></div>
+      <div class="rpa-field" data-field="status"><span class="rpa-label">Status</span><span class="rpa-value">Due on receipt</span></div>
+      <div class="rpa-scanline" id="rpa-scanline"></div>
+    </div>
+    <div class="rpa-output">
+      <div class="rpa-output-head">
+        <span>// extracted_data.json</span>
+        <span class="rpa-status" id="rpa-status">scanning…</span>
+      </div>
+      <pre id="rpa-json">{
+}</pre>
+    </div>
+  </div>
+  <button id="digitize-run" class="digitize-run-btn">▶ Run extraction</button>
 </div>
 
 <div id="cmdk-overlay">
@@ -976,18 +1066,38 @@
             </div>
           </div>
         </div>
-        <div class="signature-panel">
-          <div class="signature-bar">
-            <div class="signature-dot"></div><div class="signature-dot"></div><div class="signature-dot"></div>
-            <span class="signature-title">core.signature</span>
+        <div>
+          <div class="hero-greeting" id="hero-greeting"></div>
+          <div class="signature-panel">
+            <div class="signature-bar">
+              <div class="signature-dot"></div><div class="signature-dot"></div><div class="signature-dot"></div>
+              <span class="signature-title">core.signature</span>
+            </div>
+            <div class="signature-body" id="sig-body"></div>
+            <div class="sig-caption">// live map of core focus areas</div>
           </div>
-          <div class="signature-body" id="sig-body"></div>
-          <div class="sig-caption">// live map of core focus areas</div>
         </div>
       </div>
     `;
 
     renderSignaturePanel(profile, flatSkills);
+    setHeroGreeting(profile);
+  }
+
+  function getTimeGreeting(){
+    const hour = new Date().getHours();
+    if(hour < 5) return { text: 'Still up? Good night', emoji: '🌙' };
+    if(hour < 12) return { text: 'Good morning', emoji: '☀️' };
+    if(hour < 17) return { text: 'Good afternoon', emoji: '🌤️' };
+    if(hour < 21) return { text: 'Good evening', emoji: '🌆' };
+    return { text: 'Good night', emoji: '🌙' };
+  }
+
+  function setHeroGreeting(profile){
+    const el = document.getElementById('hero-greeting');
+    if(!el) return;
+    const g = getTimeGreeting();
+    el.innerHTML = `<span class="greeting-emoji">${g.emoji}</span> ${esc(g.text)}`;
   }
 
   function initials(name){
@@ -1238,6 +1348,55 @@
   }
   /* ===================== end untouched experience block ===================== */
 
+  /* ---------- Project tech-flow mini diagram ---------- */
+  function renderTechFlow(techStr){
+    const tags = String(techStr || '')
+      .replace(/^Technologies:\s*/i, '')
+      .split(/[|,]/)
+      .map(t => t.trim())
+      .filter(Boolean)
+      .slice(0, 5);
+    if(tags.length < 2) return '';
+
+    const boxW = 92, boxH = 30, gap = 26, startX = 4, y = 4;
+    let x = startX;
+    let boxes = '';
+    let arrows = '';
+
+    tags.forEach((tag, i) => {
+      const label = tag.length > 13 ? tag.slice(0, 12) + '…' : tag;
+      boxes += `
+        <rect x="${x}" y="${y}" width="${boxW}" height="${boxH}" rx="6" class="proj-flow-box" />
+        <text x="${x + boxW / 2}" y="${y + boxH / 2 + 3.5}" text-anchor="middle" class="proj-flow-text">${esc(label)}</text>
+      `;
+      if(i < tags.length - 1){
+        const ax1 = x + boxW, ax2 = x + boxW + gap;
+        const ay = y + boxH / 2;
+        arrows += `
+          <line x1="${ax1}" y1="${ay}" x2="${ax2 - 5}" y2="${ay}" class="proj-flow-arrow" marker-end="url(#flowArrow)" />
+        `;
+      }
+      x += boxW + gap;
+    });
+
+    const totalW = x - gap + 4;
+    const totalH = boxH + 8;
+
+    return `
+      <div class="proj-flow">
+        <svg viewBox="0 0 ${totalW} ${totalH}" width="${totalW}" height="${totalH}" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="flowArrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+              <path d="M0,0 L6,3 L0,6 Z" fill="var(--circuit)" />
+            </marker>
+          </defs>
+          ${arrows}
+          ${boxes}
+        </svg>
+      </div>
+    `;
+  }
+
   /* ---------- Projects — compact line list, click a row to expand ---------- */
   function renderProjects(projects){
     const rows = projects.map((proj, i) => {
@@ -1255,6 +1414,7 @@
         : '';
       const icon = proj.icon ? `<i class="${esc(proj.icon)}"></i>` : `<i class="fa-solid fa-diagram-project"></i>`;
       const firstTag = tags ? (proj.tech || '').replace(/^Technologies:\s*/i, '').split(/[|,]/)[0].trim() : '';
+      const flow = renderTechFlow(proj.tech);
 
       return `
         <div class="proj-row" id="row-${id}">
@@ -1268,6 +1428,7 @@
           <div class="proj-row-body" id="${id}">
             <div class="proj-row-body-inner">
               <p class="proj-row-summary">${esc(proj.summary)}</p>
+              ${flow}
               <div class="proj-row-tags">${tags}</div>
               <ul>${points}</ul>
               ${link}
@@ -1312,17 +1473,24 @@
     `;
   }
 
-  /* ---------- Skills ---------- */
+  /* ---------- Skills — clean card grid with staggered reveal bars ---------- */
   function renderSkills(skillGroups){
-    const groups = skillGroups.map(g => {
-      const chips = g.items.map(it => {
-        const icon = it.icon ? `<i class="${esc(it.icon)}"></i>` : '';
-        return `<span class="chip">${icon}${esc(it.text)}</span>`;
+    const cardsHtml = skillGroups.map(g => {
+      const label = esc(g.label.replace(/^([^\w]*)\s*/, ''));
+      const emoji = (g.label.match(/^([^\w\s]+)/) || [])[1] || '';
+      const rows = g.items.map(it => {
+        const icon = it.icon ? `<i class="${esc(it.icon)}"></i>` : `<i class="fa-solid fa-circle-check"></i>`;
+        return `
+          <div class="skill-row">
+            <div class="skill-row-top">${icon}<span>${esc(it.text)}</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill"></div></div>
+          </div>
+        `;
       }).join('');
       return `
-        <div>
-          <div class="skill-group-label">${esc(g.label.replace(/^[^\w]*\s*/, ''))}</div>
-          <div class="chip-row">${chips}</div>
+        <div class="skill-card">
+          <div class="skill-card-head"><span class="skill-card-emoji">${esc(emoji)}</span><span>${label}</span></div>
+          ${rows}
         </div>
       `;
     }).join('');
@@ -1331,10 +1499,128 @@
       <section id="skills">
         <div class="wrap reveal">
           <div class="section-head"><span class="idx">06</span><h2>Skills</h2></div>
-          <div class="skill-groups">${groups}</div>
+          <div class="skills-grid" id="skills-grid">${cardsHtml}</div>
         </div>
       </section>
     `;
+  }
+
+  function setupSkillsReveal(){
+    const grid = document.getElementById('skills-grid');
+    if(!grid) return;
+    let played = false;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting && !played){
+          played = true;
+          const fills = Array.from(grid.querySelectorAll('.skill-bar-fill'));
+          fills.forEach((fill, i) => {
+            setTimeout(() => { fill.style.width = '100%'; }, i * 45);
+          });
+          io.unobserve(grid);
+        }
+      });
+    }, { threshold: 0.2 });
+    io.observe(grid);
+  }
+
+  /* ---------- GitHub live activity ---------- */
+  function renderGithubActivity(profile){
+    if(!profile.github) return '';
+    return `
+      <section id="github-activity">
+        <div class="wrap reveal">
+          <div class="section-head"><span class="idx">07</span><h2>Live from GitHub</h2></div>
+          <div class="gh-panel" id="gh-panel">
+            <div class="gh-loading">Fetching live activity…</div>
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function timeAgo(dateStr){
+    const diffMs = Date.now() - new Date(dateStr).getTime();
+    const mins = Math.floor(diffMs / 60000);
+    if(mins < 60) return `${Math.max(mins, 1)}m ago`;
+    const hours = Math.floor(mins / 60);
+    if(hours < 24) return `${hours}h ago`;
+    const days = Math.floor(hours / 24);
+    if(days < 30) return `${days}d ago`;
+    const months = Math.floor(days / 30);
+    if(months < 12) return `${months}mo ago`;
+    return `${Math.floor(months / 12)}y ago`;
+  }
+
+  function describeGithubEvent(event){
+    const repo = event.repo ? event.repo.name.split('/').pop() : 'a repo';
+    switch(event.type){
+      case 'PushEvent': {
+        const n = event.payload && event.payload.commits ? event.payload.commits.length : 1;
+        return { icon: 'fa-solid fa-code-commit', text: `pushed <strong>${n}</strong> commit${n === 1 ? '' : 's'} to <strong>${esc(repo)}</strong>` };
+      }
+      case 'CreateEvent':
+        return { icon: 'fa-solid fa-plus', text: `created <strong>${esc(repo)}</strong>` };
+      case 'PullRequestEvent':
+        return { icon: 'fa-solid fa-code-pull-request', text: `${esc(event.payload.action)} a pull request on <strong>${esc(repo)}</strong>` };
+      case 'IssuesEvent':
+        return { icon: 'fa-solid fa-circle-exclamation', text: `${esc(event.payload.action)} an issue on <strong>${esc(repo)}</strong>` };
+      case 'WatchEvent':
+        return { icon: 'fa-solid fa-star', text: `starred <strong>${esc(repo)}</strong>` };
+      case 'ForkEvent':
+        return { icon: 'fa-solid fa-code-branch', text: `forked <strong>${esc(repo)}</strong>` };
+      default:
+        return { icon: 'fa-solid fa-bolt', text: `was active on <strong>${esc(repo)}</strong>` };
+    }
+  }
+
+  async function loadGithubActivity(profile){
+    const panel = document.getElementById('gh-panel');
+    if(!panel || !profile.github) return;
+
+    try{
+      const [userRes, eventsRes] = await Promise.all([
+        fetch(`https://api.github.com/users/${encodeURIComponent(profile.github)}`),
+        fetch(`https://api.github.com/users/${encodeURIComponent(profile.github)}/events/public?per_page=6`)
+      ]);
+      if(!userRes.ok || !eventsRes.ok) throw new Error('GitHub API request failed');
+
+      const user = await userRes.json();
+      const events = await eventsRes.json();
+
+      const eventsHtml = Array.isArray(events) && events.length
+        ? events.slice(0, 6).map(ev => {
+            const d = describeGithubEvent(ev);
+            return `
+              <div class="gh-event">
+                <i class="${d.icon}"></i>
+                <span class="gh-event-text">${d.text}</span>
+                <span class="gh-event-time">${esc(timeAgo(ev.created_at))}</span>
+              </div>
+            `;
+          }).join('')
+        : `<div class="gh-loading">No recent public activity to show right now.</div>`;
+
+      panel.innerHTML = `
+        <div class="gh-head">
+          <div class="gh-head-user">
+            <img src="${esc(user.avatar_url)}" alt="${esc(user.login)}" />
+            <div>
+              <div class="name">${esc(user.name || user.login)}</div>
+              <div class="handle">@${esc(user.login)}</div>
+            </div>
+          </div>
+          <div class="gh-badges">
+            <img src="https://img.shields.io/github/followers/${encodeURIComponent(profile.github)}?style=flat-square&label=followers&color=39FF88&labelColor=12151C" alt="GitHub followers" />
+            <img src="https://img.shields.io/badge/public_repos-${user.public_repos || 0}-3B82F6?style=flat-square&labelColor=12151C" alt="Public repos" />
+          </div>
+        </div>
+        <div class="gh-events">${eventsHtml}</div>
+      `;
+    }catch(err){
+      panel.innerHTML = `<div class="gh-error">Live GitHub activity is unavailable right now — visit <a href="https://github.com/${esc(profile.github)}" target="_blank">github.com/${esc(profile.github)}</a> directly.</div>`;
+      console.error(err);
+    }
   }
 
   /* ---------- Contact ---------- */
@@ -1342,7 +1628,7 @@
     return `
       <section id="contact">
         <div class="wrap reveal">
-          <div class="section-head"><span class="idx">07</span><h2>Get in touch</h2></div>
+          <div class="section-head"><span class="idx">08</span><h2>Get in touch</h2></div>
           <div class="contact-grid">
             <div class="contact-info-list">
               <div class="contact-info-row"><i class="fa-solid fa-envelope"></i><a href="mailto:${esc(profile.email)}">${esc(profile.email)}</a></div>
@@ -1772,6 +2058,9 @@
       { title: 'Download resume', icon: 'fa-solid fa-arrow-down', hint: 'download', action: () => { const a = document.createElement('a'); a.href = p.resumeFile; a.download = ''; a.click(); } },
       { title: 'Ask Anikethan AI', icon: 'fa-solid fa-comment-dots', hint: 'chat', action: () => { document.getElementById('chat-toggle').click(); } }
     ];
+    if(p.github){
+      actions.push({ title: 'Open GitHub', icon: 'fab fa-github', hint: 'open ↗', action: () => window.open(`https://github.com/${p.github}`, '_blank') });
+    }
     return { sections, actions };
   }
 
@@ -1905,7 +2194,7 @@
     document.getElementById('footer-content').innerHTML = `
       <div class="wrap">
         <p>${esc(profile.name)} — © ${new Date().getFullYear()}</p>
-        <p>built with python, playwright &amp; a bit of ci/cd</p>
+        <p>All Rights Reserved.</p>
       </div>
     `;
   }
@@ -1928,7 +2217,68 @@
     els.forEach(el => io.observe(el));
   }
 
+  /* ---------- RPA extraction demo (replaces the dog) ---------- */
+  function runDigitize(){
+    const scanline = document.getElementById('rpa-scanline');
+    const fields = Array.from(document.querySelectorAll('.rpa-field'));
+    const jsonEl = document.getElementById('rpa-json');
+    const statusEl = document.getElementById('rpa-status');
+    const runBtn = document.getElementById('digitize-run');
+    if(!scanline || !jsonEl || !fields.length) return;
+
+    runBtn.disabled = true;
+    fields.forEach(f => f.classList.remove('captured'));
+    jsonEl.textContent = '{\n}';
+    statusEl.textContent = 'scanning…';
+    statusEl.classList.remove('done');
+
+    // Restart the CSS scan animation from the top each run.
+    scanline.classList.remove('scanning');
+    void scanline.offsetWidth;
+    scanline.classList.add('scanning');
+
+    const entries = fields.map(f => [f.dataset.field, f.querySelector('.rpa-value').textContent]);
+    const jsonLines = [];
+    const stepDelay = 480;
+    const startDelay = 350;
+
+    fields.forEach((field, i) => {
+      setTimeout(() => {
+        field.classList.add('captured');
+        jsonLines.push(`  "${entries[i][0]}": "${entries[i][1]}"`);
+        jsonEl.textContent = '{\n' + jsonLines.join(',\n') + '\n}';
+      }, startDelay + i * stepDelay);
+    });
+
+    setTimeout(() => {
+      statusEl.textContent = `✓ ${fields.length}/${fields.length} extracted`;
+      statusEl.classList.add('done');
+      runBtn.disabled = false;
+    }, startDelay + fields.length * stepDelay + 350);
+  }
+
+  function wireDigitizeDemo(){
+    const toggle = document.getElementById('digitize-toggle');
+    const panel = document.getElementById('digitize-panel');
+    const closeBtn = document.getElementById('digitize-close');
+    const runBtn = document.getElementById('digitize-run');
+    if(!toggle || !panel) return;
+
+    let played = false;
+    toggle.addEventListener('click', () => {
+      const isOpen = panel.classList.toggle('open');
+      if(isOpen && !played){
+        played = true;
+        setTimeout(runDigitize, 300);
+      }
+    });
+    if(closeBtn) closeBtn.addEventListener('click', () => panel.classList.remove('open'));
+    if(runBtn) runBtn.addEventListener('click', runDigitize);
+  }
+
   /* ---------- Orchestration ---------- */
+
+
   function renderPortfolio(data){
     renderHeader(data.profile, data.skills);
 
@@ -1940,6 +2290,7 @@
       renderProjects(data.projects),
       renderAchievements(data.achievements),
       renderSkills(data.skills),
+      renderGithubActivity(data.profile),
       renderContact(data.profile, data.contactForm),
       renderFeedback(data.profile)
     ].join('');
@@ -1950,11 +2301,14 @@
     wireChatbot(data);
     wireCommandPalette(data);
     setupReveal();
+    setupSkillsReveal();
+    loadGithubActivity(data.profile);
 
     setTimeout(() => window.dispatchEvent(new Event('resize')), 100);
   }
 
   initNeuralBackground();
+  wireDigitizeDemo();
 
   fetch('data/data.json')
     .then(res => {
